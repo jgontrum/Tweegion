@@ -1,0 +1,83 @@
+% Grundeinstellungen
+\documentclass[
+	11pt,
+	notitlepage,
+	oneside
+]{scrartcl}
+\KOMAoptions{
+	parskip=half
+}
+\usepackage{scrhack}
+% Encoding
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% Silbentrennung Deutsch
+\usepackage[ngerman]{babel}
+\usepackage{blindtext}
+\usepackage{hyphenat}
+
+\usepackage[linesnumbered]{algorithm2e}
+\title{Tweegion - Algorithmen}
+\author{Johannes Gontrum, Matthias Wegel, Steve Wendler}
+\begin{document}
+\section{Main-Algorithm}
+
+\begin{algorithm}[H]
+ \SetAlgoLined
+ \KwData{\\
+	$TV_0$: bestehende, normalisierte Liste von Tokenvektoren\\ 
+	$Tweets$: Liste von Tweets\\ 
+	$Stopwords$: Liste von Stoppwörtern \\ $ $}
+ \KwResult{\\$TV_{1}$: verbesserte, normalisierte Liste von Tokenvektoren\\ $ $}
+ $TV_{1} \gets\emptyset $\; 
+\ForEach{\label{alg:goto}Tweet in Tweets}{
+ $Tweet_V \gets (0,0,0,0,0,0,0)$\;
+ \ForAll{Token in Tweet}{
+  \If{Token $\notin$ Stopwords}{
+     $Tweet_V  \gets Tweet_V + TV_0(Tweet)$\;
+   }
+}
+ \ForAll{Token in Tweet}{
+  \If{Token $\notin$ Stopwords}{
+     $TV_{1}(Tweet)  \gets TV_{1}(Tweet) + Tweet_V$\;
+   }
+}
+}
+ \ForEach{$Token_V$ in $TV_{1}$}{
+$Token_V$ $\gets$ normalize($Token_V$)\;
+}
+\eIf{difference($TV_0$, $TV_1$) = significant}{
+$TV_0 \leftarrow TV_1$\;
+Goto Line \ref{alg:goto}\;
+}{
+\Return $TV_1$\;
+}
+\caption{Tweegion Main-Algorithm}
+\end{algorithm}
+
+\section{Geo-Algorithm}
+\begin{algorithm}[H]
+ \SetAlgoLined
+ \KwData{\\
+	$Tweets$: Liste von Tweets mit Geo-Informationen\\ 
+	$Stopwords$: Liste von Stoppwörtern \\ $ $}
+ \KwResult{\\$TV$: normalisierte Liste von Tokenvektoren\\ $ $}
+ $TV \gets\emptyset $\; 
+\ForEach{\label{alg:goto}Tweet in Tweets}{
+$n \gets classify(Tweet)$\;
+ $Tweet_V \gets createVector(n)$\;
+ \ForAll{Token in Tweet}{
+  \If{Token $\notin$ Stopwords}{
+     $TV(Tweet)  \gets TV(Tweet) + Tweet_V$\;
+   }
+}
+}
+ \ForEach{$Token_V$ in $TV$}{
+$Token_V$ $\gets$ normalize($Token_V$)\;
+}
+\Return $TV$\;
+
+\caption{Tweegion Geo-Algorithm}
+\end{algorithm}
+
+\end{document}
