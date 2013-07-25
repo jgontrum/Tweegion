@@ -25,32 +25,32 @@
 \begin{algorithm}[H]
  \SetAlgoLined
  \KwData{\\
-	$TV_0$: bestehende, normalisierte Liste von Tokenvektoren\\ 
+	$WV_0$: bestehende, normalisierte Liste von Wortvektoren\\ 
 	$Tweets$: Liste von Tweets\\ 
 	$Stopwords$: Liste von Stoppwörtern \\ $ $}
- \KwResult{\\$TV_{1}$: verbesserte, normalisierte Liste von Tokenvektoren\\ $ $}
- $TV_{1} \gets\emptyset $\; 
+ \KwResult{\\$WV_{1}$: verbesserte, normalisierte Liste von Wortvektoren\\ $ $}
+ $WV_{1} \gets\emptyset $\; 
 \ForEach{\label{alg:goto}Tweet in Tweets}{
- $Tweet_V \gets (0,0,0,0,0,0,0)$\;
+ $V_{Tweet} \gets (0,0,0,0,0,0,0)$\;
  \ForAll{Token in Tweet}{
   \If{Token $\notin$ Stopwords}{
-     $Tweet_V  \gets Tweet_V + TV_0(Tweet)$\;
+     $V_{Tweet}  \gets V_{Tweet} + WV_0(Token)$\;
    }
 }
  \ForAll{Token in Tweet}{
   \If{Token $\notin$ Stopwords}{
-     $TV_{1}(Tweet)  \gets TV_{1}(Tweet) + Tweet_V$\;
+     $WV_{1}(Token)  \gets WV_{1}(Token) + V_{Tweet}$\;
    }
 }
 }
- \ForEach{$Token_V$ in $TV_{1}$}{
-$Token_V$ $\gets$ normalize($Token_V$)\;
+ \ForEach{$V_{Word}$ in $WV_{1}$}{
+$V_{Word}$ $\gets$ normalize($V_{Word}$)\;
 }
-\eIf{difference($TV_0$, $TV_1$) = significant}{
-$TV_0 \leftarrow TV_1$\;
+\eIf{difference($WV_0$, $WV_1$) < significance level}{
+$WV_0 \leftarrow WV_1$\;
 Goto Line \ref{alg:goto}\;
 }{
-\Return $TV_1$\;
+\Return $WV_1$\;
 }
 \caption{Tweegion Main-Algorithm}
 \end{algorithm}
@@ -61,21 +61,21 @@ Goto Line \ref{alg:goto}\;
  \KwData{\\
 	$Tweets$: Liste von Tweets mit Geo-Informationen\\ 
 	$Stopwords$: Liste von Stoppwörtern \\ $ $}
- \KwResult{\\$TV$: normalisierte Liste von Tokenvektoren\\ $ $}
- $TV \gets\emptyset $\; 
+ \KwResult{\\$WV$: normalisierte Liste von Tokenvektoren\\ $ $}
+ $WV \gets\emptyset $\; 
 \ForEach{\label{alg:goto}Tweet in Tweets}{
 $n \gets classify(Tweet)$\;
- $Tweet_V \gets createVector(n)$\;
+ $V_{Tweet} \gets createVector(n)$\;
  \ForAll{Token in Tweet}{
   \If{Token $\notin$ Stopwords}{
-     $TV(Tweet)  \gets TV(Tweet) + Tweet_V$\;
+     $WV(Token) \gets WV(Token) + V_{Tweet}$\;
    }
 }
 }
- \ForEach{$Token_V$ in $TV$}{
-$Token_V$ $\gets$ normalize($Token_V$)\;
+ \ForEach{$V_{Word}$ in $WV$}{
+$V_{Word}$ $\gets$ normalize($V_{Word}$)\;
 }
-\Return $TV$\;
+\Return $WV_1$\;
 
 \caption{Tweegion Geo-Algorithm}
 \end{algorithm}
