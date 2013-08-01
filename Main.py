@@ -1,8 +1,9 @@
 #/usr/bin/ python
 # -*- coding: utf8 -*-
-import wv0       # Dictionary der initialen Wortvektoren {word : vector}
-import tweets    # Dictionary von Tweets {id : text}
-import stopwords # Liste von Stoppwörtern
+from numpy import array  # Datenstruktur für Vektoren
+import wv0               # Dictionary der initialen Wortvektoren {word : vector}
+import tweets            # Dictionary von Tweets {id : text}
+import stopwords         # Liste von Stoppwörtern
 
 def calc_next_generation(wv0):
     wv1 = {}
@@ -10,22 +11,24 @@ def calc_next_generation(wv0):
     
     for id, text in tweets.iteritems():
         
-        tv[id] = (0,0,0,0,0,0,0)
+        tv[id] = array([0,0,0,0,0,0,0])
         for token in text:
             if not token in stopwords:
-                # addvectors(v1,v2) müssen wir uns schreiben
-                # vgl. http://stackoverflow.com/questions/497885/python-tuple-operations
-                tv[id] = addvectors(tv[id],wv0[token])
+                tv[id] = tv[id] + wv0[token]
                 
         for token in text:
             if not token in stopwords:
                 # Initialisierung von wv1[token] fehlt!
-                wv1[token] = addvectors(wv1[token],tv[id])
+                wv1[token] = wv1[token] + tv[id]
                 
     for word in wv1:
         wv1[word] = normalize(wv1[word])
 
     return wv1
+
+def normalize(vector):
+    # Werden uns die Rundungsfehler auffressen?
+    return vector/vector.sum()
 
 
 # Erster Durchlauf, um 1. Generation dann mit 0. Generation vergleichen zu können
