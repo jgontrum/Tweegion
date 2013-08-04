@@ -6,7 +6,7 @@ from numpy import array  # Datenstruktur für Vektoren
 ###########################################################
 # Nutzereingabe:
 # init_wv_file    CSV-Datei mit initialen Wortvektoren
-# tweets_file     Datei mit Tweets (JSON?)
+# tweets_file     Datei mit Tweets (JSON-Objekte)
 # stopwords_file  Textdatei mit Stoppwörtern
 ###########################################################
 
@@ -23,7 +23,7 @@ def csv_to_vectors(filename):
 
 # Tweets einlesen und als Dictionary ID -> Text ausgeben
 def jsons_to_dict(filename):
-    ## ...
+    ## ... ##
 
 # Raw Text einlesen und als Liste ausgeben
 def textfile_to_list(filename):
@@ -40,12 +40,14 @@ def calc_next_generation(wvm):
         tv[id] = array([0,0,0,0,0,0,0])
         for token in text:
             if not token in stopwords:
-                tv[id] = tv[id] + wvm[token]
+                tv[id] += wvm[token]
                 
         for token in text:
             if not token in stopwords:
-                ## Initialisierung von wv1[token] fehlt! ##
-                wvn[token] = wvn[token] + tv[id]
+                if token in wvn:
+                    wvn[token] += tv[id]
+                else:
+                    wvn[token] = tv[id]
                 
     for word in wvn:
         wvn[word] = normalize(wvn[word])
