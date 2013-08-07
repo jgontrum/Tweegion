@@ -35,7 +35,7 @@ def print_results(tweet_vector):
     # Daher den restlichen Vektor mit einer Schleife weiter durchsuchen
     n = 0
     # Solange der aktuelle Fund nicht am Ende des Vektors steht
-    while maxarg[n] < 7:
+    while maxarg[n] < 6:
         # Betrachte den Teil des Vektors dahinter
         rest = tweet_vector[maxarg[n]+1:]
         # Finde dort den größten Wert
@@ -50,13 +50,10 @@ def print_results(tweet_vector):
     if len(maxarg) == 1:
         # Größter Wert in genau einer Region
         print "Der Tweet scheint aus der Region {0} zu stammen.".format(region[maxarg[0]])
+        return
     else:
         # Größter Wert in mehreren Regionen
         results = ', '.join([region[m] for m in maxarg])
         print "Der Tweet scheint aus einer der Regionen {0} zu stammen.".format(results)
-
-
-
-
-
+        return
 
