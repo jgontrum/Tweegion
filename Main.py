@@ -13,7 +13,7 @@ from happyfuntokenizing import Tokenizer
 # tweets_file     Datei mit Tweets (JSON-Objekte)
 # stopwords_file  Textdatei mit Stoppwörtern
 ###########################################################
-init_wv_file = ""
+init_wv_file = "Words/Regionalwords.csv"
 tweets_file = ""
 stopwords_file = ""
 
@@ -22,7 +22,8 @@ def csv_to_vectors(filename):
     wv = {}
     with open(filename,'r') as csvfile:
         csvreader = csv.reader(csvfile,delimiter=';')
-        for stringlist in csvreader:
+        # Erste Zeile ignorieren
+        for stringlist in csvreader[1:]:
             word = stringlist[0]
             floatlist = list()
             for x in stringlist[1:]:
