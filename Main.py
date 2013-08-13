@@ -23,7 +23,7 @@ def csv_to_vectors(filename):
     wv = {}
     with codecs.open(filename,'r',"utf8") as csvfile:
         # Erste Zeile ignorieren
-        for line in csvfile:
+        for line in csvfile[1:]:
             stringlist = line.split(";")
             word = stringlist[0]
             floatlist = list()
