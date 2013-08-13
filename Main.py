@@ -23,7 +23,8 @@ def csv_to_vectors(filename):
     wv = {}
     with codecs.open(filename,'r',"utf8") as csvfile:
         # Erste Zeile ignorieren
-        for line in csvfile[1:]:
+        csvfile.readline()
+        for line in csvfile:
             stringlist = line.split(";")
             word = stringlist[0]
             floatlist = list()
@@ -100,7 +101,8 @@ wv1 = calc_next_generation(wv0, tweets)
 # Schleife - vergleiche stets die gerade berechnete Generation mit der vorigen
 # Wenn sie größer ist, hat sie mehr Einträge, es sind also neue Wörter hinzugekommen
 c = 0
-while len(wv1) > len(wv0):
+#while len(wv1) > len(wv0):
+while c < 100: 
     c += 1
     # In diesem Fall wird die alte Generation vergessen, ihren Platz nimmt die
     # gerade berechnete ein
@@ -110,7 +112,9 @@ while len(wv1) > len(wv0):
 else:
     # Ist die gerade berechnete Generation nicht größer, enthielt die vorige bereits
     # alle Wörter des Trainingskorpus. Es wird also die vorige abgespeichert
-    print wv0
+    for key,value in wv0.iteritems():
+        print key
+        print value
     print "fertig!!"
     print c
 

@@ -109,11 +109,11 @@ regex_strings = (
     ,
     # Remaining word types:
     r"""
-    (?:[a-z][a-z'\-_]+[a-z])       # Words with apostrophes or dashes.
+    (?:[a-zöäüß][a-zöäüß'\-_]+[a-zöäüß])       # Words with apostrophes or dashes.
     |
     (?:[+\-]?\d+[,/.:-]\d+[+\-]?)  # Numbers, including fractions, decimals.
     |
-    (?:[\w_]+)                     # Words without apostrophes or dashes.
+    (?:[a-zöäüß_]+)                     # Words without apostrophes or dashes.
     |
     (?:\.(?:\s*\.){1,})            # Ellipsis dots. 
     |
