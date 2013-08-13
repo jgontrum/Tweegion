@@ -1,0 +1,58 @@
+import sys
+import simplejson as json
+import operator
+import pickle
+import os
+import codecs
+
+
+def sort_dict(dictionary):
+    i = sorted(dictionary.iteritems(), key=operator.itemgetter(1), reverse=True)
+    stpwrds = codecs.open('stpwds.txt','w','utf8')
+    stpwrdscnt = codecs.open('stpwrdscnt.txt', 'w','utf8')
+    for e in i:
+	if (e[1] > 100):
+	    #print e
+            stpwrds.write(e[0] + '\n')
+            stpwrdscnt.write('%7d  %s \n' % (e[1],e[0]))
+    	else:
+    	    stpwrds.close()
+    	    stpwrdscnt.close()
+	    exit()
+    
+def read_and_count():
+    dictionary = {}
+    tweetfolder = '/home/gontrum/april-corpus-raw'
+    
+    for tweetfile in [folder for folder in os.listdir(tweetfolder) if folder.startswith('tweets') == True ]:
+        tweetfile = os.path.join(tweetfolder, tweetfile)
+	with open(tweetfile, 'r') as f:
+            for line in f:
+                try:
+                    tw = json.loads(line, 'latin1')['text']
+                except:
+                    None
+                for each in tw.split():
+                    each = each.lower()
+                    dictionary[each] = dictionary.get(each, 0) + 1
+    
+     
+    return dictionary
+
+def serialize_dict(dictionary):
+    with open('stpwrdsDict.txt','w') as f:
+        pickle.dump(dictionary, f)
+
+def read_in_dict():
+    with open('stpwrdsDict.txt','r') as f:
+        d = pickle.load(f)
+    return d
+        
+
+#dictionary = read_and_count()
+#serialize_dict(dictionary)
+
+d = read_in_dict()
+sort_dict(d) 
+        
+        
