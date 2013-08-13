@@ -4,12 +4,13 @@ import operator
 import pickle
 import os
 import codecs
+from happyfuntokenizing import Tokenizer
 
 
 def sort_dict(dictionary):
     i = sorted(dictionary.iteritems(), key=operator.itemgetter(1), reverse=True)
-    stpwrds = codecs.open('stpwds.txt','w','utf8')
-    stpwrdscnt = codecs.open('stpwrdscnt.txt', 'w','utf8')
+    stpwrds = codecs.open('stpwds2.txt','w','utf8')
+    stpwrdscnt = codecs.open('stpwrdscnt2.txt', 'w','utf8')
     for e in i:
 	if (e[1] > 100):
 	    #print e
@@ -23,6 +24,8 @@ def sort_dict(dictionary):
 def read_and_count():
     dictionary = {}
     tweetfolder = '/home/gontrum/april-corpus-raw'
+
+    tok = Tokenizer(preserve_case=False)
     
     for tweetfile in [folder for folder in os.listdir(tweetfolder) if folder.startswith('tweets') == True ]:
         tweetfile = os.path.join(tweetfolder, tweetfile)
@@ -32,8 +35,7 @@ def read_and_count():
                     tw = json.loads(line, 'latin1')['text']
                 except:
                     None
-                for each in tw.split():
-                    each = each.lower()
+                for each in tok.tokenize(tw):
                     dictionary[each] = dictionary.get(each, 0) + 1
     
      
