@@ -6,8 +6,8 @@ counter = {"Norden" : 0, "Osten" : 0, "Westen" : 0, "Suedwest" : 0, "Bayern" : 0
 
 test_data = open("geo_data.txt",'r')
 for line in test_data:
-	lang,lat = line.split(",")
-	reg = geo.get_region((float(lang),float(lat)))
+	lat,lon = line.split(",")
+	reg = geo.get_region((float(lat),float(lon)))
 	if reg != "Not found":
 		counter[reg] += 1  
 

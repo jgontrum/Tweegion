@@ -39,13 +39,10 @@ class GeoFunctions():
 
 	# Takes coordinates as a tupel and optional a dict of polygons and returns in which polygon the point lays
 	def get_region(self, needle, haystack = region_dict):
-		result = ""
 		for region in haystack:
 			if self.point_in_poly(needle, haystack[region]):
-				result = region
-		if result == "":
-			return "Not found"
-		else: return result
+				return region
+		return "Not found"
 
 
 
