@@ -6,7 +6,10 @@ import os
 import json
 import codecs
 from numpy import array  # Datenstruktur für Vektoren
+import numpy
 from happyfuntokenizing import Tokenizer
+import geo
+import Use
 
 ###########################################################
 # Nutzereingabe:
@@ -17,6 +20,7 @@ from happyfuntokenizing import Tokenizer
 init_wv_file = "Words/Regionalwords.csv"
 tweets_file = "./"
 stopwords_file = "Wordcount/stpwds_no_happytok.txt"
+geo_tagged_tweets = "first_geo_tweets.txt"
 
 # CSV einlesen und als Dictionary von Wortvektoren ausgeben
 def csv_to_vectors(filename):
@@ -38,11 +42,44 @@ def csv_to_vectors(filename):
             wv[word] = array(floatlist)
     return wv
 
+def geodict_to_vectors(geodict):
+    wv = {}
+    for tweet_id in geodict:
+        tweet,region = geodict[tweet_id]
+        for token in tweet:
+            if token in wv:
+                wv[token] += get_region_vector(region)
+            else:
+                wv[token] = get_region_vector(region)
+    for word in wv:
+        wv[word] = normalize(wv[word])
+
+    return wv
+
+
+def get_region_vector(region):
+    if region == 0:
+        return array([1.0,0.0,0.0,0.0,0.0,0.0,0.0])
+    if region == 1:
+        return array([0.0,1.0,0.0,0.0,0.0,0.0,0.0])
+    if region == 2:
+        return array([1.0,0.0,1.0,0.0,0.0,0.0,0.0])
+    if region == 3:
+        return array([1.0,0.0,0.0,1.0,0.0,0.0,0.0])
+    if region == 4:
+        return array([1.0,0.0,0.0,0.0,1.0,0.0,0.0])
+    if region == 5:
+        return array([1.0,0.0,0.0,0.0,0.0,1.0,0.0])
+    if region == 6:
+        return array([1.0,0.0,0.0,0.0,0.0,0.0,1.0])
+
+
+
 # Tweets einlesen und als Dictionary ID -> Text ausgeben
 def jsons_to_dict(path, stopwords):
     id_to_tok = dict()
     tok = Tokenizer(preserve_case=False)
-    for tweetfile in [folder for folder in os.listdir(path) if folder.startswith('tweets') == True ]:
+    for tweetfile in [folder for folder in os.listdir(path) if folder.startswith('first10000') == True ]:
         tweetfile = os.path.join(path, tweetfile)
         with codecs.open(tweetfile, 'r', "utf-8") as json_file:
             for line in json_file:
@@ -55,7 +92,6 @@ def jsons_to_dict(path, stopwords):
                 except:
                     None
     return id_to_tok
-
 
 # Raw Text einlesen und als Liste ausgeben
 def textfile_to_list(filename):
@@ -91,11 +127,39 @@ def normalize(vector):
         return vector/vector.sum()
     return array([0.0,0.0,0.0,0.0,0.0,0.0,0.0])
 
+def geo_to_dict(filename):
+    id_to_geotok = dict()
+    tok = Tokenizer(preserve_case=False)
+    geo_functions = geo.GeoFunctions()
+    with codecs.open(filename, 'r', "utf-8") as json_file:
+        for line in json_file:
+            try:
+                json_data = json.loads(line, 'latin1')
+                tweet_id = json_data['id']
+                tweet = json_data['text']
+                coordinates = json_data['geo']['coordinates']
+                region = geo_functions.get_region((float(coordinates[0]),float(coordinates[1])))
+                # Stopworte entfernen
+                if region != -1:
+                    tokenized_tweet = tok.tokenize(tweet)
+                    id_to_geotok[tweet_id] = (
+                        [token for token in tokenized_tweet if token not in stopwords],
+                        region)
+            except:
+                None
+    return id_to_geotok
+
+
+def average_distribution(wv):
+    return sum(wv.values())/len(wv)
+
 # Tweets und Stoppwörter einlesen
 stopwords = textfile_to_list(stopwords_file)
 tweets = jsons_to_dict(tweets_file,stopwords) 
 # Wortvektoren der 0. Generation einlesen
-wv0 = csv_to_vectors(init_wv_file)
+#wv0 = csv_to_vectors(init_wv_file)
+wv0 = geodict_to_vectors(geo_to_dict(geo_tagged_tweets))
+
 # Erster Durchlauf, um 1. Generation dann mit 0. Generation vergleichen zu können
 wv1 = calc_next_generation(wv0, tweets)
 # Schleife - vergleiche stets die gerade berechnete Generation mit der vorigen
@@ -112,9 +176,21 @@ while c < 100:
 else:
     # Ist die gerade berechnete Generation nicht größer, enthielt die vorige bereits
     # alle Wörter des Trainingskorpus. Es wird also die vorige abgespeichert
-    for key,value in wv0.iteritems():
-        print key
-        print value
-    print "fertig!!"
-    print c
+    # for key,value in wv0.iteritems():
+    #     print key
+    #     print value
+    # av = average_distribution(wv0)
+    # for key,value in wv0.iteritems():
+    #     deviation = value - av
+    #     if numpy.amax(deviation) > 0.05 or numpy.amin(deviation) < -0.05:
+    #         print key
+    #         print deviation
+    # print "Durchläufe"
+    # print c
+    print "Normalverteilung:"
+    print average_distribution(wv0)
+
+    tweet = "Schalke wird Meister, weil...... Meine unschlagbare Meisterschaftsargumentation gibbet in mein Block: http://www.ottos-revier.de/?p=1225  #ligaprognose" 
+    Use.print_results(Use.classify_tweet(tweet,wv0))
+    print Use.classify_tweet(tweet,wv0)
 

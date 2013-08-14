@@ -2,6 +2,8 @@
 # -*- coding: utf8 -*-
 import csv               # Lesen und Schreiben von CSV-Dateien
 from numpy import array  # Datenstruktur für Vektoren
+from happyfuntokenizing import Tokenizer
+
 
 # Dictionary Vektorstelle -> Regionenname
 region = {0 : "Ostdeutschland",
@@ -14,11 +16,25 @@ region = {0 : "Ostdeutschland",
 
 # Vektor für einen Tweet auf Grundlage von Wortvektoren berechnen
 def classify_tweet(tweet_text,word_vectors):
-    tweet_vector = array([0,0,0,0,0,0,0])
-    for token in tweet_text:
+    tweet_vector = array([0.0,0.0,0.0,0.0,0.0,0.0,0.0])
+    tok = Tokenizer(preserve_case=False)
+    for token in tok.tokenize(tweet_text):
         if token in word_vectors:
             tweet_vector += word_vectors[token]
+    tweet_vector = normalize(tweet_vector)
+    tweet_vector = tweet_vector - average_distribution(word_vectors)
     return tweet_vector
+
+# Herunterrechnen eines Vektors, so dass er Summe 1 hat
+def normalize(vector):
+    ## Werden uns die Rundungsfehler auffressen? ##
+    if vector.sum() > 0:
+        return vector/vector.sum()
+    return array([0.0,0.0,0.0,0.0,0.0,0.0,0.0])
+
+def average_distribution(wv):
+    return sum(wv.values())/len(wv)
+
 
 # Ergebnis der Klassifikation ausgeben
 def print_results(tweet_vector):
@@ -30,7 +46,7 @@ def print_results(tweet_vector):
         return
     # Stelle des größten Wertes finden
     maxarg = []
-    maxarg[0] = tweet_vector.argmax()
+    maxarg.append(tweet_vector.argmax())
     # Steht der größte Wert an mehreren Stellen, wird zunächst nur die erste gefunden
     # Daher den restlichen Vektor mit einer Schleife weiter durchsuchen
     n = 0
