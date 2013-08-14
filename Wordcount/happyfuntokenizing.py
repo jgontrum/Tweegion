@@ -111,7 +111,6 @@ regex_strings = (
     r"""(?:http[\w./:-_]+)"""
     ,
     r"""
-<<<<<<< HEAD
        (?:[\w][\w'\-_]+[\w])       # Words with apostrophes or dashes.
        |
        (?:[+\-]?\d+[,/.:-]\d+[+\-]?)  # Numbers, including fractions, decimals.
@@ -123,19 +122,6 @@ regex_strings = (
        (?:\S)                         # Everything else that isn't whitespace.
        """
        )
-=======
-    (?:[a-zöäüß][a-zöäüß'\-_]+[a-zöäüß])       # Words with apostrophes or dashes.
-    |
-    (?:[+\-]?\d+[,/.:-]\d+[+\-]?)  # Numbers, including fractions, decimals.
-    |
-    (?:[a-zöäüß_]+)                     # Words without apostrophes or dashes.
-    |
-    (?:\.(?:\s*\.){1,})            # Ellipsis dots. 
-    |
-    (?:\S)                         # Everything else that isn't whitespace.
-    """
-    )
->>>>>>> 9814c801c96a1c3e8d26b67784c42338430f7345
 
 ######################################################################
 # This is the core tokenizing regex:
