@@ -107,24 +107,26 @@ regex_strings = (
     # Twitter hashtags:
     r"""(?:\#+[\w_]+[\w\'_\-]*[\w_]+)"""
     ,
-    # Remaining word types:
+    #urls
+    r"""(?:http[\w./:-_]+)"""
+    ,
     r"""
-    (?:[a-z][a-z'\-_]+[a-z])       # Words with apostrophes or dashes.
-    |
-    (?:[+\-]?\d+[,/.:-]\d+[+\-]?)  # Numbers, including fractions, decimals.
-    |
-    (?:[\w_]+)                     # Words without apostrophes or dashes.
-    |
-    (?:\.(?:\s*\.){1,})            # Ellipsis dots. 
-    |
-    (?:\S)                         # Everything else that isn't whitespace.
-    """
-    )
+       (?:[\w][\w'\-_]+[\w])       # Words with apostrophes or dashes.
+       |
+       (?:[+\-]?\d+[,/.:-]\d+[+\-]?)  # Numbers, including fractions, decimals.
+       |
+       (?:[\w]+)                     # Words without apostrophes or dashes.
+       |
+       (?:\.(?:\s*\.){1,})            # Ellipsis dots. 
+       |
+       (?:\S)                         # Everything else that isn't whitespace.
+       """
+       )
 
 ######################################################################
 # This is the core tokenizing regex:
     
-word_re = re.compile(r"""(%s)""" % "|".join(regex_strings), re.VERBOSE | re.I | re.UNICODE)
+word_re = re.compile(r"""(%s)""" % "|".join(regex_strings), re.VERBOSE | re.I | re.UNICODE )
 
 # The emoticon string gets its own regex so that we can preserve case for them as needed:
 emoticon_re = re.compile(regex_strings[1], re.VERBOSE | re.I | re.UNICODE)
@@ -154,7 +156,7 @@ class Tokenizer:
         # Fix HTML character entitites:
         s = self.__html2unicode(s)
         # Tokenize:
-        words = word_re.findall(s)
+        words = [x for x in word_re.findall(s) if not x.startswith(("http",'@',"#","1","2","3","4","5","6","7","8","9","0"))]
         # Possible alter the case, but avoid changing emoticons like :D into :d:
         if not self.preserve_case:            
             words = map((lambda x : x if emoticon_re.search(x) else x.lower()), words)
@@ -216,8 +218,6 @@ if __name__ == '__main__':
         u"It's perhaps noteworthy that phone numbers like +1 (800) 123-4567, (800) 123-4567, and 123-4567 are treated as words despite their whitespace."
         )
 
-    for s in samples:
-        print "======================================================================"
-        print s
-        tokenized = tok.tokenize(s)
-        print "\n".join(tokenized)
+
+    tokenized = tok.tokenize(u"Blap #123 @as13 http://t.co/123124sadsa 123 häsc0hen0 haßen habichte")
+    print "\n".join(tokenized)
