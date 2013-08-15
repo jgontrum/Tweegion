@@ -63,15 +63,15 @@ def get_region_vector(region):
     if region == 1:
         return array([0.0,1.0,0.0,0.0,0.0,0.0,0.0])
     if region == 2:
-        return array([1.0,0.0,1.0,0.0,0.0,0.0,0.0])
+        return array([0.0,0.0,1.0,0.0,0.0,0.0,0.0])
     if region == 3:
-        return array([1.0,0.0,0.0,1.0,0.0,0.0,0.0])
+        return array([0.0,0.0,0.0,1.0,0.0,0.0,0.0])
     if region == 4:
-        return array([1.0,0.0,0.0,0.0,1.0,0.0,0.0])
+        return array([0.0,0.0,0.0,0.0,1.0,0.0,0.0])
     if region == 5:
-        return array([1.0,0.0,0.0,0.0,0.0,1.0,0.0])
+        return array([0.0,0.0,0.0,0.0,0.0,1.0,0.0])
     if region == 6:
-        return array([1.0,0.0,0.0,0.0,0.0,0.0,1.0])
+        return array([0.0,0.0,0.0,0.0,0.0,0.0,1.0])
 
 
 
@@ -166,7 +166,8 @@ wv1 = calc_next_generation(wv0, tweets)
 # Wenn sie größer ist, hat sie mehr Einträge, es sind also neue Wörter hinzugekommen
 c = 0
 #while len(wv1) > len(wv0):
-while c < 100: 
+while c < 5: 
+
     c += 1
     # In diesem Fall wird die alte Generation vergessen, ihren Platz nimmt die
     # gerade berechnete ein
