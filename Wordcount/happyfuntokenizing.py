@@ -156,7 +156,7 @@ class Tokenizer:
         # Fix HTML character entitites:
         s = self.__html2unicode(s)
         # Tokenize:
-        words = [x for x in word_re.findall(s) if not x.startswith(("http",'@',"#","1","2","3","4","5","6","7","8","9","0"))]
+        words = [x for x in word_re.findall(s) if x.isalpha() and not x.startswith(("http",'@',"#")) ]
         # Possible alter the case, but avoid changing emoticons like :D into :d:
         if not self.preserve_case:            
             words = map((lambda x : x if emoticon_re.search(x) else x.lower()), words)
@@ -219,5 +219,5 @@ if __name__ == '__main__':
         )
 
 
-    tokenized = tok.tokenize(u"Blap #123 @as13 http://t.co/123124sadsa 123 häsc0hen0 haßen habichte")
-    print "\n".join(tokenized)
+    tokenized = tok.tokenize(u"Blap #123 @as13 http://t.co/123124sadsa 123 hsc0hen0 haßen habichte")
+    print '\n'.join(tokenized)
