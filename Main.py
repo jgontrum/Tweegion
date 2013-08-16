@@ -83,7 +83,7 @@ def jsons_to_dict(path, stopwords):
 
 # Raw Text einlesen und als Liste ausgeben
 def textfile_to_list(filename):
-    textfile = open(filename,'r')
+    textfile = open(filename,'r',"utf-8")
     return textfile.readlines()
 
 # Hauptalgorithmus: aus gegebener Generation von Wortvektoren die nächste berechnen
