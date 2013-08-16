@@ -58,21 +58,9 @@ def geodict_to_vectors(geodict):
 
 
 def get_region_vector(region):
-    if region == 0:
-        return array([1.0,0.0,0.0,0.0,0.0,0.0,0.0])
-    if region == 1:
-        return array([0.0,1.0,0.0,0.0,0.0,0.0,0.0])
-    if region == 2:
-        return array([0.0,0.0,1.0,0.0,0.0,0.0,0.0])
-    if region == 3:
-        return array([0.0,0.0,0.0,1.0,0.0,0.0,0.0])
-    if region == 4:
-        return array([0.0,0.0,0.0,0.0,1.0,0.0,0.0])
-    if region == 5:
-        return array([0.0,0.0,0.0,0.0,0.0,1.0,0.0])
-    if region == 6:
-        return array([0.0,0.0,0.0,0.0,0.0,0.0,1.0])
-
+    vector = array([0.0,0.0,0.0,0.0,0.0,0.0,0.0])
+    vector[region] = 1.0
+    return vector
 
 
 # Tweets einlesen und als Dictionary ID -> Text ausgeben
