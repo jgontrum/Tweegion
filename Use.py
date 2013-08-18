@@ -21,9 +21,9 @@ def classify_tweet(tweet_text,word_vectors):
     for token in tok.tokenize(tweet_text):
         if token in word_vectors:
             tweet_vector += word_vectors[token]
-    tweet_vector = normalize(tweet_vector)
-    tweet_vector = tweet_vector - average_distribution(word_vectors)
-    return tweet_vector
+    tweet_vector_normalized = normalize(tweet_vector)
+    tweet_vector_diff = tweet_vector_normalized - average_distribution(word_vectors)
+    return tweet_vector_diff
 
 # Herunterrechnen eines Vektors, so dass er Summe 1 hat
 def normalize(vector):
@@ -32,9 +32,11 @@ def normalize(vector):
         return vector/vector.sum()
     return array([0.0,0.0,0.0,0.0,0.0,0.0,0.0])
 
+# def average_distribution(wv):
+#     return sum(wv.values())/len(wv)
 def average_distribution(wv):
-    return sum(wv.values())/len(wv)
-
+    hans = sum(wv.values())
+    return hans/sum(hans)
 
 # Ergebnis der Klassifikation ausgeben
 def print_results(tweet_vector):
