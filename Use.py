@@ -2,7 +2,7 @@
 # -*- coding: utf8 -*-
 import csv               # Lesen und Schreiben von CSV-Dateien
 from numpy import array  # Datenstruktur für Vektoren
-from happyfuntokenizing import Tokenizer
+from include.happyfuntokenizing import Tokenizer
 
 
 # Dictionary Vektorstelle -> Regionenname

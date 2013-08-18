@@ -7,8 +7,8 @@ import json
 import codecs
 from numpy import array  # Datenstruktur für Vektoren
 import numpy
-from happyfuntokenizing import Tokenizer
-import geo
+from include.happyfuntokenizing import Tokenizer
+import include.geo
 import Use
 
 ###########################################################
@@ -17,10 +17,10 @@ import Use
 # tweets_file     Datei mit Tweets (JSON-Objekte)
 # stopwords_file  Textdatei mit Stoppwörtern
 ###########################################################
-init_wv_file = "Words/Regionalwords.csv"
-tweets_file = "./"
-stopwords_file = "Wordcount/stpwds_no_happytok.txt"
-geo_tagged_tweets = "first_geo_tweets.txt"
+init_wv_file = "data/regionalwords.csv"
+tweets_file = "data/geo-tweets/balanced-8787.txt"
+stopwords_file = "data/stpwds_no_happytok.txt"
+geo_tagged_tweets = "data/geo-tweets/balanced-3000.txt"
 
 # CSV einlesen und als Dictionary von Wortvektoren ausgeben
 def csv_to_vectors(filename):
@@ -67,18 +67,16 @@ def get_region_vector(region):
 def jsons_to_dict(path, stopwords):
     id_to_tok = dict()
     tok = Tokenizer(preserve_case=False)
-    for tweetfile in [folder for folder in os.listdir(path) if folder.startswith('first10000') == True ]:
-        tweetfile = os.path.join(path, tweetfile)
-        with codecs.open(tweetfile, 'r', "utf-8") as json_file:
-            for line in json_file:
-                try:
-                    tweet = json.loads(line, 'latin1')['text']
-                    tweet_id = json.loads(line, 'latin1')['id']
-                    tokenized_tweet = tok.tokenize(tweet)
-                    # Stopworte entfernen
-                    id_to_tok[tweet_id] = [token for token in tokenized_tweet if token not in stopwords]
-                except:
-                    None
+    with codecs.open(tweet_file, 'r', "utf-8") as json_file:
+        for line in json_file:
+            try:
+                tweet = json.loads(line, 'latin1')['text']
+                tweet_id = json.loads(line, 'latin1')['id']
+                tokenized_tweet = tok.tokenize(tweet)
+                # Stopworte entfernen
+                id_to_tok[tweet_id] = [token for token in tokenized_tweet if token not in stopwords]
+            except:
+                None
     return id_to_tok
 
 # Raw Text einlesen und als Liste ausgeben
