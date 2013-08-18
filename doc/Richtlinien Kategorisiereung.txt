@@ -1,0 +1,13 @@
+Richtlinien für die Kategorisierung:
+
+Regionen:
+1. Ost
+2. Nord
+3. West
+4. Südwest
+5. Bayern
+6. Schweiz
+7. Österreich
+
+* Wörter dürfen maximal in drei verschiedenen Regionen vorkommen
+* 
