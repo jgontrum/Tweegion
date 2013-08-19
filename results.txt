@@ -1,0 +1,15 @@
+
+Match:  217
+Mismatch:  833
+Accuracuy:  0.206666666667
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	39459
+Number of Geo-Tweets :	21000
+Loops :	3
+Number of blackwords :	200
+Mode :	geo
+Calculation method :	Blah
+Blacklist path :	data/stpwds_no_happytok.txt
+Tweet path :	data/geo-tweets/balanced-39k.json
+Geo path :	data/geo-tweets/balanced-21k.json

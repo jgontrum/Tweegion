@@ -23,14 +23,19 @@ class Tweegion(object):
               5 : "Schweiz",
               6 : "Österreich"}
 
-    __verbose = {   "Mode" : "", 
-                    "Loops" : 0, 
-                    "Number of Tweets" : 0, 
-                    "Number of blackwords" : 0,
-                    "Number of regional words" : 0,
-                    "Number of Geo-Tweets" : 0,
-                    "Blacklist path" : "".
-                    ""}
+    __verbose = {   "Mode" : None, 
+                    "Loops" : None, 
+                    "Number of Tweets" : None, 
+                    "Number of blackwords" : None,
+                    "Number of regional words" : None,
+                    "Number of Geo-Tweets" : None,
+                    "Blacklist path" : None,
+                    "Tweet path" : None,
+                    "Regio path" : None,
+                    "Geo path" : None,
+                    "Calculation method" : None
+                }
+
     # Arguments:
     #   * mode = "geo" | "regio" 
     #       Toggles the mode of Tweegion.
@@ -73,6 +78,8 @@ class Tweegion(object):
             wv1 = self.__calc_next_generation(wv0, tweet_dict)
         self.__wv = wv1
         self.__calc_average_distribution()
+        self.__fill_verbose("Blah", mode, loops, tweet_dict, blackword_list, regional_words, geo_tweets, blackwords, tweets)
+
     # Returns the region, from where a tweet was most likely sent. For more information, enable verbose mode
     def classify(self, tweet, human_readable=True, verbose=False):
         if not verbose:
@@ -86,6 +93,7 @@ class Tweegion(object):
     def evaluate_accuracy(self, gold_tweet_file):
         match = 0 #< Number tweets, where the actual region matches the calculated one
         mismatch = 0 #< not match
+        geo_functions = geo.GeoFunctions()
         # Open the file and parse all json objects
         with codecs.open(gold_tweet_file, 'r', "utf-8") as json_file:
             for line in json_file:
@@ -96,19 +104,52 @@ class Tweegion(object):
                     region = geo_functions.get_region((float(coordinates[0]),float(coordinates[1])))
                     if region != -1:
                         if self.classify(tweet,False,False) == region: match += 1
-                        else mismatch += 1
+                        else: mismatch += 1
                 except:
                     None
-        return (match, mismatch)
+        print ""
+        print "Match: ", match
+        print "Mismatch: ", mismatch
+        print "Accuracuy: ", float(match) / (match+mismatch)
+        print "~~~~~~~~~~~~~~~~~~~~~"
+        print "Variables:"
+        for key, value in self.__verbose.iteritems():
+            if value != None:
+                print key, ":\t", value
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Internal functions:
+    def __fill_verbose(self, method, mode, loops, tweets, blackwords, 
+                        regio_path, geo_path, backword_path, tweet_path):
+        self.__verbose['Mode'] = mode
+        self.__verbose['Loops'] = loops
+        self.__verbose['Number of Tweets'] = len(tweets)
+        self.__verbose['Number of blackwords'] = len(blackwords)
+        self.__verbose['Blacklist path'] = backword_path
+        self.__verbose['Tweet path'] = tweet_path
+        self.__verbose['Calculation method'] = method
+        if regio_path != "":
+            self.__verbose['Regio path'] = regio_path
+            i = 0
+            with open(regio_path) as f:
+                for i, l in enumerate(f):
+                    pass
+            self.__verbose['Number of regional words'] = i
+        if geo_path != "":
+            self.__verbose['Geo path'] = geo_path
+            i = 0
+            with open(geo_path) as f:
+                for i, l in enumerate(f):
+                    pass
+            self.__verbose['Number of Geo-Tweets'] = i+1
+
     # Raw Text einlesen und als Liste ausgeben
     def __textfile_to_list(self, filename):
         return codecs.open(filename,'r',"utf-8").read().splitlines()
     
     # Tweets einlesen und als Dictionary ID -> Text ausgeben
     def __jsons_to_dict(self, tweet_file, stopwords):
+        counter = 0
         id_to_tok = dict()
         tok = Tokenizer(preserve_case=False)
         with codecs.open(tweet_file, 'r', "utf-8") as json_file:
@@ -119,11 +160,15 @@ class Tweegion(object):
                     tokenized_tweet = tok.tokenize(tweet)
                     # Stopworte entfernen
                     id_to_tok[tweet_id] = [token for token in tokenized_tweet if token not in stopwords]
+                    counter += 1
+                    # if counter % 1000 == 0:
+                        # sys.stdout.write('+ ')
                 except:
                     None
         return id_to_tok
 
     def __geo_to_dict(self, filename, stopwords):
+        counter = 0
         id_to_geotok = dict()
         tok = Tokenizer(preserve_case=False)
         geo_functions = geo.GeoFunctions()
@@ -141,6 +186,9 @@ class Tweegion(object):
                         id_to_geotok[tweet_id] = (
                             [token for token in tokenized_tweet if token not in stopwords],
                             region)
+                    counter += 1
+                    # if counter % 1000 == 0:
+                        # sys.stdout.write('- ')
                 except:
                     None
         return id_to_geotok
@@ -236,7 +284,7 @@ class Tweegion(object):
             # Nullvektor: keine regionalen Wörter gefunden
             if human_readable:
                 return "Keine regionalen Wörter gefunden."
-            else return -1
+            else: return -1
         # Stelle des größten Wertes finden
         maxarg = []
         maxarg.append(tweet_vector.argmax())
@@ -260,13 +308,13 @@ class Tweegion(object):
             # Größter Wert in genau einer Region
             if human_readable:
                 return "Der Tweet scheint aus der Region {0} zu stammen.".format(self.__region[maxarg[0]])
-            else return maxarg[0]
+            else: return maxarg[0]
         else:
             # Größter Wert in mehreren Regionen
             if human_readable:
                 results = ', '.join([self.__region[m] for m in maxarg])
                 return "Der Tweet scheint aus einer der Regionen {0} zu stammen.".format(results)
-            else return maxarg
+            else: return maxarg
             
 if __name__ == "__main__":
    pass
