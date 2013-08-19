@@ -9,7 +9,7 @@ from numpy import array  # Datenstruktur für Vektoren
 import numpy             # Weitere Funktionen für die Verrechnung von Vektoren
 from happyfuntokenizing import Tokenizer    # Potts Tokenizer
 import geo_wrapper as geo# Klassifizierung von Geo-Tweets
-
+from math import log
 
 class Tweegion(object):
     __average_distribution = ()
