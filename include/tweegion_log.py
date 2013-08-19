@@ -238,7 +238,7 @@ class Tweegion(object):
         return array([0.0,0.0,0.0,0.0,0.0,0.0,0.0])
 
     # Logarithmieren eines Vektors
-    def __log_vector(vector, base):
+    def __log_vector(self, vector, base):
         return_vector = vector
         for i in range(len(vector)):
             return_vector[i] = 1 + log(vector[i], base)
