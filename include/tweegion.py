@@ -78,7 +78,7 @@ class Tweegion(object):
             wv1 = self.__calc_next_generation(wv0, tweet_dict)
         self.__wv = wv1
         self.__calc_average_distribution()
-        self.__fill_verbose("Blah", mode, loops, tweet_dict, blackword_list, regional_words, geo_tweets, blackwords, tweets)
+        self.__fill_verbose("Legacy", mode, loops, tweet_dict, blackword_list, regional_words, geo_tweets, blackwords, tweets)
 
     # Returns the region, from where a tweet was most likely sent. For more information, enable verbose mode
     def classify(self, tweet, human_readable=True, verbose=False):
