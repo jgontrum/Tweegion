@@ -1,7 +1,7 @@
 #/usr/bin/ python
 # -*- coding: utf8 -*-
 from include.tweegion import Tweegion
-# from include.tweegion_root import Tweegion as TweegionRoot
+from include.tweegion_root import Tweegion as TweegionRoot
 
 tweegion = TweegionRoot("geo",
  					"data/geo-tweets/balanced-61k.json",
