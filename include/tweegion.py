@@ -42,10 +42,9 @@ class Tweegion(object):
         # Parse and tokenize all tweets to get a dictionary (ID -> list_of_token)
         tweet_dict = self.__jsons_to_dict(tweets,blackword_list) 
         # Depending on the mode, create the first vector-list from geo-tagged tweets or read it from a CSV-file
-        wv0 = dict()
         if mode == "geo":
             # geo_dict: Key: TweetID, Value: Tupel of a list of token for a tweet and the region index.
-            geo_dict = self.__geo_to_dict(geo_tweets)
+            geo_dict = self.__geo_to_dict(geo_tweets, blackword_list)
             # create the first wordvector depending an the previously created geo_dict
             wv0 = self.__geodict_to_vectors(geo_dict)
         elif mode == "regio":
@@ -54,6 +53,7 @@ class Tweegion(object):
         else:
             print "Please choose a valid mode: \"geo\" or \"regio\"."
             sys.exit(1)
+        # print blackword_list
         # First  calculation based on the initial wordvector
         wv1 = self.__calc_next_generation(wv0, tweet_dict)
         # Entering the main-loop...
@@ -63,7 +63,7 @@ class Tweegion(object):
             # the old wv1 is our new wv0!
             wv0 = wv1
             wv1 = self.__calc_next_generation(wv0, tweet_dict)
-        self.wv = wv1
+        self.__wv = wv1
         self.__calc_average_distribution()
     # Returns the region, from where a tweet was most likely sent. For more information, enable verbose mode
     def classify(self, tweet, verbose=False):
@@ -79,8 +79,7 @@ class Tweegion(object):
     # Internal functions:
     # Raw Text einlesen und als Liste ausgeben
     def __textfile_to_list(self, filename):
-        textfile = codecs.open(filename,'r',"utf-8")
-        return textfile.readlines()
+        return codecs.open(filename,'r',"utf-8").read().splitlines()
     
     # Tweets einlesen und als Dictionary ID -> Text ausgeben
     def __jsons_to_dict(self, tweet_file, stopwords):
@@ -98,7 +97,7 @@ class Tweegion(object):
                     None
         return id_to_tok
 
-    def __geo_to_dict(self, filename):
+    def __geo_to_dict(self, filename, stopwords):
         id_to_geotok = dict()
         tok = Tokenizer(preserve_case=False)
         geo_functions = geo.GeoFunctions()
@@ -231,10 +230,10 @@ class Tweegion(object):
         # Ergebnisse ausgeben
         if len(maxarg) == 1:
             # Größter Wert in genau einer Region
-            return "Der Tweet scheint aus der Region {0} zu stammen.".format(region[maxarg[0]])
+            return "Der Tweet scheint aus der Region {0} zu stammen.".format(self.__region[maxarg[0]])
         else:
             # Größter Wert in mehreren Regionen
-            results = ', '.join([region[m] for m in maxarg])
+            results = ', '.join([self.__region[m] for m in maxarg])
             return "Der Tweet scheint aus einer der Regionen {0} zu stammen.".format(results)
             
 if __name__ == "__main__":
