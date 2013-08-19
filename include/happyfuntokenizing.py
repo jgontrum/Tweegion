@@ -156,7 +156,9 @@ class Tokenizer:
         # Fix HTML character entitites:
         s = self.__html2unicode(s)
         # Tokenize:
-        words = [x for x in word_re.findall(s) if x.isalpha() and not x.startswith(("http",'@',"#")) ]
+        # words = [x for x in word_re.findall(s) if x.isalpha() and not x.startswith(("http",'@',"#")) ]
+        # filters out ALL tokens which do not consist of only chars or chars combined with apostroph
+        words = [each for each in word_re.findall(s) if each.isalpha() or each.find("'") != -1]
         # Possible alter the case, but avoid changing emoticons like :D into :d:
         if not self.preserve_case:            
             words = map((lambda x : x if emoticon_re.search(x) else x.lower()), words)
