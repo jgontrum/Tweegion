@@ -23,6 +23,14 @@ class Tweegion(object):
               5 : "Schweiz",
               6 : "Österreich"}
 
+    __verbose = {   "Mode" : "", 
+                    "Loops" : 0, 
+                    "Number of Tweets" : 0, 
+                    "Number of blackwords" : 0,
+                    "Number of regional words" : 0,
+                    "Number of Geo-Tweets" : 0,
+                    "Blacklist path" : "".
+                    ""}
     # Arguments:
     #   * mode = "geo" | "regio" 
     #       Toggles the mode of Tweegion.
@@ -66,14 +74,32 @@ class Tweegion(object):
         self.__wv = wv1
         self.__calc_average_distribution()
     # Returns the region, from where a tweet was most likely sent. For more information, enable verbose mode
-    def classify(self, tweet, verbose=False):
+    def classify(self, tweet, human_readable=True, verbose=False):
         if not verbose:
-            return self.__get_results(self.__classify_tweet(tweet))
+            return self.__get_results(self.__classify_tweet(tweet), human_readable)
         else:
             pass
 
-    def evaluate_accuracy(self, gold_tweets, gold_regions):
-        pass
+    # Arguments:
+    #   * gold_tweet_file = /path/to/json_tweet_objects
+    #       Must contain a geo field
+    def evaluate_accuracy(self, gold_tweet_file):
+        match = 0 #< Number tweets, where the actual region matches the calculated one
+        mismatch = 0 #< not match
+        # Open the file and parse all json objects
+        with codecs.open(gold_tweet_file, 'r', "utf-8") as json_file:
+            for line in json_file:
+                try:
+                    json_data = json.loads(line, 'utf-8')
+                    tweet = json_data['text']
+                    coordinates = json_data['geo']['coordinates']
+                    region = geo_functions.get_region((float(coordinates[0]),float(coordinates[1])))
+                    if region != -1:
+                        if self.classify(tweet,False,False) == region: match += 1
+                        else mismatch += 1
+                except:
+                    None
+        return (match, mismatch)
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Internal functions:
@@ -88,8 +114,8 @@ class Tweegion(object):
         with codecs.open(tweet_file, 'r', "utf-8") as json_file:
             for line in json_file:
                 try:
-                    tweet = json.loads(line, 'latin1')['text']
-                    tweet_id = json.loads(line, 'latin1')['id']
+                    tweet = json.loads(line, 'utf-8')['text']
+                    tweet_id = json.loads(line, 'utf-8')['id']
                     tokenized_tweet = tok.tokenize(tweet)
                     # Stopworte entfernen
                     id_to_tok[tweet_id] = [token for token in tokenized_tweet if token not in stopwords]
@@ -104,7 +130,7 @@ class Tweegion(object):
         with codecs.open(filename, 'r', "utf-8") as json_file:
             for line in json_file:
                 try:
-                    json_data = json.loads(line, 'latin1')
+                    json_data = json.loads(line, 'utf-8')
                     tweet_id = json_data['id']
                     tweet = json_data['text']
                     coordinates = json_data['geo']['coordinates']
@@ -203,12 +229,14 @@ class Tweegion(object):
         self.__average_distribution = hans/sum(hans)
 
     # Ergebnis der Klassifikation ausgeben
-    def __get_results(self, tweet_vector):
+    def __get_results(self, tweet_vector, human_readable=True):
         # Größten Wert des Vektors finden
         maxval = tweet_vector.max()
         if maxval == 0.0:
             # Nullvektor: keine regionalen Wörter gefunden
-            return "Keine regionalen Wörter gefunden."
+            if human_readable:
+                return "Keine regionalen Wörter gefunden."
+            else return -1
         # Stelle des größten Wertes finden
         maxarg = []
         maxarg.append(tweet_vector.argmax())
@@ -230,11 +258,15 @@ class Tweegion(object):
         # Ergebnisse ausgeben
         if len(maxarg) == 1:
             # Größter Wert in genau einer Region
-            return "Der Tweet scheint aus der Region {0} zu stammen.".format(self.__region[maxarg[0]])
+            if human_readable:
+                return "Der Tweet scheint aus der Region {0} zu stammen.".format(self.__region[maxarg[0]])
+            else return maxarg[0]
         else:
             # Größter Wert in mehreren Regionen
-            results = ', '.join([self.__region[m] for m in maxarg])
-            return "Der Tweet scheint aus einer der Regionen {0} zu stammen.".format(results)
+            if human_readable:
+                results = ', '.join([self.__region[m] for m in maxarg])
+                return "Der Tweet scheint aus einer der Regionen {0} zu stammen.".format(results)
+            else return maxarg
             
 if __name__ == "__main__":
    pass
