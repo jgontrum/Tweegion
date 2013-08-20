@@ -304,7 +304,7 @@ class Tweegion(object):
             # Finde dort den größten Wert
             if rest.max() == maxval:
                 # Er entspricht bisherigem größtem Wert: Stelle in Trefferliste speichern
-                maxarg[n+1] = rest.argmax() + n+1
+                maxarg.append(rest.argmax() + n+1)
             else:
                 # Er ist kleiner: keine weiteren Treffer, Schleife beenden
                 break
