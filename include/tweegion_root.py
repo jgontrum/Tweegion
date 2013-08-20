@@ -110,7 +110,7 @@ class Tweegion(object):
         print ""
         print "Match: ", match
         print "Mismatch: ", mismatch
-        print "Accuracuy: ", float(match) / (match+mismatch)
+        print "Accuracy: ", float(match) / (match+mismatch)
         print "~~~~~~~~~~~~~~~~~~~~~"
         print "Variables:"
         for key, value in self.__verbose.iteritems():
@@ -237,6 +237,12 @@ class Tweegion(object):
             return vector/vector.sum()
         return array([0.0,0.0,0.0,0.0,0.0,0.0,0.0])
 
+    # Herunterrechnen eines Vektors, so dass er Länge 1 hat
+    def __normalize_len(self, vector):
+        if vector.sum() > 0:
+            return numpy.linalg.norm(vector)
+        return array([0.0,0.0,0.0,0.0,0.0,0.0,0.0])
+
     # Wurzel aus einem Vektor ziehen
     def __root_vector(self, vector, base):
         return_vector = vector
@@ -273,13 +279,13 @@ class Tweegion(object):
         for token in tok.tokenize(tweet_text):
             if token in self.__wv:
                 tweet_vector += self.__wv[token]
-        tweet_vector_normalized = numpy.linalg.norm(tweet_vector)
+        tweet_vector_normalized = self.__normalize_len(tweet_vector)
         tweet_vector_diff = tweet_vector_normalized - self.__average_distribution
         return tweet_vector_diff
 
     def __calc_average_distribution(self):
         total_vector = sum(self.__wv.values())
-        self.__average_distribution = numpy.linalg.norm(total_vector)
+        self.__average_distribution = self.__normalize_len(total_vector)
 
     # Ergebnis der Klassifikation ausgeben
     def __get_results(self, tweet_vector, human_readable=True):
