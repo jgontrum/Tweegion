@@ -97,16 +97,16 @@ class Tweegion(object):
         # Open the file and parse all json objects
         with codecs.open(gold_tweet_file, 'r', "utf-8") as json_file:
             for line in json_file:
-                try:
-                    json_data = json.loads(line, 'utf-8')
-                    tweet = json_data['text']
-                    coordinates = json_data['geo']['coordinates']
-                    region = geo_functions.get_region((float(coordinates[0]),float(coordinates[1])))
-                    if region != -1:
-                        if self.classify(tweet,False,False) == region: match += 1
-                        else: mismatch += 1
-                except:
-                    None
+                #try:
+                json_data = json.loads(line, 'utf-8')
+                tweet = json_data['text']
+                coordinates = json_data['geo']['coordinates']
+                region = geo_functions.get_region((float(coordinates[0]),float(coordinates[1])))
+                if region != -1:
+                    if self.classify(tweet,False,False) == region: match += 1
+                    else: mismatch += 1
+                #except:
+                    #None
         print ""
         print "Match: ", match
         print "Mismatch: ", mismatch
