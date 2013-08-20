@@ -268,13 +268,13 @@ class Tweegion(object):
         for token in tok.tokenize(tweet_text):
             if token in self.__wv:
                 tweet_vector += self.__wv[token]
-        tweet_vector_normalized = self.__normalize(tweet_vector)
+        tweet_vector_normalized = numpy.linalg.norm(tweet_vector)
         tweet_vector_diff = tweet_vector_normalized - self.__average_distribution
         return tweet_vector_diff
 
     def __calc_average_distribution(self):
-        hans = sum(self.__wv.values())
-        self.__average_distribution = hans/sum(hans)
+        total_vector = sum(self.__wv.values())
+        self.__average_distribution = numpy.linalg.norm(total_vector)
 
     # Ergebnis der Klassifikation ausgeben
     def __get_results(self, tweet_vector, human_readable=True):
