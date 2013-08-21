@@ -101,11 +101,12 @@ class Tweegion(object):
     def evaluate_accuracy(self, gold_tweet_file):
         match = 0 #< Number tweets, where the actual region matches the calculated one
         mismatch = 0 #< not match
+        lines =0
         geo_functions = geo.GeoFunctions()
         # Open the file and parse all json objects
         with codecs.open(gold_tweet_file, 'r', "utf-8") as json_file:
             for line in json_file:
-                #try:
+                lines += 1
                 json_data = json.loads(line, 'utf-8')
                 tweet = json_data['text']
                 coordinates = json_data['geo']['coordinates']
@@ -115,11 +116,10 @@ class Tweegion(object):
                     if result != -1:
                         if result == region: match += 1
                         else: mismatch += 1
-                #except:
-                #    None
         print ""
         print "Match: ", match
         print "Mismatch: ", mismatch
+        print "Not regional: ", lines - (match + mismatch)
         print "Accuracy: ", float(match) / (match+mismatch)
         print "~~~~~~~~~~~~~~~~~~~~~"
         print "Variables:"
@@ -302,7 +302,8 @@ class Tweegion(object):
     def __get_raw_tv(self, tweet):
         tv = array([0.0,0.0,0.0,0.0,0.0,0.0,0.0])
         for token in tweet:
-            tv += self.__wv[token]
+            if token in self.__wv:
+                tv += self.__wv[token]
         return tv
 
     def __sorted_sim_list(self, tweets, wv, average):
