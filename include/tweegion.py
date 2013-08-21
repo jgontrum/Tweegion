@@ -78,6 +78,8 @@ class Tweegion(object):
             wv1 = self.__calc_next_generation(wv0, tweet_dict)
         self.__wv = wv1
         self.__calc_average_distribution()
+        print "81",self.__average_distribution
+        print "82",self.__sorted_sim_list(tweet_dict, self.__wv, self.__average_distribution)
         self.__fill_verbose("Legacy", mode, loops, tweet_dict, blackword_list, regional_words, geo_tweets, blackwords, tweets)
 
     # Returns the region, from where a tweet was most likely sent. For more information, enable verbose mode
@@ -242,7 +244,7 @@ class Tweegion(object):
     # Herunterrechnen eines Vektors, so dass er Länge 1 hat
     def __normalize_len(self, vector):
         if vector.sum() > 0:
-            return numpy.linalg.norm(vector)
+            return numpy.linalg.norm(vector) #!!!!! Gibt keinen Vektor aus, sondern Float!!
         return array([0.0,0.0,0.0,0.0,0.0,0.0,0.0])
 
     # Hauptalgorithmus: aus gegebener Generation von Wortvektoren die nächste berechnen
@@ -278,9 +280,31 @@ class Tweegion(object):
         tweet_vector_diff = tweet_vector_normalized - self.__average_distribution
         return tweet_vector_diff
 
+    def __cosine_sim(self, q, d):
+        # See Jurafsky & Martin: Speech and Language Processing, pp. 803: Information Retrieval - The Vector Space Model
+        numerator = sum(q,d)
+        print "286",q
+        print "287",d
+        denumerator = numpy.sqrt(sum(numpy.power(q,2))) * numpy.sqrt(sum(numpy.power(d,2)))
+        return numerator / denumerator
+
+    def __sorted_sim_list(self, tweets, wv, average):
+        sim_list = list()
+        for tweet in tweets.values():
+            tv = array([0.0,0.0,0.0,0.0,0.0,0.0,0.0])
+            print "294",tv
+            for token in tweet:
+                tv += wv[token]
+                print "298",tv
+            print "299",tv
+            sim_list.append(self.__cosine_sim(tv, average))
+        return sim_list.sort()
+
     def __calc_average_distribution(self):
         total_vector = sum(self.__wv.values())
+        print "305",total_vector
         self.__average_distribution = self.__normalize_len(total_vector)
+        print "307",self.__normalize_len(total_vector)
 
     # Ergebnis der Klassifikation ausgeben
     def __get_results(self, tweet_vector, human_readable=True):
