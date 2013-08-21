@@ -244,7 +244,7 @@ class Tweegion(object):
     # Herunterrechnen eines Vektors, so dass er Länge 1 hat
     def __normalize_len(self, vector):
         if vector.sum() > 0:
-            return numpy.linalg.norm(vector) #!!!!! Gibt keinen Vektor aus, sondern Float!!
+            return vector/numpy.linalg.norm(vector)
         return array([0.0,0.0,0.0,0.0,0.0,0.0,0.0])
 
     # Hauptalgorithmus: aus gegebener Generation von Wortvektoren die nächste berechnen
