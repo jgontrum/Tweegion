@@ -287,7 +287,7 @@ class Tweegion(object):
                 tweet_vector += self.__wv[token]
         if self.__cosine_sim(tweet_vector, self.__average_distribution) > self.__sim_threshold:
             return None
-        tweet_vector_normalized = self.__normalize(tweet_vector)
+        tweet_vector_normalized = self.__normalize_len(tweet_vector)
         tweet_vector_diff = tweet_vector_normalized - self.__average_distribution
         return tweet_vector_diff
 
@@ -323,8 +323,8 @@ class Tweegion(object):
 
 
     def __calc_average_distribution(self):
-        hans = sum(self.__wv.values())
-        self.__average_distribution = hans/sum(hans)
+        total_vector = sum(self.__wv.values())
+        self.__average_distribution = self.__normalize_len(total_vector)
 
     # Ergebnis der Klassifikation ausgeben
     def __get_results(self, tweet_vector, human_readable=True):
