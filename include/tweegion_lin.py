@@ -9,11 +9,13 @@ from numpy import array  # Datenstruktur für Vektoren
 import numpy             # Weitere Funktionen für die Verrechnung von Vektoren
 from happyfuntokenizing import Tokenizer    # Potts Tokenizer
 import geo_wrapper as geo# Klassifizierung von Geo-Tweets
-from math import log
+import matplotlib.pyplot as plt 
+
 
 class Tweegion(object):
     __average_distribution = ()
     __wv = dict()
+    __sim_threshold = 0
     # Dictionary Vektorstelle -> Regionenname
     __region = {0 : "Ostdeutschland",
               1 : "Norddeutschland",
@@ -33,7 +35,8 @@ class Tweegion(object):
                     "Tweet path" : None,
                     "Regio path" : None,
                     "Geo path" : None,
-                    "Calculation method" : None
+                    "Calculation method" : None,
+                    "Similarity" : None
                 }
 
     # Arguments:
@@ -49,7 +52,10 @@ class Tweegion(object):
     #       Used only in "geo"-mode. Tweet objects, that must contain a geo object!
     #   * regional_words = /path/to/csv_file (separated by semi-column)
     #       Used only in "regip"-mode. CSV file with regional words.
-    def __init__(self, mode, tweets, blackwords, loops, geo_tweets, regional_words):
+    #   * non_regional_tweets = <= 1 && >= 0
+    #       Amount of all Tweets, that supose to have some regional token. 
+    #       Used to calculate a similarity threshold 
+    def __init__(self, mode, tweets, blackwords, loops, geo_tweets, regional_words, non_regional_tweets = 0.6):
         # Read blackwords
         blackword_list = self.__textfile_to_list(blackwords)
         # Parse and tokenize all tweets to get a dictionary (ID -> list_of_token)
@@ -78,7 +84,9 @@ class Tweegion(object):
             wv1 = self.__calc_next_generation(wv0, tweet_dict)
         self.__wv = wv1
         self.__calc_average_distribution()
-        self.__fill_verbose("Log", mode, loops, tweet_dict, blackword_list, regional_words, geo_tweets, blackwords, tweets)
+        sim_list = self.__sorted_sim_list(tweet_dict, self.__wv, self.__average_distribution)
+        self.__sim_threshold = sim_list[int(non_regional_tweets * len(sim_list))]
+        self.__fill_verbose("Legacy", mode, loops, tweet_dict, blackword_list, regional_words, geo_tweets, blackwords, tweets, self.__sim_threshold)
 
     # Returns the region, from where a tweet was most likely sent. For more information, enable verbose mode
     def classify(self, tweet, human_readable=True, verbose=False):
@@ -93,23 +101,25 @@ class Tweegion(object):
     def evaluate_accuracy(self, gold_tweet_file):
         match = 0 #< Number tweets, where the actual region matches the calculated one
         mismatch = 0 #< not match
+        lines =0
         geo_functions = geo.GeoFunctions()
         # Open the file and parse all json objects
         with codecs.open(gold_tweet_file, 'r', "utf-8") as json_file:
             for line in json_file:
-                try:
-                    json_data = json.loads(line, 'utf-8')
-                    tweet = json_data['text']
-                    coordinates = json_data['geo']['coordinates']
-                    region = geo_functions.get_region((float(coordinates[0]),float(coordinates[1])))
-                    if region != -1:
-                        if self.classify(tweet,False,False) == region: match += 1
+                lines += 1
+                json_data = json.loads(line, 'utf-8')
+                tweet = json_data['text']
+                coordinates = json_data['geo']['coordinates']
+                region = geo_functions.get_region((float(coordinates[0]),float(coordinates[1])))
+                if region != -1:
+                    result = self.classify(tweet,False,False)
+                    if result != -1:
+                        if result == region: match += 1
                         else: mismatch += 1
-                except:
-                    None
         print ""
         print "Match: ", match
         print "Mismatch: ", mismatch
+        print "Not regional: ", lines - (match + mismatch)
         print "Accuracy: ", float(match) / (match+mismatch)
         print "~~~~~~~~~~~~~~~~~~~~~"
         print "Variables:"
@@ -120,7 +130,7 @@ class Tweegion(object):
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Internal functions:
     def __fill_verbose(self, method, mode, loops, tweets, blackwords, 
-                        regio_path, geo_path, backword_path, tweet_path):
+                        regio_path, geo_path, backword_path, tweet_path, sim):
         self.__verbose['Mode'] = mode
         self.__verbose['Loops'] = loops
         self.__verbose['Number of Tweets'] = len(tweets)
@@ -128,6 +138,7 @@ class Tweegion(object):
         self.__verbose['Blacklist path'] = backword_path
         self.__verbose['Tweet path'] = tweet_path
         self.__verbose['Calculation method'] = method
+        self.__verbose['Similarity'] = sim
         if regio_path != "":
             self.__verbose['Regio path'] = regio_path
             i = 0
@@ -243,13 +254,6 @@ class Tweegion(object):
             return vector/numpy.linalg.norm(vector)
         return array([0.0,0.0,0.0,0.0,0.0,0.0,0.0])
 
-    # Logarithmieren eines Vektors
-    def __log_vector(self, vector, base):
-        return_vector = vector
-        for i in range(len(vector)):
-            return_vector[i] = log(vector[i]+1, base)
-        return return_vector
-
     # Hauptalgorithmus: aus gegebener Generation von Wortvektoren die nächste berechnen
     def __calc_next_generation(self, wvm, tweets):
         wvn = {}    # wvn = Dict von Wörtern auf Wort-Vektoren der n-ten Generation
@@ -267,9 +271,6 @@ class Tweegion(object):
                     else:
                         wvn[token] = tv[id]
 
-        for word in wvn:
-            wvn[word] = self.__log_vector(wvn[word], 2)
-
         return wvn
 
     # Vektor für einen Tweet auf Grundlage von Wortvektoren berechnen
@@ -279,17 +280,55 @@ class Tweegion(object):
         for token in tok.tokenize(tweet_text):
             if token in self.__wv:
                 tweet_vector += self.__wv[token]
-        tweet_vector_normalized = self.__normalize_len(tweet_vector)
+        if self.__cosine_sim(tweet_vector, self.__average_distribution) > self.__sim_threshold:
+            return None
+        tweet_vector_normalized = self.__normalize(tweet_vector)
         tweet_vector_diff = tweet_vector_normalized - self.__average_distribution
         return tweet_vector_diff
 
+    def __cosine_sim(self, q, d):
+        # See Jurafsky & Martin: Speech and Language Processing, pp. 803: Information Retrieval - The Vector Space Model
+        numerator = sum(q*d)
+        denumerator = numpy.sqrt(sum(numpy.power(q,2))) * numpy.sqrt(sum(numpy.power(d,2)))
+        if denumerator != 0:
+            return numerator / denumerator
+        return None
+
+    def __get_raw_tv(self, tweet):
+        tv = array([0.0,0.0,0.0,0.0,0.0,0.0,0.0])
+        for token in tweet:
+            if token in self.__wv:
+                tv += self.__wv[token]
+        return tv
+
+    def __sorted_sim_list(self, tweets, wv, average):
+        sim_list = list()
+        for tweet in tweets.values():
+            tv = self.__get_raw_tv(tweet)
+            cos = self.__cosine_sim(tv, average)
+            if cos != None: # = Not a 0-Vector
+                sim_list.append(cos)
+        # plt.plot(sorted(sim_list)[::-1])
+        # plt.ylabel('Similarity')
+        # plt.xlabel('Vectors')
+        # plt.title('Cosine Similarity between Tweet-Vectors and the average Vector')
+        # plt.grid(True)
+        # plt.show()
+        return sorted(sim_list)
+
+
     def __calc_average_distribution(self):
-        total_vector = sum(self.__wv.values())
-        self.__average_distribution = self.__normalize_len(total_vector)
+        hans = sum(self.__wv.values())
+        self.__average_distribution = hans/sum(hans)
 
     # Ergebnis der Klassifikation ausgeben
     def __get_results(self, tweet_vector, human_readable=True):
         # Größten Wert des Vektors finden
+        if tweet_vector == None:
+            if human_readable:
+                return "Der Tweet beinhaltet zu wenig relevante Wörter, um einer Region zugeordnet zu werden."
+            else:
+                return -1
         maxval = tweet_vector.max()
         if maxval == 0.0:
             # Nullvektor: keine regionalen Wörter gefunden
@@ -309,7 +348,7 @@ class Tweegion(object):
             # Finde dort den größten Wert
             if rest.max() == maxval:
                 # Er entspricht bisherigem größtem Wert: Stelle in Trefferliste speichern
-                maxarg[n+1] = rest.argmax() + n+1
+                maxarg.append(rest.argmax() + n+1)
             else:
                 # Er ist kleiner: keine weiteren Treffer, Schleife beenden
                 break
