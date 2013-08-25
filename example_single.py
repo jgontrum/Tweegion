@@ -9,35 +9,6 @@ tweegion = Tweegion("geo",
  					1,
  					"data/geo-tweets/balanced-61k.json",
  					"data/regionalwords.csv",
- 					0.33 )
-tweegion.evaluate_accuracy("data/geo-tweets/gold.json")
-
-
-tweegion = TweegionRoot("geo",
- 					"data/geo-tweets/balanced-39k.json",
- 					"data/stoppwords200.txt",
- 					1,
- 					"data/geo-tweets/balanced-61k.json",
- 					"data/regionalwords.csv",
- 					0.33 )
-tweegion.evaluate_accuracy("data/geo-tweets/gold.json")
-
-tweegion = Tweegion("geo",
- 					"data/geo-tweets/balanced-39k.json",
- 					"data/stoppwords200.txt",
- 					0,
- 					"data/geo-tweets/balanced-61k.json",
- 					"data/regionalwords.csv",
- 					0.33 )
-tweegion.evaluate_accuracy("data/geo-tweets/gold.json")
-
-
-tweegion = TweegionRoot("geo",
- 					"data/geo-tweets/balanced-39k.json",
- 					"data/stoppwords200.txt",
- 					0,
- 					"data/geo-tweets/balanced-61k.json",
- 					"data/regionalwords.csv",
- 					0.33 )
-tweegion.evaluate_accuracy("data/geo-tweets/gold.json")
-
+ 					0.99 )
+#tweegion.evaluate_accuracy("data/geo-tweets/gold.json")
+print tweegion.classify("Ich glaube @Drahflow tippt noch schneller als er redet. ;) #om13")

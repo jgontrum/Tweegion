@@ -10,6 +10,8 @@ import numpy             # Weitere Funktionen für die Verrechnung von Vektoren
 from happyfuntokenizing import Tokenizer    # Potts Tokenizer
 import geo_wrapper as geo# Klassifizierung von Geo-Tweets
 import matplotlib.pyplot as plt 
+from pylab import arange,sqrt
+import pylab
 
 
 class Tweegion(object):
@@ -313,12 +315,31 @@ class Tweegion(object):
             cos = self.__cosine_sim(tv, average)
             if cos != None: # = Not a 0-Vector
                 sim_list.append(cos)
-        # plt.plot(sorted(sim_list)[::-1])
-        # plt.ylabel('Similarity')
-        # plt.xlabel('Vectors')
-        # plt.title('Cosine Similarity between Tweet-Vectors and the average Vector')
-        # plt.grid(True)
-        # plt.show()
+        fig_width_pt = 418.25  # Get this from LaTeX using \showthe\columnwidth
+        inches_per_pt = 1.0/72.27               # Convert pt to inches
+        golden_mean = (sqrt(5)-1.0)/2.0         # Aesthetic ratio
+        fig_width = fig_width_pt*inches_per_pt  # width in inches
+        fig_height =fig_width*golden_mean+1       # height in inches
+        fig_size = [fig_width,fig_height]
+        params = {'backend': 'ps',
+            'axes.labelsize': 11,
+            'text.fontsize': 11,
+            'legend.fontsize': 11,
+            'xtick.labelsize': 8,
+            'ytick.labelsize': 8,
+            'text.usetex': True,
+            'figure.figsize': fig_size,
+            'font.family' : 'serif'}
+        pylab.rcParams.update(params)
+        pylab.figure(1)
+        pylab.clf()
+        pylab.plot(sorted(sim_list)[::-1],label=r'$sim(\vec{d_x}, \vec{\bar{d}})$')
+        pylab.ylabel('cosine similarity')
+        pylab.xlabel(r'Tweet-vectors $\vec{d_x}$')
+        pylab.grid(True)
+        pylab.legend(loc=3)
+        pylab.savefig('doc/Hausarbeit/img/cos-verteilung.eps')
+
         return sorted(sim_list)
 
 

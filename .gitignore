@@ -4,3 +4,7 @@ Thumbs.db
 *.pyc
 
 *.json
+
+*.pdf
+
+*.log
