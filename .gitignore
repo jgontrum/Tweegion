@@ -9,4 +9,12 @@ Thumbs.db
 
 *.log
 
+<<<<<<< HEAD
 *.psd
+=======
+*.aux
+
+*.toc
+
+*.synctex.gz
+>>>>>>> d005b3e3641e84c7b9c1ff55d9b2851c9cb7d83b
