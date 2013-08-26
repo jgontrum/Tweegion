@@ -2,7 +2,27 @@
 \begin{document}
 
 \section{Introduction (5p)}
+\subsection{Twitter} % State of the Art und so
+Twitter ist ein seit 2006 bestehender und heute weltweit genutzter Webdienst zur Versendung von Kurznachrichten (sogenanntes Mikroblogging). Nur ein kleiner Teil der Nachrichten, der sogenannten Tweets, ist in deutscher Sprache verfasst. Die überwiegend genutzten Sprachen sind Englisch, Spanisch, (...). Auch im relativen Vergleich zur Einwohnerzahl zeigt sich, dass in Deutschland, Österreich und der Schweiz wenig getwittert wird, während das Netzwerk etwa in den Niederlanden, Großbritannien, Japan und Indonesien extrem populär ist.
+
+Auch innerhalb Deutschlands ist die räumliche Verteilung versendeter Tweets auf Grundlage mitgesendeter Geodaten ermittelbar. Sie spiegelt größtenteils die Bevölkerungsverteilung wider; Zentren sind vor allem Berlin und das Ruhrgebiet. Allerdings ist -- neben dem Twittern allgemein -- im Besonderen das Mitsenden von Geodaten (sogenanntes Geotagging) im deutschsprachigen Raum eher unpopulär.
+
+Herkunftsangaben der Twitterer nicht gut nutzbar wegen Unsinnsangaben und schwieriger maschineller Verarbeitbarkeit %...
+
 \subsection{General Idea}
+Ziel: ungefähre regionale Einordnung eines Tweets innerhalb des deutschssprachigen Raums trotz der o. g. seltenen Geodaten und schlecht benutzbaren Herkunftsangaben %...
+Idee: Sprache verrät Herkunft, also sollte aus dem reinen Tweettext die Herkunft ablesbar sein %...
+
+Es existieren hier zwei unterschiedliche Größen. Zum einen gibt es den oder die Orte, an denen ein Twitterer aufgewachsen ist und die ihn sprachlich geprägt haben. Hauptsächlich diese Orte messen wir, wenn wir nach mundartlichen Ausdrücken und Ausdrücken der regionalen Alltagssprache suchen. Auf der anderen Seite steht der momentane, mitunter sehr kurzfristige Aufenthaltsort, von dem aus der Nutzer twittert. Auf Inhaltsebene der Tweets wird er sich eher in ortsbezogenen Begriffen (Ortsnamen, Verkehrsknotenpunkte, Lokalitäten, lokale Ereignisse und Persönlichkeiten etc.) widerspiegeln. Er ist es außerdem, den wir aus den Geodaten von Tweets erfahren. Nun sind Geodaten jedoch die einzigen Daten, die wir zur Evaluierung unserer Ergebnisse verwenden können. Während unser geodatengestützter Ansatz damit recht passend evaluiert werden kann, zielt unser Regiowort-Ansatz speziell auf die Größe \textit{sprachliche Herkunft des Twitterers} ab und wird die Evaluierung daher zwangsläufig mit einem gewissen Handicap absolvieren.
+
+Ansatz:
+\begin{itemize}
+\item Einteilung des deutschsprachigen Raums in Regionen
+\item Machine Learning auf Trainingsdaten aus diesen Regionen
+\item Bag-of-words model (Betrachtung von Unigrammen)
+\end{itemize}
+%...
+
 \subsection{Regional word attempt}
 \subsection{Geo location attempt}
 \subsection{Expectations}
