@@ -2,6 +2,7 @@
 \begin{document}
 
 \section{Geo location attempt }
+\subsection{Introduction}
 As stated in the previous chapter, the foundation of all calculations in the regional word attempt is a list of a few hundred words that appear more likely in a specific region. 
 Although this list and their probability distribution is based on scientific research it markes the weak spot of this attempt for number of reasons. For example people in a specific region use a typically word in their everyday language while speaking to their friends or family, but there is no proof that this people also use this words in their written language, even if it is only their private Twitter account. In addition, the list is way to short to cover only fraction of the words, people use on Twitter, so the end results mostly rely on the data that is generated in main loop of the algorithm.
 
@@ -86,22 +87,26 @@ This experiment showed us, that we should use the \emph{balanced-39k}-set for th
         \begin{axis}[
                               width=0.9\columnwidth,
                               height=0.3\textheight,
-                              symbolic x coords={200 stopwords, 500 stopwords, 750 stopwords, 1000 stopwords},
+                              symbolic x coords={0, 100, 200, 500, 750, 1000},
                               xtick=data,
+                              ytick={0.26, 0.28, 0.3,0.32, 0.34,0.36, 0.38},
                               ylabel=accuracy,
-                              bar width=40
+                              bar width=40,
+                              xlabel=number of stopwords
           ]
             \addplot[ybar,  postaction={ pattern=north east lines  }] coordinates {
-               (200 stopwords, 0.368)
-	      (500 stopwords, 0.333)
-                (750 stopwords, 	0.318)
-                (1000 stopwords, 0.299)
+               (0, 0.2762)
+               (100, 0.352)
+               (200, 0.368)
+	      (500, 0.333)
+               (750, 	0.318)
+               (1000, 0.299)
             };
         \end{axis}
     \end{tikzpicture}
 \end{center}
   \label{geo_graph1}
-  Calculation method: \textit{Normalized}; Geo-dataset: \textit{balanced-39k}, Main-dataset: \textit{geo-175k}; Loops: \textit{1}; Estimated amount of non-regional Tweets: \textit{60\%}
+Calculation method: \textit{Normalized}; Geo-dataset: \textit{balanced-39k}, Main-dataset: \textit{geo-175k}; Loops: \textit{1}; Estimated amount of non-regional Tweets: \textit{60\%}
   \caption{Accuracy of different stopword-lists.}
 
 \end{figure}
@@ -110,10 +115,10 @@ Zipf's law tells us that a very small amount of token are found extremely often 
 
 We came up with the idea, that it is not reasonable to use a existing stopword-list for the German language because people on Twitter could use specific words more often than for example in a standard German text. In addition, spam bots or automatically sent messages, that always contain the same words, are extremely often and  have to be filtered. So we used the Scheffler corpus to create our own stopword-list by using our modified version of Christopher Potts' tokenizer and counting the frequency of all token.
 
-We were unsure, how many token should be appear on a stopword-list, so we created four of them, containing the most \emph{200}, \emph{500}, \emph{750} and \emph{1000} frequent words.\\
+We were unsure, how many token should be appear on a stopword-list, so we created five of them, containing the most \emph{100}, \emph{200}, \emph{500}, \emph{750} and \emph{1000} frequent words.\\
 Actually, we expected the have a better accuracy, the more stopwords we use, but he have been proved otherwise. 
-Figure \ref{geo_graph1} show clearly, that the accuracy decreases, the more stopwords a list contains. It seems, that 
-
+Figure \ref{geo_graph1} show clearly, that more than 200 stopwords lead to a worse results, while only 100 stopwords also have a lower accuracy (0.352) than the list containing 200 entries (0.368). The fact, that the results of the run with no stopword filtering at all had the lowest accuracy (0.276), reveals the importance of the use of a stopword-list.\\
+Because the list containing 200 stopwords lead to the best results, we will use this one in further experiments.
 
 \subsubsection{Guessing the amount of regional Tweets}
 \begin{figure}
@@ -149,16 +154,23 @@ Figure \ref{geo_graph1} show clearly, that the accuracy decreases, the more stop
            \addlegendentry[font=\tiny]{threshold}
        \end{axis}
 \end{tikzpicture}
-  \caption{Relation between the amount of non-regional Tweets and the accuracy.}
+Calculation method: \textit{Normalized}; Geo-dataset: \textit{balanced-39k}, Main-dataset: \textit{geo-175k}; Stopwords: \textit{Top 200}; Loops: \textit{1}; 
+
+  \caption{Relation between the amount of regional Tweets and the accuracy.}
   \label{geo_graph2}
 \end{figure}
+In section 2, 'Algorithms', we talked about the advantages and disadvantages of filtering too ordinary Tweets using the cosine similarity metric. Summarized, we gain much better results, considering the accuracy, but have to accept, that we cannot classify a huge percentage of Tweets, because they do not differ enough from the average Tweet-vector.
 
+We wanted to know, what high the accuracy could be, so ran the program a few times, changing the parameter guessing the amount of regional Tweets. We started at 100\% and went down to an extreme of 5\%.
 
+The results approved our hypothesis, as the accuracy rises, the lower we guess. Of course, the similarity threshold lowers to values of 0.92 at a guess of 5\%. \\
+The highes accuracy we could archive had a value of 0.506, guessing that only 20\% of all Tweets are regional salient. We were extremely happy about this result, as we started our first experiments with an accouracy as low as about 0.2, but we had to keep in mind that 80\% of all Tweet will be ignored. If we lower our guessing to 10\% or 5\%, the accuracy gets lower again, probably because there are not enough Tweets left in the gold-standard to give an trustworthy result. 
 
-%\subsubsection{Parameters}
-%\subsubsection{Expectations}
-%\subsubsection{Discussion}
-%\subsubsection{-> new Experiment}
+There is no ideal value for this parameter and eventually, people who would use this algorithm have to figure it out themself, according to what they want to archive: A higher coverage of data or a more reliable result. \\
+In further experiments, we decided to use a guessing of 20\%, because our aim is to get the highest accuracy as possible.
+
+\subsubsection{The right amount of loops}
+
 %\subsection{Conclusion}
 
 \end{document}
