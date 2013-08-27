@@ -79,36 +79,80 @@ Also we discovered, that the use of balanced data  in the geo-algorithm, where a
 
 This experiment showed us, that we should use the \emph{balanced-39k}-set for the training of the geo-algorithm and the \emph{geo-175k}-set for the main-algorithm, because it generated the best accuracy of 0.365. We were surprised, that the combination \emph{balanced-39k} / \emph{all-1500k} had a worse result, but interpreted it as a result of the unfiltered data of the \emph{all-1500k}-set.
 
+\subsubsection{Comparission of different stopword-lists}
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}
+        \begin{axis}[
+                              width=0.9\columnwidth,
+                              height=0.3\textheight,
+                              symbolic x coords={200 stopwords, 500 stopwords, 750 stopwords, 1000 stopwords},
+                              xtick=data,
+                              ylabel=accuracy,
+                              bar width=40
+          ]
+            \addplot[ybar,  postaction={ pattern=north east lines  }] coordinates {
+               (200 stopwords, 0.368)
+	      (500 stopwords, 0.333)
+                (750 stopwords, 	0.318)
+                (1000 stopwords, 0.299)
+            };
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+  \label{geo_graph1}
+  Calculation method: \textit{Normalized}; Geo-dataset: \textit{balanced-39k}, Main-dataset: \textit{geo-175k}; Loops: \textit{1}; Estimated amount of non-regional Tweets: \textit{60\%}
+  \caption{Accuracy of different stopword-lists.}
+
+\end{figure}
+
+Zipf's law tells us that a very small amount of token are found extremely often in corpora, while most token appear only a few times. Because it is much more likely for a more seldom word to have a regional meaning, we decided to filter out the most frequent token. 
+
+We came up with the idea, that it is not reasonable to use a existing stopword-list for the German language because people on Twitter could use specific words more often than for example in a standard German text. In addition, spam bots or automatically sent messages, that always contain the same words, are extremely often and  have to be filtered. So we used the Scheffler corpus to create our own stopword-list by using our modified version of Christopher Potts' tokenizer and counting the frequency of all token.
+
+We were unsure, how many token should be appear on a stopword-list, so we created four of them, containing the most \emph{200}, \emph{500}, \emph{750} and \emph{1000} frequent words.\\
+Actually, we expected the have a better accuracy, the more stopwords we use, but he have been proved otherwise. 
+Figure \ref{geo_graph1} show clearly, that the accuracy decreases, the more stopwords a list contains. It seems, that 
+
+
 \subsubsection{Guessing the amount of regional Tweets}
+\begin{figure}
+\begin{tikzpicture}
+       \pgfplotstableread{../data/geo_cos.csv}\data
+       \begin{axis}[
+           legend pos=south east,
+           ylabel near ticks,
+           axis y line*=left,
+           xmin = 5,
+           xmax = 100,
+           ylabel= accuracy,
+           xlabel= guessed percentage of non-regional Tweets,
+           xtick = {5,10,20,30,40,50,60,70,80,90,100},
+           width=0.9\columnwidth,
+           height=0.5\textheight]
+           \addplot[blue, mark=x] 
+           table[x=Guess,y=Accuracy]{\data} ;
+           \addlegendentry[font=\tiny]{accuracy}
+       \end{axis}
+       \begin{axis}[
+           hide x axis,
+           xmin = 5,
+           xmax = 100,
+           axis y line*=right,
+           legend pos=south west,
+           ylabel near ticks,
+           ylabel= cosine similarity threshold,
+           width=0.9\columnwidth,
+           height=0.5\textheight]
+           \addplot[red, mark=x] 
+           table[x=Guess,y=Threshold]{\data};
+           \addlegendentry[font=\tiny]{threshold}
+       \end{axis}
+\end{tikzpicture}
+  \caption{Relation between the amount of non-regional Tweets and the accuracy.}
+  \label{geo_graph2}
+\end{figure}
 
-
-
-%	\begin{tikzpicture}
-%		\pgfplotstableread{../data/geo_datasets.csv}\data
-%		\begin{axis}[
-%				legend pos=north west,
-%				width=0.9\columnwidth,
-%				height=0.5\textheight,
-%				ymin=0.3,
-%				xtick={1,2,3,4},
-%				ylabel={accuracy}]
-%        			\addplot[blue, mark=x] 
-%            		table[x=geo,y=balanced-21k]{\data} ;
-%			\addlegendentry[font=\tiny]{balanced-21k}
-%       			\addplot[red, mark=x] 
-%            		table[x=geo,y=balanced-39k]{\data};
-%			\addlegendentry[font=\tiny]{balanced-39k}
-%       			\addplot[green, mark=x] 
-%            		table[x=geo,y=balanced-61k]{\data};
-%			\addlegendentry[font=\tiny]{balanced-61k}
-%       			\addplot[olive, mark=x] 
-%            		table[x=geo,y=unbalanced-175k]{\data};			
-%			\addlegendentry[font=\tiny]{unbalanced-175k}
-%       			\addplot[orange, mark=x] 
-%            		table[x=geo,y=2days-1500k]{\data};
-%			\addlegendentry[font=\tiny]{2days-1500k}
-%    		\end{axis}
-%	\end{tikzpicture}
 
 
 %\subsubsection{Parameters}
