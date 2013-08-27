@@ -7,7 +7,13 @@ Twitter ist ein seit 2006 bestehender und heute weltweit genutzter Webdienst zur
 
 Auch innerhalb Deutschlands ist die räumliche Verteilung versendeter Tweets auf Grundlage mitgesendeter Geodaten ermittelbar. Sie spiegelt größtenteils die Bevölkerungsverteilung wider; Zentren sind vor allem Berlin und das Ruhrgebiet. Allerdings ist -- neben dem Twittern allgemein -- im Besonderen das Mitsenden von Geodaten (sogenanntes Geotagging) im deutschsprachigen Raum eher unpopulär.
 
-Herkunftsangaben der Twitterer nicht gut nutzbar wegen Unsinnsangaben und schwieriger maschineller Verarbeitbarkeit %...
+Es gibt drei grundsätzlich verschiedene ortsbezogene Informationen, die bei einem Tweet mitgesendet werden können. Keine der Angaben ist für den Nutzer verpflichtend, sodass nicht zu allen Tweets ortsbezogene Daten verfügbar sind.
+Zunächst kann der Nutzer in seinem Profil einen Standort eingeben. Er erscheint im JSON-Objekt des Tweets als Feld \textit{location} im Unterobjekt \textit{user.} In unserem Korpus ist zu x\% der Tweets diese Angabe vorhanden. Allerdings werden hier auch sehr gerne Fantasie-Orte eingetragen. Hinzu kommt die mögliche Mehrdeutigkeit und Ungenauigkeit der Angaben, weswegen sie für maschinelle Verwertung praktisch ausscheiden.
+Beim Absenden eines Tweets besteht außerdem die Option \textit{Standort hinzufügen}. Dort kann ein eindeutiger, benannter Ort hinzugefügt werden. Im JSON-Objekt erscheint er als Unterobjekt \textit{place}, unter anderem mit Namen, Typ (bspw. "city" für Stadt), Land und einer \textit{bounding box}, einem Rechteck aus vier Geokoordinaten, welches den Ort einschließt.
+"Tweets associated with places are not necessarily issued from that location but could also potentially be \textit{about} that location."
+Diese Angabe findet sich in unserem Korpus zu x\% der Tweets.
+Schließlich ist es möglich, von GPS-fähigen Geräten aus direkt den tatsächlichen Absendeort des Tweets mitzusenden. Die Koordinaten werden als Unterobjekt \textit{geo} im JSON gespeichert. x\% der Tweets in unserem Korpus tragen diese Angaben.
+
 
 \subsection{General Idea}
 Ziel: ungefähre regionale Einordnung eines Tweets innerhalb des deutschssprachigen Raums trotz der o. g. seltenen Geodaten und schlecht benutzbaren Herkunftsangaben %...
