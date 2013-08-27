@@ -43,22 +43,78 @@ The datasets used for the generation of the first word-vectors have been extract
 We created balanced sets, where the amount of  Tweets are the same for all regions. Because the fewest number of Tweets (8787) came from region 6, 'Austria', we ended up with only 61509 Tweets for all regions. 
 
 In order to create a gold-standard, we substracted 150 Tweets from each region, leaving us 60459 for the training. \\
-Our assumption was, that datasets of different sizes lead to different results and we wondered, how it would effect the accuracy, if we would use the same data for the creation of the word-vectors and for the main-algorithm. Therefore we created three sets:
-\begin{enumerate}
+Our assumption was, that datasets of different sizes lead to different results and we wondered, how it would effect the accuracy, if we would use the same data for the creation of the word-vectors and for the main-algorithm. Therefore we created three balanced sets, one unbalanced set of all geo annotated Tweets and as a reference one huge set of normal Tweets. Of course none of these sets contain any Tweets from the gold-standard-set.
+ \begin{enumerate}
 \item \emph{balanced-21k} with 3000 Tweets from each region.
-\item \emph{balanced-39k} consisting of the remaining 39456 Tweets (no intersection with the \emph{balanced-21k} set)
+\item \emph{balanced-39k} consisting of the remaining 39456 Tweets
 \item \emph{balanced-61k} combining the both previous sets. 
-\item \emph{unbalanced-175k} with all Tweets from the corpus that were sent from one of the defined regions. Not normalized.
+\item \emph{geo-175k} with all Tweets from the corpus that were sent from one of the defined regions. Not balanced.
+\item \emph{all-1500k} contains 1.5 million mostly not geo annotated Tweets.
 \end{enumerate}
 \subsection{Experiments}
+\subsubsection{Dataset combinations}
+\begin{table}[b]
+    \begin{tabular}{|l|lllll|}
+    \hline
+    Geo dataset     & balanced-21k & balanced-39k & balanced-61k & geo-175k & all-1500k \\ \hline
+    balanced-21k    & 0.319        & 0.308        & 0.304        & 0.307           & 0.308       \\
+    balanced-39k    & 0.306        & 0.353       & \textbf{0.345}        & \textbf{0.368 }          & 0.306       \\
+    balanced-61k    & \textbf{0.336}        & \textbf{0.361}        & 0.344        &0.360           & 0.332       \\
+    unbalanced-175k & 0.303        & 0.343        & 0.322        & 0.352           & \textbf{0.340}       \\ \hline
+    \end{tabular} \\
+
+  Calculation method: \textit{Normalized}; Stopwords: \textit{Top 200}; Loops: \textit{1}; Estimated amount of non-regional Tweets: \textit{60\%}, leading to a similarity threshold between \textit{0.999} and \textit{0.991}, depending on the dataset.
+  \caption{Comparrision of the combination of all datasets}
+  \label{geo_datasets}
+\end{table}
+
+In order to give a solid foundation which data we should use in further experiments, we started to compare the combination of the five datasets we created. We wondered, how it would affect the accuracy, if we would for example train the geo-algorithm with a small set of geo-annotated data but use a very big set of Tweets for the learning of the word-vectors in the loop of the main-algorithm. Another question was, what results we would get, if the data in the main-algorithm contains Tweets, that have been used in the geo-algorithm before. 
+
+Our expectation was in general, that the accuracy would rise, the more data we use and that the reuse of Tweets in the main-algorithm would lower it, because this data already had an effect and using it again would not change anything.
+
+Unsurprisingly, using the smallest set, \emph{balanced-21k}, for the training of the geo-algorithm nearly always produced the lowest accuracy. \\
+But our hypothesis about the reuse of data was falsified:  The combination of the \emph{balanced-39k} set for the learning in the geo-algorithm and \emph{balanced-61k} for the main-algorithm generated the third best result with an accuracy of 0.345.
+
+Also we discovered, that the use of balanced data  in the geo-algorithm, where all regions are represented by the same amount of documents, is crucial for good results. Having a look at the row for the \emph{unbalanced-175k}, it produces a very bad accuracy. Even in combination with the set containing 1.5 million Tweets (\emph{all-1500k}), it marks the second last rank.
+
+This experiment showed us, that we should use the \emph{balanced-39k}-set for the training of the geo-algorithm and the \emph{geo-175k}-set for the main-algorithm, because it generated the best accuracy of 0.365. We were surprised, that the combination \emph{balanced-39k} / \emph{all-1500k} had a worse result, but interpreted it as a result of the unfiltered data of the \emph{all-1500k}-set.
+
+\subsubsection{Guessing the amount of regional Tweets}
 
 
-\newpage
 
-\subsubsection{Parameters}
-\subsubsection{Expectations}
-\subsubsection{Discussion}
-\subsubsection{-> new Experiment}
-\subsection{Conclusion}
+%	\begin{tikzpicture}
+%		\pgfplotstableread{../data/geo_datasets.csv}\data
+%		\begin{axis}[
+%				legend pos=north west,
+%				width=0.9\columnwidth,
+%				height=0.5\textheight,
+%				ymin=0.3,
+%				xtick={1,2,3,4},
+%				ylabel={accuracy}]
+%        			\addplot[blue, mark=x] 
+%            		table[x=geo,y=balanced-21k]{\data} ;
+%			\addlegendentry[font=\tiny]{balanced-21k}
+%       			\addplot[red, mark=x] 
+%            		table[x=geo,y=balanced-39k]{\data};
+%			\addlegendentry[font=\tiny]{balanced-39k}
+%       			\addplot[green, mark=x] 
+%            		table[x=geo,y=balanced-61k]{\data};
+%			\addlegendentry[font=\tiny]{balanced-61k}
+%       			\addplot[olive, mark=x] 
+%            		table[x=geo,y=unbalanced-175k]{\data};			
+%			\addlegendentry[font=\tiny]{unbalanced-175k}
+%       			\addplot[orange, mark=x] 
+%            		table[x=geo,y=2days-1500k]{\data};
+%			\addlegendentry[font=\tiny]{2days-1500k}
+%    		\end{axis}
+%	\end{tikzpicture}
+
+
+%\subsubsection{Parameters}
+%\subsubsection{Expectations}
+%\subsubsection{Discussion}
+%\subsubsection{-> new Experiment}
+%\subsection{Conclusion}
 
 \end{document}
