@@ -6,7 +6,7 @@ from include.tweegion_log import Tweegion as TweegionLog
 
 tweegion = Tweegion("geo",
  					"data/geo-tweets/balanced-39k.json",
- 					"data/empty.txt",
+ 					"data/stoppwords100.txt",
  					1,
  					"data/geo-tweets/unbalanced_175k.json",
  					"")
