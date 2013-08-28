@@ -106,7 +106,7 @@ This experiment showed us, that we should use the \emph{balanced-39k}-set for th
     \end{tikzpicture}
 \end{center}
   \label{geo_graph1}
-Calculation method: \textit{Normalized}; Geo-dataset: \textit{balanced-39k}, Main-dataset: \textit{geo-175k}; Loops: \textit{1}; Estimated amount of non-regional Tweets: \textit{60\%}
+Calculation method: \textit{Normalized}; Geo-dataset: \textit{balanced-39k}, Main-dataset: \textit{geo-175k}; Loops: \textit{1}; Estimated amount of regional Tweets: \textit{60\%}
   \caption{Accuracy of different stopword-lists.}
 
 \end{figure}
@@ -170,6 +170,58 @@ There is no ideal value for this parameter and eventually, people who would use 
 In further experiments, we decided to use a guessing of 20\%, because our aim is to get the highest accuracy as possible.
 
 \subsubsection{The right amount of loops}
+\begin{figure}
+\begin{tikzpicture}
+       \pgfplotstableread{../data/geo_loops.csv}\data
+       \begin{axis}[
+           legend pos=south east,
+           ylabel near ticks,
+           xmin = 0,
+           xmax = 20,
+           ylabel= accuracy,
+           xlabel= loops,
+           xtick = {0,1,2,3,4,5,10,15,20},
+           width=0.9\columnwidth,
+           height=0.4251174\textheight]
+           \addplot[blue, mark=x] 
+           table[x=Loops,y=Accuracy]{\data} ;
+       \end{axis}
+\end{tikzpicture}
+
+Calculation method: \textit{Normalized}; Geo-dataset: \textit{balanced-39k}, Main-dataset: \textit{geo-175k}; Stopwords: \textit{Top 200}; Estimated amount of regional Tweets: \textit{20\%}
+  \caption{Amount of loops in the algorithm and their effect on the accuracy.}
+  \label{geo_graph3}
+\end{figure}
+The idea between in the loops in the main-algorithm was to estimate the probability distinction from which region a tweet could have been set to as many words as possible. This was especially for the regional-list attempt a crucial approach to prevent the sparse data problem.
+
+In this attempt on the other hand, this problem is not so urgent, because we create a very large list of word-vectors based on geo-annotated data. Therefore we asked ourself, which amount of loops would lead to the best results. The more the better or the opposite? 
+
+To find an answer to this question, we chose the parameters we had proven to be the best choice in the experiments before, but varied to value for the loop-parameter from 0 to 20 and measured the accuracy. 
+We were a bit puzzled to find out, that the main loop, even if it was only ran once, lowers the accuracy by 0.023. Our new record for the accuracy becomes 0.53, if we use a value of 0. 
+
+If we have a look at the graph in figure \ref{geo_graph3}, we can clearly see that the accuracy drastically decreases, the more loops we enter. So our assumption, that the loops in the main-algorithm would lead to better results has been falsified. We now came up with the explanation, that the more often we use a loop, the more do all word-vectors approach an average word-vector and in this way lose all signs of a specific region.
+
+In addition to finding out the best value for the loops runs, we now know, that the parameter for the second dataset, that was relevant for the training in the main-algorithm, has only the purpose of a foundation for creating the cosine similarity. This also raises the question, whether our results in the first experiment 1.3.1, are still valid. So we ran the experiment with the loops=0 setting again.
+
+The results were slightly different than before, ranking the \emph{balanced-61k} as the best dataset for the training of the geo-algorithm. To be sure that the outcomes of the other experiments are still valid, we made some spot checks that showed, that the values differ a little bit, but the end results were still the same. In further experiments, we now use the settings "loops=\emph{0}" and "geo-dataset=\emph{balanced-61k}"
+\begin{table}
+\begin{center}
+    \begin{tabular}{|l|llll|}
+    \hline
+    Dataset     & balanced-21k & balanced-39k & balanced-61k & geo-175k \\ \hline
+    Accuracy    & 0.339       & 0.342        & \textbf{0.364 }       & 0.332                \\ \hline
+    \end{tabular} \\
+\end{center}
+  Calculation method: \textit{Normalized}; Stopwords: \textit{Top 200}; Loops: \textit{0}; Estimated amount of non-regional Tweets: \textit{60\%}.
+  \caption{Comparrision of the accuracy for all geo-datasets with a loop parameter of '0'}
+  \label{geo_datasets}
+\end{table}
+
+\subsubsection{Comparission of different calculation methods}
+As mentioned in the 'Algorithms'-section before, we developed four different versions of the algorithms, that differ mostly in the way of normalization. We named our first attempt, that we also used in the previous experiments, \emph{Normalized}, the other calculation methods are \emph{Log}, \emph{Root} and \emph{Linear}. For a discussion of the details of the algorithms, please have a look at the corresponding section. 
+
+The parameter for the calculation method is the last one we have to find an optimal value for. As recommended in the experiments before, we choosed the \emph{balanced-61k} set for the geo-algorithm, the \emph{unbalanced-175k} dataset as a foundation for the calculation of the cosine similarity, which depends on our guess of the amount of regional Tweets which we  decided to be \emph{20\%}. The amount of loops is \emph{0} and we filtered using the \emph{200} most used token as stopword-list.
+
 
 %\subsection{Conclusion}
 
