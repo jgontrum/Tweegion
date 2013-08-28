@@ -218,6 +218,38 @@ The results were slightly different than before, ranking the \emph{balanced-61k}
 \end{table}
 
 \subsubsection{Comparission of different calculation methods}
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}
+        \begin{axis}[
+                              width=0.9\columnwidth,
+                              height=0.3\textheight,
+                              symbolic x coords={Normalized, Sqrt, Log, Linear},
+                              xtick=data,
+                              ylabel=accuracy,
+                              bar width=40,
+			 ymin=0.25,
+			 ymax=0.6,
+			ytick={0.25,0.35,0.45,0.55},
+			 nodes near coords,
+    			  nodes near coords align={vertical}
+          ]
+            \addplot[ybar,  postaction={ pattern=north east lines  }] coordinates {
+               (Normalized, 0.539)
+               (Sqrt, 0.330)
+               (Log, 0.265)
+	      (Linear, 0.365)
+            };
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+  \label{geo_graph1}
+Calculation method: \textit{Normalized}; Geo-dataset: \textit{balanced-39k}, Main-dataset: \textit{geo-175k}; Loops: \textit{1}; Estimated amount of regional Tweets: \textit{60\%}
+  \caption{Accuracy of different stopword-lists.}
+
+\end{figure}
+
+
 As mentioned in the 'Algorithms'-section before, we developed four different versions of the algorithms, that differ mostly in the way of normalization. We named our first attempt, that we also used in the previous experiments, \emph{Normalized}, the other calculation methods are \emph{Log}, \emph{Root} and \emph{Linear}. For a discussion of the details of the algorithms, please have a look at the corresponding section. 
 
 The parameter for the calculation method is the last one we have to find an optimal value for. As recommended in the experiments before, we choosed the \emph{balanced-61k} set for the geo-algorithm, the \emph{unbalanced-175k} dataset as a foundation for the calculation of the cosine similarity, which depends on our guess of the amount of regional Tweets which we  decided to be \emph{20\%}. The amount of loops is \emph{0} and we filtered using the \emph{200} most used token as stopword-list.
