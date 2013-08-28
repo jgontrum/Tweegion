@@ -87,7 +87,7 @@ class Tweegion(object):
         self.__calc_average_distribution()
         sim_list = self.__sorted_sim_list(tweet_dict, self.__wv, self.__average_distribution)
         self.__sim_threshold = sim_list[int(non_regional_tweets * len(sim_list))]
-        self.__fill_verbose("Legacy", mode, loops, tweet_dict, blackword_list, regional_words, geo_tweets, blackwords, tweets, self.__sim_threshold)
+        self.__fill_verbose("Linear", mode, loops, tweet_dict, blackword_list, regional_words, geo_tweets, blackwords, tweets, self.__sim_threshold)
 
     # Returns the region, from where a tweet was most likely sent. For more information, enable verbose mode
     def classify(self, tweet, human_readable=True, verbose=False):
