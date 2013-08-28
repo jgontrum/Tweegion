@@ -1,9 +1,9 @@
 #/usr/bin/ python
 # -*- coding: utf8 -*-
 from include.tweegion import Tweegion
-from include.tweegion_root import TweegionRoot
-from include.tweegion_log import TweegionLog
-from include.tweegion_lin import TweegionLin
+from include.tweegion_root import Tweegion as TweegionRoot
+from include.tweegion_log import Tweegion as TweegionLog
+from include.tweegion_lin import Tweegion as TweegionLin
 
 blackwords = ["data/stoppwords200.txt"]
 tweets = ["data/geo-tweets/unbalanced_175k.json"]
