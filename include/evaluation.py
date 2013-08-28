@@ -48,21 +48,21 @@ def precision(a):
 
 
 # example
+if __name__ == "__main__":
+	g = [0,1,2,3,4,5,6,0,0,0] # goldstandard
+	r = [0,1,2,3,6,0,6,0,1,5] # erzielte ergebniss
 
-g = [0,1,2,3,4,5,6,0,0,0] # goldstandard
-r = [0,1,2,3,6,0,6,0,1,5] # erzielte ergebniss
+	hit_table = count_hits(g,r)
+	cft = confusion_table(hit_table)
+	print g, " Goldstandard"
+	print r, " Ergbnissliste"
+	print "[true positives, false negatives,false positives, true negatives]"
+	print cft
 
-hit_table = count_hits(g,r)
-cft = confusion_table(hit_table)
-print g, " Goldstandard"
-print r, " Ergbnissliste"
-print "[true positives, false negatives,false positives, true negatives]"
-print cft
+	# Recall und Precison fuer jede Region
+	for each in cft:
+		print "Recall: ", recall(each), " precision: ", precision(each)
 
-# Recall und Precison fuer jede Region
-for each in cft:
-	print "Recall: ", recall(each), " precision: ", precision(each)
-
-# Recall und Precision im Schnitt
-print "durchschnittlicher Recall: ", recall(average_axis(cft))
-print "durchschnittliche Precision: ", precision(average_axis(cft))
+	# Recall und Precision im Schnitt
+	print "durchschnittlicher Recall: ", recall(average_axis(cft))
+	print "durchschnittliche Precision: ", precision(average_axis(cft))
