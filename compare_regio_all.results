@@ -1,0 +1,1844 @@
+
+Match:  34
+Mismatch:  221
+Not regional:  795
+Accuracy:  0.133333333333
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	0
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.699286546704
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  40
+Mismatch:  228
+Not regional:  782
+Accuracy:  0.149253731343
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	0
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.696530581197
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  39
+Mismatch:  222
+Not regional:  789
+Accuracy:  0.149425287356
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	0
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.71046117428
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  38
+Mismatch:  226
+Not regional:  786
+Accuracy:  0.143939393939
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	0
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.675673837034
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  2
+Mismatch:  173
+Not regional:  875
+Accuracy:  0.0114285714286
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	0
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.989407042947
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  2
+Mismatch:  4
+Not regional:  1044
+Accuracy:  0.333333333333
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	0
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.99288510097
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  2
+Mismatch:  4
+Not regional:  1044
+Accuracy:  0.333333333333
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	0
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.993439031457
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  2
+Mismatch:  4
+Not regional:  1044
+Accuracy:  0.333333333333
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	0
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.996882068657
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  53
+Mismatch:  275
+Not regional:  722
+Accuracy:  0.161585365854
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	0
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.957521521695
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  53
+Mismatch:  249
+Not regional:  748
+Accuracy:  0.175496688742
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	0
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.966157995594
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  52
+Mismatch:  251
+Not regional:  747
+Accuracy:  0.171617161716
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	0
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.965277283056
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  56
+Mismatch:  260
+Not regional:  734
+Accuracy:  0.177215189873
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	0
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.96750623544
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  21
+Mismatch:  148
+Not regional:  881
+Accuracy:  0.12426035503
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	1
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.861373944043
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  28
+Mismatch:  188
+Not regional:  834
+Accuracy:  0.12962962963
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	1
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.88785407455
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  23
+Mismatch:  156
+Not regional:  871
+Accuracy:  0.128491620112
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	1
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.883012796174
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  37
+Mismatch:  244
+Not regional:  769
+Accuracy:  0.131672597865
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	1
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.866585369149
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  19
+Mismatch:  213
+Not regional:  818
+Accuracy:  0.0818965517241
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	1
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999244594352
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  10
+Mismatch:  74
+Not regional:  966
+Accuracy:  0.119047619048
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	1
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999220360854
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  14
+Mismatch:  83
+Not regional:  953
+Accuracy:  0.144329896907
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	1
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999275946529
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  8
+Mismatch:  71
+Not regional:  971
+Accuracy:  0.101265822785
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	1
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999664285631
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  41
+Mismatch:  126
+Not regional:  883
+Accuracy:  0.245508982036
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	1
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.995645474048
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  48
+Mismatch:  163
+Not regional:  839
+Accuracy:  0.227488151659
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	1
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.997770951654
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  44
+Mismatch:  136
+Not regional:  870
+Accuracy:  0.244444444444
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	1
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.997389597854
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  42
+Mismatch:  178
+Not regional:  830
+Accuracy:  0.190909090909
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	1
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.997920774777
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  21
+Mismatch:  135
+Not regional:  894
+Accuracy:  0.134615384615
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	2
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.917687272633
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  28
+Mismatch:  192
+Not regional:  830
+Accuracy:  0.127272727273
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	2
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.927088881774
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  25
+Mismatch:  148
+Not regional:  877
+Accuracy:  0.14450867052
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	2
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.937113661079
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  33
+Mismatch:  195
+Not regional:  822
+Accuracy:  0.144736842105
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	2
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.759886087339
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  14
+Mismatch:  155
+Not regional:  881
+Accuracy:  0.0828402366864
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	2
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999556987932
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  13
+Mismatch:  77
+Not regional:  960
+Accuracy:  0.144444444444
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	2
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999773159202
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  11
+Mismatch:  89
+Not regional:  950
+Accuracy:  0.11
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	2
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999747707729
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  11
+Mismatch:  66
+Not regional:  973
+Accuracy:  0.142857142857
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	2
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999912220332
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  37
+Mismatch:  104
+Not regional:  909
+Accuracy:  0.262411347518
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	2
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.99906766041
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  38
+Mismatch:  164
+Not regional:  848
+Accuracy:  0.188118811881
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	2
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999531987795
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  42
+Mismatch:  115
+Not regional:  893
+Accuracy:  0.267515923567
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	2
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999527881468
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  42
+Mismatch:  172
+Not regional:  836
+Accuracy:  0.196261682243
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	2
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.996395065082
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  23
+Mismatch:  132
+Not regional:  895
+Accuracy:  0.148387096774
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	3
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.951396323312
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  29
+Mismatch:  200
+Not regional:  821
+Accuracy:  0.126637554585
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	3
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.942876758279
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  25
+Mismatch:  154
+Not regional:  871
+Accuracy:  0.139664804469
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	3
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.964328986689
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  48
+Mismatch:  266
+Not regional:  736
+Accuracy:  0.152866242038
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	3
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.8342028012
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  16
+Mismatch:  128
+Not regional:  906
+Accuracy:  0.111111111111
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	3
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999675195074
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  10
+Mismatch:  72
+Not regional:  968
+Accuracy:  0.121951219512
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	3
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999914069473
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  15
+Mismatch:  96
+Not regional:  939
+Accuracy:  0.135135135135
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	3
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999857224293
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  7
+Mismatch:  63
+Not regional:  980
+Accuracy:  0.1
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	3
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999981951883
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  39
+Mismatch:  100
+Not regional:  911
+Accuracy:  0.280575539568
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	3
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999752778884
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  27
+Mismatch:  148
+Not regional:  875
+Accuracy:  0.154285714286
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	3
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.998669186263
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  38
+Mismatch:  112
+Not regional:  900
+Accuracy:  0.253333333333
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	3
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999886783047
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  20
+Mismatch:  175
+Not regional:  855
+Accuracy:  0.102564102564
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	3
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999999721693
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  24
+Mismatch:  139
+Not regional:  887
+Accuracy:  0.147239263804
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	4
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.969609855903
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  29
+Mismatch:  194
+Not regional:  827
+Accuracy:  0.130044843049
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	4
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.957960823169
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  23
+Mismatch:  153
+Not regional:  874
+Accuracy:  0.130681818182
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	4
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.977049739954
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  43
+Mismatch:  260
+Not regional:  747
+Accuracy:  0.141914191419
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	4
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.977054101411
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  16
+Mismatch:  123
+Not regional:  911
+Accuracy:  0.115107913669
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	4
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999775388987
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  10
+Mismatch:  66
+Not regional:  974
+Accuracy:  0.131578947368
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	4
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999962961579
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  12
+Mismatch:  82
+Not regional:  956
+Accuracy:  0.127659574468
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	4
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999909938638
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  6
+Mismatch:  59
+Not regional:  985
+Accuracy:  0.0923076923077
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	4
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999994417099
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  37
+Mismatch:  97
+Not regional:  916
+Accuracy:  0.276119402985
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	4
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999925552559
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  23
+Mismatch:  147
+Not regional:  880
+Accuracy:  0.135294117647
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	4
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999157641786
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  36
+Mismatch:  114
+Not regional:  900
+Accuracy:  0.24
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	4
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999968888922
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  19
+Mismatch:  170
+Not regional:  861
+Accuracy:  0.100529100529
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	4
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	1.0
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  24
+Mismatch:  137
+Not regional:  889
+Accuracy:  0.149068322981
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	5
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.980487963369
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  29
+Mismatch:  179
+Not regional:  842
+Accuracy:  0.139423076923
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	5
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.97065040108
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  24
+Mismatch:  151
+Not regional:  875
+Accuracy:  0.137142857143
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	5
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.983949527759
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  43
+Mismatch:  240
+Not regional:  767
+Accuracy:  0.151943462898
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	5
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999198594664
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  15
+Mismatch:  115
+Not regional:  920
+Accuracy:  0.115384615385
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	5
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999840731883
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  9
+Mismatch:  58
+Not regional:  983
+Accuracy:  0.134328358209
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	5
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999982888672
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  12
+Mismatch:  74
+Not regional:  964
+Accuracy:  0.139534883721
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	5
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.99994252547
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  13
+Mismatch:  57
+Not regional:  980
+Accuracy:  0.185714285714
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	5
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999999327648
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  39
+Mismatch:  96
+Not regional:  915
+Accuracy:  0.288888888889
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	5
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.99997550379
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  20
+Mismatch:  146
+Not regional:  884
+Accuracy:  0.120481927711
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	5
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999765564533
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  35
+Mismatch:  104
+Not regional:  911
+Accuracy:  0.251798561151
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	5
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999990674355
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  77
+Mismatch:  464
+Not regional:  509
+Accuracy:  0.142329020333
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	5
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	1.0
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  21
+Mismatch:  136
+Not regional:  893
+Accuracy:  0.133757961783
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	10
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.995823503437
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  31
+Mismatch:  198
+Not regional:  821
+Accuracy:  0.135371179039
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	10
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.995998463712
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  20
+Mismatch:  131
+Not regional:  899
+Accuracy:  0.132450331126
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	10
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.994045386771
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  39
+Mismatch:  249
+Not regional:  762
+Accuracy:  0.135416666667
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	10
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999999999996
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  17
+Mismatch:  119
+Not regional:  914
+Accuracy:  0.125
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	10
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999966750359
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  9
+Mismatch:  27
+Not regional:  1014
+Accuracy:  0.25
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	10
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999998056721
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  11
+Mismatch:  50
+Not regional:  989
+Accuracy:  0.180327868852
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	10
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999990377896
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  20
+Mismatch:  75
+Not regional:  955
+Accuracy:  0.210526315789
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	10
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999999997408
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  38
+Mismatch:  105
+Not regional:  907
+Accuracy:  0.265734265734
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	10
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999999727078
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  24
+Mismatch:  144
+Not regional:  882
+Accuracy:  0.142857142857
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	10
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999999904598
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  31
+Mismatch:  124
+Not regional:  895
+Accuracy:  0.2
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	10
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999999887062
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  38
+Mismatch:  226
+Not regional:  786
+Accuracy:  0.143939393939
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	10
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	1.0
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  22
+Mismatch:  131
+Not regional:  897
+Accuracy:  0.143790849673
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	15
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.998561636658
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  34
+Mismatch:  195
+Not regional:  821
+Accuracy:  0.148471615721
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	15
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999081846027
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  22
+Mismatch:  123
+Not regional:  905
+Accuracy:  0.151724137931
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	15
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.997805057911
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  91
+Mismatch:  507
+Not regional:  452
+Accuracy:  0.152173913043
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	15
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	1.0
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  15
+Mismatch:  132
+Not regional:  903
+Accuracy:  0.102040816327
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	15
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999991113267
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  8
+Mismatch:  37
+Not regional:  1005
+Accuracy:  0.177777777778
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	15
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999999527381
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  10
+Mismatch:  49
+Not regional:  991
+Accuracy:  0.169491525424
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	15
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999997844679
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  23
+Mismatch:  87
+Not regional:  940
+Accuracy:  0.209090909091
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	15
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999999999976
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  33
+Mismatch:  149
+Not regional:  868
+Accuracy:  0.181318681319
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	15
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999999979939
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  27
+Mismatch:  209
+Not regional:  814
+Accuracy:  0.114406779661
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	15
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999999996808
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  22
+Mismatch:  135
+Not regional:  893
+Accuracy:  0.140127388535
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	15
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999999957318
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  87
+Mismatch:  511
+Not regional:  452
+Accuracy:  0.145484949833
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	15
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	1.0
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  22
+Mismatch:  122
+Not regional:  906
+Accuracy:  0.152777777778
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	20
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999488238073
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  36
+Mismatch:  186
+Not regional:  828
+Accuracy:  0.162162162162
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	20
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999632036013
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  22
+Mismatch:  123
+Not regional:  905
+Accuracy:  0.151724137931
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	20
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999203520324
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  106
+Mismatch:  583
+Not regional:  361
+Accuracy:  0.153846153846
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	20
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	1.0
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/regio_word_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  16
+Mismatch:  137
+Not regional:  897
+Accuracy:  0.104575163399
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	20
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999997178035
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  9
+Mismatch:  31
+Not regional:  1010
+Accuracy:  0.225
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	20
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.99999984534
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  11
+Mismatch:  50
+Not regional:  989
+Accuracy:  0.180327868852
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	20
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999999489479
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  27
+Mismatch:  96
+Not regional:  927
+Accuracy:  0.219512195122
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	6439
+Loops :	20
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	1.0
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_corpus.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  23
+Mismatch:  143
+Not regional:  884
+Accuracy:  0.138554216867
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	20
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Legacy
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999999988506
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  33
+Mismatch:  226
+Not regional:  791
+Accuracy:  0.127413127413
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	20
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Root
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999999999182
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio /usr/lib/python2.7/dist-packages/numpy/linalg/linalg.py:1945: RuntimeWarning: overflow encountered in multiply
+  return sqrt(add.reduce((x.conj() * x).ravel().real))
+/home/wendler/Twitter/include/tweegion_lin.py:293: RuntimeWarning: overflow encountered in double_scalars
+  denumerator = numpy.sqrt(sum(numpy.power(q,2))) * numpy.sqrt(sum(numpy.power(d,2)))
+/home/wendler/Twitter/include/tweegion_lin.py:293: RuntimeWarning: invalid value encountered in double_scalars
+  denumerator = numpy.sqrt(sum(numpy.power(q,2))) * numpy.sqrt(sum(numpy.power(d,2)))
+/home/wendler/Twitter/include/tweegion_lin.py:293: RuntimeWarning: overflow encountered in power
+  denumerator = numpy.sqrt(sum(numpy.power(q,2))) * numpy.sqrt(sum(numpy.power(d,2)))
+path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  21
+Mismatch:  132
+Not regional:  897
+Accuracy:  0.137254901961
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	20
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Log
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	0.999999963431
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
+
+Match:  143
+Mismatch:  870
+Not regional:  37
+Accuracy:  0.141164856861
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	747482
+Loops :	20
+Number of blackwords :	200
+Mode :	regio
+Calculation method :	Linear
+Blacklist path :	/home/gontrum/Tweegion/data/stoppwords200.txt
+Number of regional words :	0
+Similarity :	nan
+Tweet path :	/home/gontrum/Tweegion/data/regio-tweets/scheffler_regio_oneday.json
+Regio path :	/home/gontrum/Tweegion/data/regionalwords.csv
