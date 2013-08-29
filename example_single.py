@@ -5,15 +5,6 @@ from include.tweegion_root import Tweegion as TweegionRoot
 from include.tweegion_log import Tweegion as TweegionLog
 from include.tweegion_lin import Tweegion as TweegionLin
 
-<<<<<<< HEAD
-tweegion = Tweegion("geo",
- 					"data/geo-tweets/balanced-39k.json",
- 					"data/stoppwords100.txt",
- 					1,
- 					"data/geo-tweets/unbalanced_175k.json",
- 					"")
-tweegion.evaluate_accuracy("data/geo-tweets/gold.json")
-=======
 # tweegion = Tweegion("geo",
 #  					"data/geo-tweets/balanced-39k.json",
 #  					"data/stoppwords200.txt",
@@ -32,4 +23,3 @@ tweegion = Tweegion("regio",
  					0.6) #Schaetzung: 0.9999999, 0.9, 0.5
 
 #  nohup python compare_calcmeth.py > compare_calcmeth.results &
->>>>>>> 239ec4290cb23c1199ebb06256ca247abbec4fe2
