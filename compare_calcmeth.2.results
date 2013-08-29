@@ -1,0 +1,72 @@
+
+Match:  94
+Mismatch:  89
+Not regional:  867
+Accuracy:  0.513661202186
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	174011
+Number of Geo-Tweets :	60459
+Loops :	0
+Number of blackwords :	200
+Mode :	geo
+Calculation method :	Legacy
+Blacklist path :	data/stoppwords200.txt
+Similarity :	0.941968331939
+Tweet path :	data/geo-tweets/unbalanced_175k.json
+Geo path :	data/geo-tweets/balanced-61k.json
+guess: 0.2
+
+Match:  76
+Mismatch:  133
+Not regional:  841
+Accuracy:  0.363636363636
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	174011
+Number of Geo-Tweets :	60459
+Loops :	0
+Number of blackwords :	200
+Mode :	geo
+Calculation method :	Root
+Blacklist path :	data/stoppwords200.txt
+Similarity :	0.997330213364
+Tweet path :	data/geo-tweets/unbalanced_175k.json
+Geo path :	data/geo-tweets/balanced-61k.json
+guess: 0.2
+
+Match:  47
+Mismatch:  107
+Not regional:  896
+Accuracy:  0.305194805195
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	174011
+Number of Geo-Tweets :	60459
+Loops :	0
+Number of blackwords :	200
+Mode :	geo
+Calculation method :	Log
+Blacklist path :	data/stoppwords200.txt
+Similarity :	0.999729057942
+Tweet path :	data/geo-tweets/unbalanced_175k.json
+Geo path :	data/geo-tweets/balanced-61k.json
+guess: 0.2
+
+Match:  85
+Mismatch:  150
+Not regional:  815
+Accuracy:  0.36170212766
+~~~~~~~~~~~~~~~~~~~~~
+Variables:
+Number of Tweets :	174011
+Number of Geo-Tweets :	60459
+Loops :	0
+Number of blackwords :	200
+Mode :	geo
+Calculation method :	Linear
+Blacklist path :	data/stoppwords200.txt
+Similarity :	0.97495084065
+Tweet path :	data/geo-tweets/unbalanced_175k.json
+Geo path :	data/geo-tweets/balanced-61k.json
+guess: 0.2
