@@ -4,6 +4,21 @@
 \section{Algorithms}
 % \subsection{Main algorithm}
 % \subsection{Difference between both attempts}
+\subsection{Normalizing versions}
+Im Laufe der Arbeit haben wir mehrere Varianten unseres Haupt-Algorithmus entwickelt, die sich in der Behandlung der Wortvektoren nach jedem Durchlauf, also im Anschluss an die Berechnung der Tweet- und der Wortvektoren, unterscheiden. Diese Behandlung wirkt sich direkt auf die folgende Berechnung von Tweetvektoren aus, sowohl in einem möglichen folgenden Durchlauf des Haupt-Algorithmus wie auch bei der Anwendung, also der Klassifizierung eines ungesehenen Tweets.
+
+Die ursprüngliche Version, \textit{Normalized,} sieht eine Normalisierung aller Wortvektoren jeweils auf Summe 1 vor. Das bedeutet, dass jedes Type gleichwertig ist, unabhängig von der Anzahl der Token. Bei Testläufen sahen wir, dass dieses Vorgehen seltene Wörter extrem bevorzugt, da diese nur in einem oder wenigen Tweets vorkommen und damit sehr stark regional gewertet werden.
+
+Unsere zweite Variante, \textit{Linear,} entstand dann einfach durch das Auslassen der Normalisierung. Hier besitzt nun jedes Type ein Gewicht in direkter linearer Abhängigkeit seiner Häufigkeit als Token. Diese Variante, so zeigte sich, verlieh aber sehr häufigen Wörtern ein so großes Gewicht, dass die regionale Signifikanz, die sich eher bei Wörtern mit mittlerer Häufigkeit findet, stark einbüßte und es nur noch winzige Abweichungen vom Durchschnittsvektor gab.
+
+Auf Grundlage dieser Erfahrungen beschlossen wir, einen Kompromiss zwischen konstanter und linearer Abhängigkeit zu finden. Wir entwickelten also die Variante \textit{Log,} bei der die Länge des Vektors so verändert wird, dass dabei die Summe des Vektors erhöht um 1 zur Basis 2 logarithmiert wird.
+
+$$\vec v = \frac{\vec v}{\sum_i v_i} * \log_2(\sum_i v_i+1)$$
+
+Bei der Variante \textit{Root} wird hier statt dem Logarithmus zur Basis 2 die Quadratwurzel genutzt.
+
+$$\vec v = \frac{\vec v}{\sum_i v_i} * \sqrt{\sum_i v_i}$$
+
 \subsection{Cosine similarity}
 \begin{figure}
   \[ sim(\vec{q},\vec{d_j}) = \frac{\sum^N_{i=1} w_{i,q} \times w_{i,j}}{\sqrt{\sum^N_{i=1}w^2_{i,q}} \times \sqrt{\sum^N_{i=1}w^2_{i,j}}} \]
