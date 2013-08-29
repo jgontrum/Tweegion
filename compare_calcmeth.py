@@ -6,7 +6,7 @@ from include.tweegion_log import Tweegion as TweegionLog
 from include.tweegion_lin import Tweegion as TweegionLin
 
 blackwords = ["data/stoppwords200.txt"]
-tweets = ["data/geo-tweets/geo-175k.json"]
+tweets = ["data/geo-tweets/unbalanced_175k.json"]
 geo = ["data/geo-tweets/balanced-61k.json"]
 loops = [0]
 guesses = [0.2]
