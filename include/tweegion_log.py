@@ -259,10 +259,8 @@ class Tweegion(object):
 
     # Logarithmieren eines Vektors
     def __log_vector(self, vector, base):
-        return_vector = vector
-        for i in range(len(vector)):
-            return_vector[i] = log(vector[i]+1, base)
-        return return_vector
+        s = sum(vector)
+        return (vector/s)*log(s+1, base)
 
     # Hauptalgorithmus: aus gegebener Generation von Wortvektoren die nächste berechnen
     def __calc_next_generation(self, wvm, tweets):

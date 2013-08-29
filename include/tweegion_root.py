@@ -259,10 +259,8 @@ class Tweegion(object):
 
     # Wurzel aus einem Vektor ziehen
     def __root_vector(self, vector, base):
-        return_vector = vector
-        for i in range(len(vector)):
-            return_vector[i] = sqrt(vector[i])
-        return return_vector
+        s = sum(vector)
+        return (vector/s)*sqrt(s)
 
     # Hauptalgorithmus: aus gegebener Generation von Wortvektoren die nächste berechnen
     def __calc_next_generation(self, wvm, tweets):
