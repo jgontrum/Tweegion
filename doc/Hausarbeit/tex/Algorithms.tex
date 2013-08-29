@@ -2,6 +2,20 @@
 \begin{document}
 
 \section{Algorithms}
+Unsere grundlegende Datenstruktur sind Vektoren, deren Stellen die Regionen repräsentieren. Für unsere Arbeit mit sieben festgelegten Regionen kommen also siebenstellige Vektoren zum Einsatz.
+Vektoren werden bei uns einerseits Wörtern (Types) und andererseits Tweets (Dokumenten) zugeordnet. Sie zeigen jeweils die Stärke der Zugehörigkeit des Wortes beziehungsweise des Tweets zu den einzelnen Regionen.
+
+So könnte zum Beispiel das Wort \glqq Porree\grqq{} zu je einem Drittel signifikant für die Regionen Ostdeutschland, Norddeutschland und Westdeutschland sein. Damit würde man die Wahrscheinlichkeit, dass eine Benutzung dieses Wortes auf einen Sprecher aus einer dieser Regionen hinweist, auf jeweils ein Drittel schätzen, für die anderen Regionen jeweils auf Null.
+
+$$\overrightarrow{Porree} = \begin{pmatrix} 0,33 \\ 0,33 \\ 0,33 \\ 0,0 \\ 0,0 \\ 0,0 \\ 0,0 \end{pmatrix} \ \ \ \ \begin{matrix} \text{Ostdeutschland} \\ \text{Norddeutschland} \\ \text{Westdeutschland} \\ \text{Bayern} \\ \text{Südwestdeutschland} \\ \text{Österreich} \\ \text{Schweiz} \end{matrix}$$
+
+Als Saat werden initiale Wortvektoren \textit{(0. Generation)} verwendet. Besonders beim Regiowort-Ansatz handelt es sich hier um eine sehr geringe Menge, die noch nicht zur Anwendung taugt -- es gäbe in einem zu klassifizierenden Tweet schlicht nur mit geringster Wahrscheinlichkeit überhaupt einen Treffer.
+
+Daher folgt nun eine Anreicherungsphase, in der mithilfe von Twitter-Trainingsdaten weitere regional signifikante Wörter gefunden werden sollen. Dies erledigt unser Haupt-Algorithmus, der aus einer Generation von Wortvektoren die nächste Generation berechnet. Er kann also in einer Schleife mit beliebiger Anzahl von Durchläufen angewendet werden. Schließlich liegt eine finale Generation von Wortvektoren vor. Daraus berechnen wir noch den Durchschnittsvektor (normalisiert auf Länge 1), dann ist unser Modell fertig trainiert.
+
+In der Anwendung wird nun zu einem ungesehenen Tweet ein Tweetvektor berechnet. Dazu wird er nach Wörtern durchsucht, zu denen Wortvektoren vorliegen. Alle Wortvektoren zu gefundenen Wörtern werden dann aufsummiert.
+Anschließend wird der Tweetvektor auf Länge 1 normalisiert. Zur Zuordnung des Tweets zu einer Region wird nun die Differenz aus dem Durchschnittsvektor und dem Tweetvektor berechnet. Das Ergebnis ist ein Differenzvektor, der in die gesuchte Richtung weist. Genauer gesagt verrät der größte Wert dieses Vektors, in Richtung welcher Region der Vektor am stärksten zeigt. Diese Region ist das Ergebnis unserer Klassifikation.
+
 % \subsection{Main algorithm}
 % \subsection{Difference between both attempts}
 \subsection{Normalizing versions}
