@@ -16,7 +16,36 @@ Daher folgt nun eine Anreicherungsphase, in der mithilfe von Twitter-Trainingsda
 In der Anwendung wird nun zu einem ungesehenen Tweet ein Tweetvektor berechnet. Dazu wird er nach Wörtern durchsucht, zu denen Wortvektoren vorliegen. Alle Wortvektoren zu gefundenen Wörtern werden dann aufsummiert.
 Anschließend wird der Tweetvektor auf Länge 1 normalisiert. Zur Zuordnung des Tweets zu einer Region wird nun die Differenz aus dem Durchschnittsvektor und dem Tweetvektor berechnet. Das Ergebnis ist ein Differenzvektor, der in die gesuchte Richtung weist. Genauer gesagt verrät der größte Wert dieses Vektors, in Richtung welcher Region der Vektor am stärksten zeigt. Diese Region ist das Ergebnis unserer Klassifikation.
 
-% \subsection{Main algorithm}
+\subsection{Main algorithm}
+Der Haupt-Algorithmus erzeugt aus einer bestehenden Generation von Wortvektoren und einem Trainingskorpus mit Tweets eine neue Generation von Wortvektoren.
+
+Es wird über alle Tweets im Trainingskorpus iteriert. Für jeden Tweet wird zunächst ein Tweetvektor berechnet. Dazu wird einfach zu jedem Token des Tweets der Wortvektor der bestehenden Generation -- sofern er existiert -- aufsummiert. Anschließend wird umgekehrt für jedes Token des Tweets der Tweetvektor zum neuen Wortvektor addiert. Falls einige Token des Tweets in der alten Generation von Wortvektoren nicht vertreten sind, so kommen sie in der neuen Generation nun neu hinzu; die Zahl der Wortvektoren erhöht sich also. Es verändern sich aber auch die Werte für die bereits vorhandenen Wörter.
+
+Zusammengefasst wird also erst für jeden Tweet des Trainingskorpus ein Tweetvektor auf Basis der bestehenden Wortvektoren zu den darin vorkommenden Wörtern berechnet, und anschließend für jedes Wort im Trainingskorpus ein Wortvektor auf Basis der Tweetvektoren zu den Tweets, in denen es vorkommt.
+
+\begin{algorithm}[H]
+ \SetAlgoLined
+ \KwData{\\
+	$WV_0$: bestehende Menge von Wortvektoren $WV_0(Wort) = \vec V_{Wort}$\\ 
+	$Tweets$: Menge von Tweets\\ $ $}
+ \KwResult{\\$WV_1$: angereicherte Menge von Wortvektoren $WV_1(Wort) = \vec V_{Wort}$\\ $ $}
+ $WV_1 \gets\emptyset $\; 
+\ForEach{Tweet in Tweets}{
+ $\vec V_{Tweet} \gets (0,0,0,0,0,0,0)$\\
+ \ForAll{Token in Tweet}{
+  $\vec V_{Tweet}  \gets \vec V_{Tweet} + WV_0(Token)$
+}
+ \ForAll{Token in Tweet}{
+  $WV_1(Token)  \gets WV_1(Token) + \vec V_{Tweet}$
+}
+}
+ \ForEach{$\vec V_{Word}$ in $WV_1$}{
+$\vec V_{Word}$ $\gets$ normalize($\vec V_{Word}$)
+}
+\Return $WV_1$\;
+\caption{Tweegion Main-Algorithm}
+\end{algorithm}
+
 % \subsection{Difference between both attempts}
 \subsection{Normalizing versions}
 Im Laufe der Arbeit haben wir mehrere Varianten unseres Haupt-Algorithmus entwickelt, die sich in der Behandlung der Wortvektoren nach jedem Durchlauf, also im Anschluss an die Berechnung der Tweet- und der Wortvektoren, unterscheiden. Diese Behandlung wirkt sich direkt auf die folgende Berechnung von Tweetvektoren aus, sowohl in einem möglichen folgenden Durchlauf des Haupt-Algorithmus wie auch bei der Anwendung, also der Klassifizierung eines ungesehenen Tweets.
