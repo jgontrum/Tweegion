@@ -372,13 +372,20 @@ class Tweegion(object):
         # Daher den restlichen Vektor mit einer Schleife weiter durchsuchen
         n = 0
         # Solange der aktuelle Fund nicht am Ende des Vektors steht
+        # print "maxarg",maxarg
         while maxarg[n] < 6:
             # Betrachte den Teil des Vektors dahinter
             rest = tweet_vector[maxarg[n]+1:]
-            # Finde dort den größten Wert
+            # print "Rest:",rest
+	    # Finde dort den größten Wert
             if rest.max() == maxval:
+		return -1
+		#break
+		#print "len maxarg", len(maxarg)
+		#print "n",n
+		#print "rest argmax",rest.argmax()
                 # Er entspricht bisherigem größtem Wert: Stelle in Trefferliste speichern
-                maxarg[n+1] = rest.argmax() + n+1
+                maxarg.append(rest.argmax() + n+1)
             else:
                 # Er ist kleiner: keine weiteren Treffer, Schleife beenden
                 break

@@ -377,8 +377,10 @@ class Tweegion(object):
             rest = tweet_vector[maxarg[n]+1:]
             # Finde dort den größten Wert
             if rest.max() == maxval:
-                # Er entspricht bisherigem größtem Wert: Stelle in Trefferliste speichern
-                maxarg[n+1] = rest.argmax() + n+1
+                return -1
+ 		# Er entspricht bisherigem größtem Wert: Stelle in Trefferliste speichern
+                # maxarg.append(rest.argmax() + n+1)
+ 		#maxarg[n+1] = rest.argmax() + n+1
             else:
                 # Er ist kleiner: keine weiteren Treffer, Schleife beenden
                 break
