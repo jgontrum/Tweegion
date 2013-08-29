@@ -8,6 +8,48 @@ Die initiale Version unserer Grundidee basiert auf Ausdrücken der regionalen Al
 \subsection{Source of the data and creation of the CSV}
 Beim Sammeln der Daten aus dem Atlas der Alltagssprache mussten verschiedene Faktoren berücksichtigt werden. Zunächst waren wir natürlich auf Ausdrücke aus, die den Sprachraum möglichst klar aufteilen, also wenig Überlappung zeigen. Dabei sollten sie auch tatsächlich regional signifikant sein, also nicht etwa wie xxx nahezu den gesamten Sprachraum abdecken. Unsere Obergrenze war hier die Zuordnung zu vier unserer sieben Regionen. Des Weiteren waren Homonyme für unsere Zwecke ungeeignet, sodass etwa die meisten regionalen Wörter für "Dachboden", etwa \textit{Boden}, \textit{Speicher} und \textit{Bühne}, ausschieden.
 
+\subsubsection{Guessing the amount of regional Tweets}
+\begin{figure}
+\begin{tikzpicture}
+       \pgfplotstableread{../data/geo_cos.csv}\data
+       \begin{axis}[
+           legend pos=south east,
+           ylabel near ticks,
+           axis y line*=left,
+           xmin = 5,
+           xmax = 100,
+           ylabel= accuracy,
+           xlabel= guessed percentage of non-regional Tweets,
+           xtick = {5,10,20,30,40,50,60,70,80,90,100},
+           width=0.9\columnwidth,
+           height=0.5\textheight]
+           \addplot[blue, mark=x] 
+           table[x=Guess,y=Accuracy]{\data} ;
+           \addlegendentry[font=\tiny]{accuracy}
+       \end{axis}
+       \begin{axis}[
+           hide x axis,
+           xmin = 5,
+           xmax = 100,
+           axis y line*=right,
+           legend pos=south west,
+           ylabel near ticks,
+           ylabel= cosine similarity threshold,
+           width=0.9\columnwidth,
+           height=0.5\textheight]
+           \addplot[red, mark=x] 
+           table[x=Guess,y=Threshold]{\data};
+           \addlegendentry[font=\tiny]{threshold}
+       \end{axis}
+\end{tikzpicture}
+Calculation method: \textit{Normalized}; Geo-dataset: \textit{balanced-39k}, Main-dataset: \textit{geo-175k}; Stopwords: \textit{Top 200}; Loops: \textit{1}; 
+
+  \caption{Relation between the amount of regional Tweets and the accuracy.}
+  \label{geo_graph2}
+\end{figure}
+
+
+
 \subsection{Why the loops are so important}
 \subsection{Experiments}
 \subsubsection{Parameters}
