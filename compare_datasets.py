@@ -5,7 +5,7 @@ from include.tweegion_root import Tweegion as TweegionRoot
 from include.tweegion_log import Tweegion as TweegionLog
 
 blackwords = ["data/stoppwords200.txt"]
-tweets = ["data/geo-tweets/unbalanced_175k.json"]
+tweets = ["data/geo-tweets/balanced-21k.json", "data/geo-tweets/balanced-39k.json", "data/geo-tweets/balanced-61k.json", "data/geo-tweets/unbalanced_175k.json"]
 geo = ["data/geo-tweets/balanced-21k.json", "data/geo-tweets/balanced-39k.json", "data/geo-tweets/balanced-61k.json", "data/geo-tweets/unbalanced_175k.json"]
 loops = [0]
 
