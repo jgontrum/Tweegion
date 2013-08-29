@@ -258,7 +258,7 @@ class Tweegion(object):
         return array([0.0,0.0,0.0,0.0,0.0,0.0,0.0])
 
     # Wurzel aus einem Vektor ziehen
-    def __root_vector(self, vector, base):
+    def __root_vector(self, vector):
         s = sum(vector)
         return (vector/s)*sqrt(s)
 
@@ -280,7 +280,7 @@ class Tweegion(object):
                         wvn[token] = tv[id]
 
         for word in wvn:
-            wvn[word] = self.__root_vector(wvn[word], 2)
+            wvn[word] = self.__root_vector(wvn[word])
 
         return wvn
 
