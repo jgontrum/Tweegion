@@ -2,19 +2,19 @@
 \begin{document}
 
 \section{Algorithms}
+\subsection{Data structure and overview}
 Unsere grundlegende Datenstruktur sind Vektoren, deren Stellen die Regionen repräsentieren. Für unsere Arbeit mit sieben festgelegten Regionen kommen also siebenstellige Vektoren zum Einsatz.
 Vektoren werden bei uns einerseits Wörtern (Types) und andererseits Tweets (Dokumenten) zugeordnet. Sie zeigen jeweils die Stärke der Zugehörigkeit des Wortes beziehungsweise des Tweets zu den einzelnen Regionen.
 
 So könnte zum Beispiel das Wort \textit{Porree} zu je einem Drittel signifikant für die Regionen Ostdeutschland, Norddeutschland und Westdeutschland sein. Damit würde man die Wahrscheinlichkeit, dass eine Benutzung dieses Wortes auf einen Sprecher aus einer dieser Regionen hinweist, auf jeweils ein Drittel schätzen, für die anderen Regionen jeweils auf Null.
 
-$$\vec V_{Porree} = \begin{pmatrix} 0,33 \\ 0,33 \\ 0,33 \\ 0,0 \\ 0,0 \\ 0,0 \\ 0,0 \end{pmatrix} \ \ \ \ \begin{matrix} \text{Ostdeutschland} \\ \text{Norddeutschland} \\ \text{Westdeutschland} \\ \text{Bayern} \\ \text{Südwestdeutschland} \\ \text{Österreich} \\ \text{Schweiz} \end{matrix}$$
+$$\vec V_{Porree} = \begin{pmatrix} 0,33 \\ 0,33 \\ 0,33 \\ 0,0 \\ 0,0 \\ 0,0 \\ 0,0 \end{pmatrix} \ \ \ \ \begin{matrix} \text{Ostdeutschland} \\ \text{Norddeutschland} \\ \text{Westdeutschland} \\ \text{Bayern} \\ \text{Südwestdeutschland} \\ \text{Schweiz} \\ \text{Österreich} \end{matrix}$$
 
 Als Saat werden initiale Wortvektoren \textit{(0. Generation)} verwendet. Besonders beim Regiowort-Ansatz handelt es sich hier um eine sehr geringe Menge, die noch nicht zur Anwendung taugt -- es gäbe in einem zu klassifizierenden Tweet schlicht nur mit geringster Wahrscheinlichkeit überhaupt einen Treffer.
 
 Daher folgt nun eine Anreicherungsphase, in der mithilfe von Twitter-Trainingsdaten weitere regional signifikante Wörter gefunden werden sollen. Dies erledigt unser Haupt-Algorithmus, der aus einer Generation von Wortvektoren die nächste Generation berechnet. Er kann also in einer Schleife mit beliebiger Anzahl von Durchläufen angewendet werden. Schließlich liegt eine finale Generation von Wortvektoren vor. Daraus berechnen wir noch den Durchschnittsvektor (normalisiert auf Länge 1), dann ist unser Modell fertig trainiert.
 
-In der Anwendung wird nun zu einem ungesehenen Tweet ein Tweetvektor berechnet. Dazu wird er nach Wörtern durchsucht, zu denen Wortvektoren vorliegen. Alle Wortvektoren zu gefundenen Wörtern werden dann aufsummiert.
-Anschließend wird der Tweetvektor auf Länge 1 normalisiert. Zur Zuordnung des Tweets zu einer Region wird nun die Differenz aus dem Durchschnittsvektor und dem Tweetvektor berechnet. Das Ergebnis ist ein Differenzvektor, der in die gesuchte Richtung weist. Genauer gesagt verrät der größte Wert dieses Vektors, in Richtung welcher Region der Vektor am stärksten zeigt. Diese Region ist das Ergebnis unserer Klassifikation.
+In der Anwendung wird dann zu einem ungesehenen Tweet ein Tweetvektor berechnet. Aus dessen Differenz zum Durchschnittsvektor wird die Region abgelesen, der der Tweet schließlich zugeordnet wird.
 
 \subsection{Main algorithm}
 Der Haupt-Algorithmus erzeugt aus einer bestehenden Generation von Wortvektoren und einem Trainingskorpus mit Tweets eine neue Generation von Wortvektoren.
@@ -77,6 +77,13 @@ Bei der Variante \textit{Root} wird hier statt dem Logarithmus zur Basis 2 die Q
 
 $$\text{normalize}(\vec v) = \frac{\vec v}{\sum_i v_i} * \sqrt{\sum_i v_i}$$
 
+\subsection{Classifying a tweet}
+In der Anwendung wird ein ungesehener Tweet eingegeben, der einer Region zugeordnet werden soll. Für ihn wird nun ein Tweetvektor berechnet. Dazu wird er nach Wörtern durchsucht, zu denen Wortvektoren vorliegen. Alle Wortvektoren zu gefundenen Wörtern werden dann aufsummiert.
+
+Anschließend wird die Kosinusähnlichkeit des Tweetvektors zum Normalvektor berechnet. Bei zu großer Ähnlichkeit erfolgt keine Klassifikation, siehe Abschnitt zur Kosinusähnlichkeit.
+
+Ist der Tweetvektor signifikant genug, wird er nun auf Länge 1 normalisiert. Zur Zuordnung des Tweets zu einer Region wird die Differenz aus dem Durchschnittsvektor und dem Tweetvektor berechnet. Das Ergebnis ist ein Differenzvektor, der in die gesuchte Richtung weist. Genauer gesagt verrät der größte Wert dieses Vektors, in Richtung welcher Region der Vektor am stärksten zeigt. Diese Region ist das Ergebnis unserer Klassifikation.
+
 \subsection{Cosine similarity}
 \begin{figure}
   \[ sim(\vec{q},\vec{d_j}) = \frac{\sum^N_{i=1} w_{i,q} \times w_{i,j}}{\sqrt{\sum^N_{i=1}w^2_{i,q}} \times \sqrt{\sum^N_{i=1}w^2_{i,j}}} \]
@@ -93,18 +100,18 @@ $$\text{normalize}(\vec v) = \frac{\vec v}{\sum_i v_i} * \sqrt{\sum_i v_i}$$
   \caption{Example for the similarity calculation}
   \label{cos_sim_example}
 \end{figure}
-Although Tweets may differ from one region to another in some way, a huge percentage of the German Twitter users write their messages exclusively in standard German with no signs of any regional influence whatsoever.  \\
-For example the following Tweet just appeared in my timeline:
+Although Tweets may differ from one region to another in some way, a huge percentage of the German Twitter users write their messages exclusively in standard German with no signs of any regional influence whatsoever. \\
+For example the following Tweet just appeared in one of our timelines:
 \begin{quote}
 'Ich glaube @Drahflow tippt noch schneller als er redet. ;) \#om13'
 \end{quote}
-Keeping in mind that  usernames, hashtags, smileys and punctation are being removed in the pre-processing, this Tweet contains way to ordinary words to be assigned to a specific region. It is written in pure High German and therefore could be sent from a town in Bavaria as well as from Berlin and depending on the data we use to train our algorithm with, the result of the program could be 'Austria' or 'Northern Germany' as well.
+Keeping in mind that usernames, hashtags, smileys and punctation are being removed in the pre-processing, this Tweet contains way too ordinary words to be assigned to a specific region. It is written in pure standard language and therefore could be sent from a town in Bavaria as well as from Berlin, and depending on the data we use to train our algorithm with, the result of the program could be \textit{Austria} or \textit{Northern Germany} as well.
 
-To face this problem we decided to filter this kind of undistinguished Tweets to have more reliable results and because of that also increase the accuracy of the algorithm. \\
-Our idea was to determine the average Tweet-vector $\vec{\bar{d}}$ of all the Tweets in the training-corpus and to compare the Tweet-vector $\vec{q}$ of a given Tweet with it, using the cosine metric (see Figure \ref{cos_sim} on page \pageref{cos_sim}) as recommended  in Jurafsky \& Martin. If the similarity between both vectors is smaller than a specified threshold, we continue to map the Tweet to one of the region, if not we stop and return a message, that the Tweet is written in standard German and can not be classified. In the example in figure \ref{cos_sim_example} on page \pageref{cos_sim_example}, the vector $\vec{q}$ for the Tweet mentioned above is compared to the average Tweet-vector $\vec{\bar{d}}$, returning a very high similarity of $0.9986$. Nevertheless the algorithm states, that the Tweet was most likely sent from Switzerland. 
+To face this problem we decided to filter this kind of indistinguishable Tweets in order to get more reliable results, thus increasing the accuracy of the algorithm. \\
+Our idea was to determine the average Tweet-vector $\vec{\bar{d}}$ of all the Tweets in the training-corpus and to compare the Tweet-vector $\vec{q}$ of a given Tweet with it, using the cosine metric (see Figure \ref{cos_sim} on page \pageref{cos_sim}) as recommended in Jurafsky \& Martin. If the similarity between both vectors is smaller than a specified threshold, we continue to map the Tweet to one of the region, otherwise we stop and return a message that the Tweet is written in standard German hence cannot be classified. In the example in figure \ref{cos_sim_example} on page \pageref{cos_sim_example}, the vector $\vec{q}$ for the Tweet mentioned above is compared to the average Tweet-vector $\vec{\bar{d}}$, returning a very high similarity of $0.9986$. Nevertheless the raw algorithm would state the Tweet was most likely sent from Switzerland.
 
-But the most difficult thing was to find the right threshold, that separates the too ordinary Tweets from the regional ones. To make a guess which percentage of all Tweets are written in standard German, we calculated the cosine similarity of all Tweets in the training-corpus to the average vector, sorted them and had a look at the distribution (figure \ref{cos_distribution} in page \pageref{cos_distribution}). \\
-The result was not surprising: More than 80\% of all Tweets had a similarity of 0.9 or higher. Or, seen from another point of view, only 20\% of all Tweets differ enough from the average vector to calculate reliable results. 
+The most difficult thing was to find the right threshold that separates the too ordinary Tweets from the significantly regional ones. To make a guess which percentage of all Tweets are written in standard German, we calculated the cosine similarity of all Tweets in the training-corpus to the average vector, sorted them and had a look at the distribution (figure \ref{cos_distribution} in page \pageref{cos_distribution}). \\
+The result was not surprising: More than 80\% of all Tweets had a similarity of 0.9 or higher. Or, seen from another point of view, only 20\% of all Tweets differ enough from the average vector to calculate reliable results.
 
 In the experiments in the sections 3 (regional based attempt) and 4 (geo location based) we tested different thresholds to find a good balance between a reliable classification with a high accuracy and the coverage of as many Tweets as possible.
 
