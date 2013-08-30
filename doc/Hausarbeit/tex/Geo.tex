@@ -3,19 +3,19 @@
 
 \section{Geo location attempt }
 \subsection{Introduction}
-As stated in the previous chapter, the foundation of all calculations in the regional word attempt is a list of a few hundred words that appear more likely in a specific region. 
-Although this list and their probability distribution is based on scientific research it markes the weak spot of this attempt for number of reasons. For example people in a specific region use a typically word in their everyday language while speaking to their friends or family, but there is no proof that this people also use this words in their written language, even if it is only their private Twitter account. In addition, the list is way to short to cover only fraction of the words, people use on Twitter, so the end results mostly rely on the data that is generated in main loop of the algorithm.
+While the foundation of all calculations in the regional word attempt is a manually created list of only a few hundred words and their probability distribiution, we also wanted to use machine learning technics to generate this list automatically.
+Although this list and their values are based on scientific research, it marks the weak spot of this attempt for number of reasons. For example people in a specific region could use a typically word in their everyday language while speaking to their friends and family, but there is no proof that this people also use this words in their written language, even if it is only their private Twitter account. In addition, the list is way to short to cover only fraction of the words, people use on Twitter, so the end results mostly rely on the data that is generated in main loop of the algorithm. \\
+It seems that have no other choice but to trust this generated values, so we came up with the idea of skipping the manually created word list and use an automatically created one based on a corpus of geo annotated Tweets instead. 
 
-We seem to have no other choice but to trust this generated values, so we had the idea of skipping the manually created word list and use an automatically created based on a corpus of Tweets with a geo location instead. \\
-Before entering the main loop, we had to write another algorithm that learns the distribution on all seven regions for all the words in the corpus. This way we are generating a list of words that covers nearly all the words.
+Before entering the main loop, we had to write another algorithm that learns the distribution in all seven regions for all the words in the corpus. This way we are generating a list that covers a very huge percentage of all words, that could occur in a Tweet.
 \begin{figure}
   \begin{center}
    \includegraphics[width=0.5\columnwidth]{../img/polygone_satt.jpg}
     \caption{\label{geo_polymap} Map of the regions and their index represented as polygons}
   \end{center}
 \end{figure}
-In order to classify a tweet, that has a geo location, we had struggled to find a good way to represent the seven regions in a way, that we could easily check from which of them a Tweet was sent. After a few unsuccessful approaches, we decided to define polygons for the regions that are not overlapping each other, but also leave no gaps between them. For the value of the points we simply used their longitude and latitude coordinates, that can be represented as floats.  
-We did not implement a point-in-polygon algorithm ourself, but used the version found here [SOURCE] instead. 
+In order to classify a document, that has a geo location, we struggled to find a good way representing the regions in a way, that we could easily check from which of them a Tweet was sent. After a few unsuccessful approaches, we decided to define polygons for the regions that are not overlapping each other, but also leave no gaps between them. For the value of the points we simply used their longitude and latitude coordinates, which can be represented as floating points.  
+We did not implement a point-in-polygon algorithm ourself, but used the version found here [SOURCE] instead,  
 To find out from which region a tweet was sent, we iterate over all regions and return the first one, where the point-in-polygon function returns true.
 In this first step, the Tweet-vector consists only of zeros and a one for the feature standing for the region it was sent from. 
 
