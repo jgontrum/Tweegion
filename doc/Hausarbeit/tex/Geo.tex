@@ -1,33 +1,53 @@
 \documentclass[../Main.tex]{subfiles} 
 \begin{document}
 
-\section{Geo location attempt}
+\section{Geo location attempt }
 \subsection{Introduction}
-While the foundation of all calculations in the regional word attempt is a manually created list of only a few hundred words along with their probability distribiutions, we also wanted to try using machine learning technics to generate this list automatically.
-
-Although the manually created list and its values are based on scientific research, it marks the weak spot of the regional word attempt for number of reasons. For example people in a specific region could use a typical word in their everyday language while speaking to their friends and family, but it is not quite sure that they also use this words in their written language, even if it is only their private Twitter account. In addition, the list is way too short to cover only fraction of the words people use on Twitter, so the end results mostly rely on the data that is generated during the main algorithm's loops.
-
-It seemed we had no other choice but to trust this generated values, so we came up with the idea of skipping the manually created word list and use an automatically created one based on a corpus of geo annotated Tweets instead.
-
-Before entering the main loop, we had to write another algorithm that learns the distribution in all seven regions for all the words in the corpus. This way we are generating a list that covers a very huge percentage of all words that could occur in a Tweet.
-
 \begin{figure}
   \begin{center}
    \includegraphics[width=0.5\columnwidth]{../img/polygone_satt.jpg}
-    \caption{\label{geo_polymap} Map of the regions and their index represented as polygons}
+    \caption{\label{geo_polymap} Map of the regions and the index of their feature used in the vectors represented as polygons}
   \end{center}
 \end{figure}
+While the foundation of all calculations in the regional word attempt is a manually created list of only a few hundred words and their probability distribution, we also wanted to use machine learning technics to generate this list automatically.
+Although this list and its values are based on scientific research, it marks the weak spot of this attempt for a number of reasons. For example people in a specific region could use a typical word in their everyday language while speaking to their friends and family, but there is no proof that these people also use these words in their written language, even if it is only their private Twitter account. In addition, the list is way too short to cover more than only fraction of the words that people use on Twitter, so the end results mostly rely on the data that is generated in main loop of the algorithm. \\
+It seems that we have no other choice than to trust these generated values, so we came up with the idea of skipping the manually created word list and use an automatically created one based on a corpus of geo annotated Tweets instead. 
 
-We struggled to find a good solution for representing the regions in a way that would allow us to easily check from which of them a geo annotated Tweet was sent. After a few unsuccessful approaches we decided to define polygons for the regions that are not overlapping each other but also leave no gaps between them. For the value of the points we simply used their longitude and latitude coordinates, which can be represented as floating point numbers.
+Before entering the main loop, we had to write another algorithm that learns the distribution in all seven regions for all the words in the corpus. This way we are generating a list that covers a very huge percentage of all words, that could occur in a Tweet.
 
-We did not implement a point-in-polygon algorithm ourself but used the version found here [SOURCE] instead. 
-To find out from which region a tweet was sent we iterate over all regions and return the first one the point-in-polygon function returns true for.
-In this first step, the Tweet-vector consists only of zeros and a one for the feature standing for the region it was sent from. 
+In order to classify a document, that has a geo location, we struggled to find a proper method to represent the regions in a way that would allow us to check easily from which one a Tweet was sent. After a few unsuccessful approaches, we decided to define polygons for the regions that are not overlapping each other, but but neither leave gaps. For the value of the points we simply used their longitude and latitude coordinates, which can be represented as floating points.  
+We did not implement a point-in-polygon algorithm ourself, but used the version of Joel Lawhead published on geospatialpython.com \cite{GeoPy} instead,  
+To find out  where a Tweet was sent from, we iterate over all regions and return the first one, where the point-in-polygon function returns true.
+In this first step, the Tweet-vector starts with the value 0 for all features, except the one standing for the region of origin, which we assign the value 1 to.
 
-Let's assume that the coordinates of some Tweet reveal that its region is \textit{Westdeutschland,} represented by the index $3$.
+\begin{algorithm}[!b]
+ \SetAlgoLined
+ \KwData{\\
+	$tweets$: Corpus of geo-annotated documents\\ 
+	$stopwords$: List of stopwords}
+ \KwResult{\\$WV$: normalized word-vectors, representing\\ the probability distribiution for each word}
+ $WV \gets\emptyset $\; 
+\ForEach{\label{alg:goto}tweet in tweets}{
+$region \gets \texttt{Classify(}tweet\texttt{)}$\;
+ $\vec{tweet} \gets \texttt{CreateVector(}region\texttt{)}$\;
+ \ForAll{token in tweet}{
+  \If{token $\notin$ stopwords}{
+     $WV(token) \gets WV(token) + \vec{tweet} $\;
+   }
+}
+}
+ \ForEach{$\vec{word}$ in $WV$}{
+$\vec{word} \gets$ \texttt{normalize(}$\vec{word}$\texttt{)}\;
+}
+\Return $WV$\;
+\label{geo-algo}
+\caption{Geo-algorithm}
+\end{algorithm}
+
+Let us assume that the coordinates of some Tweet reveal that its region is "Westdeutschland", represented by the feature with the index $2$.
 Therefore the Tweet-vector is $(0,0,1,0,0,0,0)$. 
-The next step consists in iterating over all tokens in the Tweet and add the Tweet-vector to their word-vectors. To put it simply, we increase the counter for the specific feature of all occurring tokens by one. 
-In the final step we iterate over all word-vectors and use our \texttt{normalize()}-function to attain the probability distribution showing how likely it is that the token is used in a specific region. By this normalization we make sure the format of the outcome is comparable to the initial list of the regional-word attempt and we can use it in the main algorithm without having to adjust it.
+The next step consists of iterating over all tokens in the Tweet and add the Tweet-vector to their word-vectors. To put it simply, we increase the counter for the specific feature of all occurring tokens by one. 
+In the final step, we iterate over all word-vectors and use our \texttt{normalize()}-function to attain the probability distribution, how likely it is that the token is used in a specific region. Because of this normalization, the format of the outcome is comparable to the input list in the regional-word attempt and we can use the main part of the algorithm without any adjustments.
 
 \begin{figure}
 \centering $\textrm{Example Tweet: } d = \textrm{'Hello Twitter!'} \textrm{ from the region 'Westdeutschland'.}$
@@ -45,22 +65,23 @@ In the final step we iterate over all word-vectors and use our \texttt{normalize
 \end{figure}
 
 \subsection{Source of data}
-The datasets used for the generation of the first word-vectors have been extracted from the Scheffler-corpus using the same classification function as in the main program. Although the corpus mostly consists of German Tweets (filtered with \emph{LangID}), about 20\% of the Tweets with geo-location have not been sent from one of the defined regions and therefore have been ignored.
+The datasets used for the generation of the first word-vectors have been extracted from the Scheffler-corpus using the same classification function as described before. Although the corpus mostly consists of German Tweets (filtered with \emph{LangID}), about 20\% of the Tweets with geo-location have not been sent from one of the defined regions and therefore have been ignored. In addition, we filtered Retweets, Hashtags for the location-based social network 'Foursquare' (\emph{\#4sq} and \emph{\#foursquare}) as well as Hashtags from automatically sent messages and blocked the UserIDs for a few very frequent bots, that transfer their geo-location. The remaining data consists almost exclusively of German human-composed Tweets (although a very few English Tweets have remained in the corpus).
 
-We created balanced sets, where the amount of Tweets is the same for all regions. Because the fewest number of Tweets (8787) came from region 6, \textit{Österreich,} we ended up with only 61509 Tweets for all regions. In order to create a gold-standard, we extracted 150 Tweets from each region, leaving us 60459 for the training.
-
-Our assumption was that datasets of different sizes lead to different results, and we wondered in what way it would affect the accuracy to use the same data for the creation of the word-vectors as we did for the main-algorithm. Therefore we created three balanced sets, one unbalanced set of all geo annotated Tweets and as a reference one huge set of normal Tweets. Of course none of these sets do contain any Tweets from the gold-standard set.
-
-\begin{enumerate}
+We created balanced sets, where the amount of  Tweets are the same for all regions. As the fewest Tweets came from the region 6, 'Östereich (8787),  we ended up with only 61509 Tweets for all regions.  
+In order to create a gold-standard, we subtracted 150 Tweets from each region, leaving us 60459 for the training process. \\
+Our assumption was, that datasets of different sizes lead to different results and we wondered, how it would effect the accuracy, if we would use the same data for the creation of the word-vectors in the geo-algorithm as well as for the main-algorithm. Therefore we created three balanced sets, one unbalanced set of all geo annotated Tweets and as a reference one huge set of unfiltered normal Tweets. Of course none of these sets contain any Tweets from the gold-standard.
+ \begin{enumerate}
 \item \emph{balanced-21k} with 3000 Tweets from each region.
 \item \emph{balanced-39k} consisting of the remaining 39456 Tweets
 \item \emph{balanced-61k} combining the both previous sets. 
 \item \emph{geo-175k} with all Tweets from the corpus that were sent from one of the defined regions. Not balanced.
 \item \emph{all-1500k} contains 1.5 million mostly not geo annotated Tweets.
 \end{enumerate}
-
 \subsection{Experiments}
+As the algorithms leave us five parameters to alter, we had to run a series of experiments to find the optimal value for them. In the following we present our procedure and the results.
+
 \subsubsection{Dataset combinations}
+\label{dataset_section}
 \begin{table}[b]
     \begin{tabular}{|l|lllll|}
     \hline
@@ -71,20 +92,21 @@ Our assumption was that datasets of different sizes lead to different results, a
     unbalanced-175k & 0.303        & 0.343        & 0.322        & 0.352           & \textbf{0.340}       \\ \hline
     \end{tabular} \\
 
-  Calculation method: \textit{Normalized}; Stopwords: \textit{Top 200}; Loops: \textit{1}; Estimated amount of non-regional Tweets: \textit{60\%}, leading to a similarity threshold between \textit{0.999} and \textit{0.991}, depending on the dataset.
+  Calculation method: \textit{Normalized}; Stopwords: \textit{Top 200}; Loops: \textit{1}; Guessed amount of non-regional Tweets: \textit{60\%}, leading to a similarity threshold between \textit{0.999} and \textit{0.991}, depending on the dataset.
   \caption{Comparison of the combination of all datasets}
   \label{geo_datasets}
 \end{table}
 
-In order to give a solid foundation which data we should use in further experiments, we started to compare the combination of the five datasets we created. We wondered in what way it would affect the accuracy if we trained for instance the geo-algorithm with a small set of geo-annotated data but used a very big set of Tweets for the learning of the word-vectors in the loop of the main-algorithm. Another question was what results we would get if the data in the main-algorithm contained Tweets that had been used in the geo-algorithm before. 
+In order to create a solid foundation which data we should use in further experiments, we started to compare the combination of the five sets we created. We wondered, how it would affect the accuracy, if  for example we would train the geo-algorithm with a small set of geo-annotated data but use a very big set of Tweets for the learning of the word-vectors in the main-algorithm. Another question was, what results we would receive, if the data in the main-algorithm contains Tweets, that have been used in the geo-algorithm before. 
 
-Our expectation was in general that the accuracy would rise the more data we used and that the reuse of Tweets in the main-algorithm would lower it, because this data already had an effect and using it again would not change anything.
+Our expectation was in general, that the accuracy would rise, the more data we use and that the reuse of Tweets in the main-algorithm would lower it, because this data already had an effect and using it again would not cause any change.
 
-Unsurprisingly, using the smallest set, \emph{balanced-21k}, for the training of the geo-algorithm nearly always produced the lowest accuracy. But our hypothesis about the reuse of data was disproved: The combination of the \emph{balanced-39k} set for the learning in the geo-algorithm and \emph{balanced-61k} for the main-algorithm generated the third best result with an accuracy of 0.345.
+Unsurprisingly, using the smallest set, \emph{balanced-21k}, for the training of the geo-algorithm nearly always produced the lowest accuracy. 
+But our hypothesis about the reuse of data was falsified:  The combination of the \emph{balanced-39k} set for the learning in the geo-algorithm and \emph{balanced-61k} for the main-algorithm generated the third best result with an accuracy of 0.345.
 
-We also discovered that the use of balanced data in the geo-algorithm, where all regions are represented by the same amount of documents, is crucial for good results. Having a look at the row for the \emph{unbalanced-175k}, it produces a very bad accuracy. Even in combination with the set containing 1.5 million Tweets (\emph{all-1500k}), it marks the second last rank.
+Also we discovered, that the use of balanced data  in the geo-algorithm, where all regions are represented by the same amount of documents, is crucial for good results. Having a look at the row for the \emph{unbalanced-175k}, it produces a very bad accuracy. Even in combination with the set containing 1.5 million Tweets (\emph{all-1500k}), it marks the second last rank.
 
-This experiment showed us that we should use the \emph{balanced-39k}-set for the training of the geo-algorithm and the \emph{geo-175k}-set for the main-algorithm, because it generated the best accuracy of 0.365. We were surprised that the combination \emph{balanced-39k}/\emph{all-1500k} had a worse result, but interpreted it as a result of the unfiltered data of the \emph{all-1500k}-set.
+This experiment showed us, that we should use the \emph{balanced-39k}-set for the training of the geo-algorithm and the \emph{geo-175k}-set for the main-algorithm, because it generated the best accuracy of 0.365. We were surprised, that the combination \emph{balanced-39k} / \emph{all-1500k} had a worse result, but interpreted it as a result of the unfiltered data of the \emph{all-1500k}-set.
 
 \subsubsection{Comparison of different stopword-lists}
 \begin{figure}
@@ -95,12 +117,15 @@ This experiment showed us that we should use the \emph{balanced-39k}-set for the
                               height=0.3\textheight,
                               symbolic x coords={0, 100, 200, 500, 750, 1000},
                               xtick=data,
-                              ytick={0.26, 0.28, 0.3,0.32, 0.34,0.36, 0.38},
+                              ytick={0.28, 0.31, 0.34, 0.37},
+			  ymax = 0.39,
                               ylabel=accuracy,
                               bar width=40,
-                              xlabel=number of stopwords
+                              xlabel=number of stopwords,
+		 	 nodes near coords,
+    			  nodes near coords align={vertical}
           ]
-            \addplot[ybar,  postaction={ pattern=north east lines  }] coordinates {
+            \addplot[ybar,  postaction={ pattern=north west lines   }] coordinates {
                (0, 0.2762)
                (100, 0.352)
                (200, 0.368)
@@ -112,22 +137,23 @@ This experiment showed us that we should use the \emph{balanced-39k}-set for the
     \end{tikzpicture}
 \end{center}
   \label{geo_graph1}
-Calculation method: \textit{Normalized}; Geo-dataset: \textit{balanced-39k}, Main-dataset: \textit{geo-175k}; Loops: \textit{1}; Estimated amount of regional Tweets: \textit{60\%}
+Calculation method: \textit{Normalized}; Geo-dataset: \textit{balanced-39k}, Main-dataset: \textit{geo-175k}; Loops: \textit{1}; Guessed amount of regional Tweets: \textit{60\%}
   \caption{Accuracy of different stopword-lists.}
 
 \end{figure}
 
-Zipf's law tells us that a very small amount of token are found extremely often in corpora, while most token appear only a few times. Because it is much more likely for a more seldom word to have a regional meaning, we decided to filter out the most frequent token. 
+Zipf's law tells us that a very small amount of tokens are found extremely often in corpora, while most token appear only a few times. As it is much more likely for a more seldom word to have a regional meaning, we decided to filter out the most frequent token. 
 
-We came up with the idea that it is not reasonable to use a existing stopword-list for the German language because people on Twitter could use specific words and symbols more often than in a standard German text. In addition, Tweets from spam bots or automatically sent messages that always contain the same words are extremely often and have to be filtered. So we used the Scheffler corpus to create our own stopword-list by using our modified version of Christopher Potts' tokenizer and counting the frequency of all tokens.
+We came up with the idea, that it is not reasonable to use an existing stopword-list of the German language because people on Twitter could use specific words more often than for example in a standard German text. In addition, spam bots or automatically sent messages, that always contain the same words, disturb the statistics and have to be filtered. So we used the Scheffler-corpus to create our own stopword-list using our modified version of Christopher Potts' tokenizer and counting the frequency of all token.
 
-We were unsure about how many token should appear on a stopword-list, so we created five of them, containing the most \emph{100}, \emph{200}, \emph{500}, \emph{750} and \emph{1000} frequent words. Actually, we expected to have a better accuracy the more stopwords we use, but we have been disproved.
+We were unsure, how many token should be appear on a stopword-list, so we created five of them, containing the most \emph{100}, \emph{200}, \emph{500}, \emph{750} and \emph{1000} frequent words.\\
+Actually, we expected the have a better accuracy, the more stopwords we use, but it turned out to be different: 
 
-Figure \ref{geo_graph1} shows clearly that more than 200 stopwords lead to worse results, while only 100 stopwords also have a lower accuracy (0.352) than the list containing 200 entries (0.368). The fact that the results of the run with no stopword filtering at all had the lowest accuracy (0.276), reveals the importance of the use of a stopword-list.
-
-Because the list containing 200 stopwords lead to the best results, we used this one in further experiments.
+Figure \ref{geo_graph1} shows clearly, that more than 200 stopwords lead to worse results, probably because these words do have a regional meaning. On the other hand, only 100 stopwords have a lower accuracy  than the list containing 200 entries. The fact, that the results of the run with no stopword filtering at all had the lowest accuracy, reveals the importance of using a stopword-list in general.\\
+As the list containing 200 stopwords leads to the best accuracy of 0.37, we will use this one in further experiments.
 
 \subsubsection{Guessing the amount of regional Tweets}
+ \label{geo_guessing}
 \begin{figure}
 \begin{tikzpicture}
        \pgfplotstableread{../data/geo_cos.csv}\data
@@ -166,14 +192,16 @@ Calculation method: \textit{Normalized}; Geo-dataset: \textit{balanced-39k}, Mai
   \caption{Relation between the amount of regional Tweets and the accuracy.}
   \label{geo_graph2}
 \end{figure}
-In section 2, \textit{Algorithms,} we talked about the advantages and disadvantages of filtering too ordinary Tweets using the cosine similarity metric. Summarized, we gain much better results considering accuracy, but have to accept that we cannot classify a huge percentage of Tweets because they do not differ enough from the average Tweet-vector.
+In section 2, 'Algorithms', we talked about the advantages and disadvantages of filtering too ordinary Tweets using the cosine similarity metric. Summarized, we gain much better results considering the accuracy, but have to accept, that we cannot classify a huge percentage of Tweets, because they do not differ enough from the average Tweet-vector.
 
-We wanted to know what accuracy we could achieve, so we ran the program a few times, changing the parameter guessing the amount of regional Tweets. We started at 100\% and went down to an extreme of 5\%.
+We wanted to know, how high the accuracy could be, so we ran the program a few times, changing the parameter guessing the amount of regional Tweets. We started at 100\% with no filtering at all and went down to an extreme of 5\%.
 
-The results approved our hypothesis, as the accuracy rised the lower we guessed. Of course, the similarity threshold lowers to values of 0.92 at a guess of 5\%. The highest accuracy we could archive had a value of 0.506, guessing that only 20\% of all Tweets are regional salient. We were extremely happy about this result, as we started our first experiments with an accuracy as low as about 0.2, but we had to keep in mind that 80\% of all Tweets will be ignored. If we lower our guessing to 10\% or 5\%, the accuracy gets lower again, probably because there are not enough Tweets left in the gold-standard to give an trustworthy result. 
+As figure \ref{geo_graph2} illustrates, the results approved our hypothesis that the accuracy rises, the lower we guess. At the same time the similarity threshold lowers to values of 0.92 at a guess of 5\%, showing that even these documents are very similar to the average Tweet-vector. \\
+The highest accuracy we could achieve had a value of 0.506, guessing that only 20\% of all Tweets are regional salient. We were extremely happy about this result, because we had an accuracy lower than 0.2, when we started our first experiments in the regional-word attempt. Nevertheless, we have to keep in mind that 80\% of all Tweet will be ignored, so for the majority of inputted Tweets we will not get any other results than that it is most likely written in standard German. \\
+If we lower our guessing to 10\% or 5\%, the accuracy lowers again, probably because there are not enough Tweets left in the gold-standard to give a trustworthy result. 
 
-There is no ideal value for this parameter and eventually, people using this algorithm would have to figure it out themselves, according to what they want to achieve: a higher coverage of data or a more reliable result. \\
-In further experiments, we decided to use a guessing of 20\%, because our aim was to get the highest accuracy as possible.
+There is no ideal value for this parameter and eventually, people who will use this algorithm have to figure it out themselves, according to what they want to achieve: A higher coverage of data or a more reliable result. \\
+In the experiments to come, we decided to use a guessing of 20\%, because our aim is to achieve the highest possible accuracy.
 
 \subsubsection{The right amount of loops}
 \begin{figure}
@@ -188,44 +216,43 @@ In further experiments, we decided to use a guessing of 20\%, because our aim wa
            xlabel= loops,
            xtick = {0,1,2,3,4,5,10,15,20},
            width=0.9\columnwidth,
-           height=0.4251174\textheight]
+           height=0.4\textheight]
            \addplot[blue, mark=x] 
            table[x=Loops,y=Accuracy]{\data} ;
        \end{axis}
 \end{tikzpicture}
 
-Calculation method: \textit{Normalized}; Geo-dataset: \textit{balanced-39k}, Main-dataset: \textit{geo-175k}; Stopwords: \textit{Top 200}; Estimated amount of regional Tweets: \textit{20\%}
+Calculation method: \textit{Normalized}; Geo-dataset: \textit{balanced-39k}, Main-dataset: \textit{geo-175k}; Stopwords: \textit{Top 200}; Guessed amount of regional Tweets: \textit{20\%}
   \caption{Amount of loops in the algorithm and their effect on the accuracy.}
   \label{geo_graph3}
 \end{figure}
-The idea behind the loops in the main-algorithm was to estimate the probability distinction from which region a tweet could have been sent from as many words as possible. Especially for the regional-list attempt this was a crucial approach to prevent the sparse data problem.
+The idea for the loops in the main-algorithm was to estimate the probability distinction from which region a Tweet could have been sent for as many words as possible. This was especially for the regional-list attempt a crucial approach to prevent a sparse data problem.
 
-%%% Bis hierhin Korrektur gelesen, MW
+In this attempt on the other hand, this problem is not urgent, because we create a very large list of word-vectors based on a geo-annotated corpus. Therefore we asked ourselves, which amount of loops would lead to the best results. The more the better or the opposite? 
 
-In this attempt on the other hand, this problem is not so urgent, because we create a very large list of word-vectors based on geo-annotated data. Therefore we asked ourself, which amount of loops would lead to the best results. The more the better or the opposite? 
+To find an answer to this question, we took the parameters we had proven to be the best choice in the experiments before, but varied the value for the loop-parameter from 0 to 20 and measured the accuracy. 
+We were a bit puzzled to find out, that the main loop, even if it was only entered one time, lowers the accuracy by 0.023. Our new record for the accuracy becomes 0.53, if we chose a value of 0. Please keep in mind, that even though we do not enter the loop, the calculation of the word-vectors is always performed one time before that.
 
-To find an answer to this question, we chose the parameters we had proven to be the best choice in the experiments before, but varied to value for the loop-parameter from 0 to 20 and measured the accuracy. 
-We were a bit puzzled to find out, that the main loop, even if it was only ran once, lowers the accuracy by 0.023. Our new record for the accuracy becomes 0.53, if we use a value of 0. 
+If we have a look at the graph in figure \ref{geo_graph3}, we can see clearly  that the accuracy drastically decreases, the more loops we enter. So our assumption, that the loops in the main-algorithm would lead to better results has been falsified. We then came up with the explanation, that the more often we use a loop, the more do all word-vectors approach an average vector and in this way lose all signs of a specific region.
 
-If we have a look at the graph in figure \ref{geo_graph3}, we can clearly see that the accuracy drastically decreases, the more loops we enter. So our assumption, that the loops in the main-algorithm would lead to better results has been falsified. We now came up with the explanation, that the more often we use a loop, the more do all word-vectors approach an average word-vector and in this way lose all signs of a specific region.
+Since the importance of the dataset for the main-algorithm drops, if we choose not to use the loop, we repeated the experiment in section \ref{dataset_section} with the loop = 0 setting. This corpus now acts only as a foundation for calculation the average Tweet-vector for the cosine similarity  and for calculation the word-vectors one time.
 
-In addition to finding out the best value for the loops runs, we now know, that the parameter for the second dataset, that was relevant for the training in the main-algorithm, has only the purpose of a foundation for creating the cosine similarity. This also raises the question, whether our results in the first experiment 1.3.1, are still valid. So we ran the experiment with the loops=0 setting again.
+Fortunately, table \ref{geo_datasets2} proves that the results were still the same, ranking the \emph{balanced-39k} set for the geo-algorithm and the \emph{geo-175k} corpus for the main-algorithm as the best combination. 
 
-The results were slightly different than before, ranking the \emph{balanced-61k} as the best dataset for the training of the geo-algorithm. To be sure that the outcomes of the other experiments are still valid, we made some spot checks that showed, that the values differ a little bit, but the end results were still the same. In further experiments, we now use the settings "loops=\emph{0}" and "geo-dataset=\emph{balanced-61k}"
 \begin{table}
 \begin{center}
     \begin{tabular}{|l|llll|}
     \hline
-    Dataset     & balanced-21k & balanced-39k & balanced-61k & geo-175k \\ \hline
-    Accuracy    & 0.308      & \textbf{0.378}        &0.371       & 0.374               \\ \hline
+                  & balanced-21k & balanced-39k   & balanced-61k & geo-175k \\ \hline
+    geo-175k    & 0.308        & \textbf{0.378} & 0.371        & 0.374    \\ \hline
     \end{tabular} \\
 \end{center}
-  Calculation method: \textit{Normalized}; Stopwords: \textit{Top 200}; Loops: \textit{0}; Estimated amount of non-regional Tweets: \textit{60\%}.
-  \caption{Comparrision of the accuracy for all geo-datasets with a loop parameter of '0'}
-  \label{geo_datasets}
+  Calculation method: \textit{Normalized}; Stopwords: \textit{Top 200}; Loops: \textit{0}; Guessed amount of non-regional Tweets: \textit{60\%}.
+  \caption{Comparing the accuracy of the combination between all geo-datasets and the \emph{geo-175k} set for the main-algorithm with the loops=0 setting.}
+  \label{geo_datasets2}
 \end{table}
 
-\subsubsection{Comparission of different calculation methods}
+\subsubsection{Comparison of different calculation methods}
 \begin{figure}
 \begin{center}
 \begin{tikzpicture}
@@ -240,29 +267,35 @@ The results were slightly different than before, ranking the \emph{balanced-61k}
 			 ymax=0.6,
 			ytick={0.25,0.35,0.45,0.55},
 			 nodes near coords,
-    			  nodes near coords align={vertical}
+    			  nodes near coords align={vertical},
+			xlabel=calculation method
           ]
             \addplot[ybar,  postaction={ pattern=north west lines  }] coordinates {
-               (Normalized, 0.539)
-               (Sqrt, 0.330)
-               (Log, 0.265)
+               (Normalized, 0.529)
+               (Sqrt, 0.3696)
+               (Log, 0.419)
 	      (Linear, 0.365)
             };
         \end{axis}
     \end{tikzpicture}
 \end{center}
-  \label{geo_graph1}
-Calculation method: \textit{Normalized}; Geo-dataset: \textit{balanced-39k}, Main-dataset: \textit{geo-175k}; Loops: \textit{1}; Estimated amount of regional Tweets: \textit{60\%}
-  \caption{Accuracy of different stopword-lists.}
-
+  \label{geo_graph4}
+Geo-dataset: \textit{balanced-39k}, Main-dataset: \textit{geo-175k}; Stopwords: \textit{Top 200}; Loops: \textit{0}; Guessed amount of regional Tweets: \textit{20\%}
+  \caption{Comparission of the four different calculation methods.}
 \end{figure}
 
 
-As mentioned in the 'Algorithms'-section before, we developed four different versions of the algorithms, that differ mostly in the way of normalization. We named our first attempt, that we also used in the previous experiments, \emph{Normalized}, the other calculation methods are \emph{Log}, \emph{Root} and \emph{Linear}. For a discussion of the details of the algorithms, please have a look at the corresponding section. 
+As mentioned in the 'Algorithms'-section before, we developed four different versions of the algorithms, that differ mostly in the way of normalization. We named our first attempt, that we also used in the previous experiments, \emph{Normalized}, the other calculation methods are \emph{Log}, \emph{Sqrt} and \emph{Linear}. For a discussion of the details of the algorithms, please have a look at the corresponding section. 
 
-The parameter for the calculation method is the last one we have to find an optimal value for. As recommended in the experiments before, we choosed the \emph{balanced-61k} set for the geo-algorithm, the \emph{unbalanced-175k} dataset as a foundation for the calculation of the cosine similarity, which depends on our guess of the amount of regional Tweets which we  decided to be \emph{20\%}. The amount of loops is \emph{0} and we filtered using the \emph{200} most used token as stopword-list.
+The parameters for the calculation method is the last one we have to find an optimal value for. As recommended in the experiments before, we chose the \emph{balanced-39k} set for the geo-algorithm, the \emph{unbalanced-175k} dataset as a foundation for the calculation of the cosine similarity, which depends on our guess of the amount of regional Tweets which we  decided to be \emph{20\%}. The amount of loops is \emph{0} and we filtered using the \emph{200} most used token as stopword-list.
 
+The comparison of the accuracy in figure \ref{geo_graph4} reveals, that the previously used method is clearly the most successful one. Only the \emph{Log}-attempt also reached a relatively good result of 0.42, while \emph{Sqrt} and \emph{Linear} have obviously been a bad choice. 
 
-%\subsection{Conclusion}
+\subsection{Conclusion}
+In this section, we have developed an alternative way of constructing a list of initial word-vectors automatically learned from geo-annotated documents. 
+
+To find the best values for all five parameters in terms of accuracy, we tested step-by-step all possible combinations,  leading to a final result of an accuracy of \emph{0.53}. The best choice is the \emph{Normalized} method in combination with the \emph{balanced-39k} set for the learning in the geo-algorithm and the \emph{geo-175k} corpus  for the main-algorithm and the calculation of the cosine similarity metric, where we guessed, that only 20\% of all Tweets have a regional influence. It seems to be the best to skip the loop in main-algorithm and we found out, that \emph{200} is the best amount for the stopword-filtering.
+ 
+Although an accuracy of 0.53 is very good, compared to a null hypothesis of 0.14, it is still not good enough to satisfy us completely. We believe, that a big corpus of several million Tweets, that are filtered and preprocessed in the way as the geo-datasets, will lead us to an even better accuracy, if we use it as data for the main-algorithm. Also, we think that a fine-tuning of the calculation method (or even a completely new one) could drastically improve the results. 
 
 \end{document}

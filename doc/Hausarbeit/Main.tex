@@ -16,21 +16,19 @@
 \usepackage{graphicx}    % Used to import the graphics
 \usepackage{pgfplots}
 \usetikzlibrary{patterns}
+\usepackage[style=authoryear,citestyle=alphabetic,sorting=nty]{biblatex} 
+\bibliography{refs}
 
 
 \title{Tweegion (working Title)}
 \author{Johannes Gontrum, Matthias Wegel, Steve Wendler}
 \begin{document}
+\maketitle
 \tableofcontents
-
 \subfile{./tex/Introduction}
-\newpage
 \subfile{./tex/Algorithms}
-
 \subfile{./tex/Regional}
-
 \subfile{./tex/Geo}
-
 \subfile{./tex/Conclusion}
-
+\printbibliography 
 \end{document}
