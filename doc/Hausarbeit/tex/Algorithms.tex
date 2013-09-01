@@ -54,7 +54,7 @@ The difference between the regional word attempt and the geo location attempt li
 
 With the geo location attempt, by contrast, we have the initial word vectors learned by machine, too. For this purpose we use a special collection of geo annotated Tweets. Based on its coordinates each Tweet is assigned to one of our seven regions. Similarly as we do it in the main algorithm, we now calculate word vectors based on the Tweets the words occur in.
 
-Our results are xxx to xxx initial word vectors for the geo location attempt depending on the size of the special training corpus. So this attempt tendentially needs less cycles of the main algorithm for the same amount of final word vectors.
+Our results are ten thousands of initial word vectors for the geo location attempt depending on the size of the special training corpus. So this attempt tendentially needs less cycles of the main algorithm for the same amount of final word vectors.
 
 \subsection{Normalizing versions}
 Over the course of our work we developed multiple versions of our main algorithm which differ in treatment of the word vectors at the end of each cycle, i. e. subsequent to the calculation of Tweet and word vectors. This treatment directly affects the following calculation of Tweet vectors, be it in a possible further cycle of the main algorithm or in the application stage, i. e. for classifying an unseen Tweet.
