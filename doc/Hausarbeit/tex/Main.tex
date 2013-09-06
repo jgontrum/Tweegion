@@ -1,0 +1,49 @@
+% Grundeinstellungen
+\documentclass[11pt,notitlepage,oneside]{article}
+% Encoding
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{blindtext}
+\usepackage{hyphenat}
+\usepackage[linesnumbered]{algorithm2e}
+\usepackage{subfiles}
+\usepackage{amsmath}
+\usepackage{graphicx}    % Used to import the graphics
+\usepackage{pgfplots}
+\usepackage[bookmarksdepth=3]{hyperref}
+\usetikzlibrary{patterns}
+\usepackage[style=authoryear,citestyle=alphabetic,sorting=nty]{biblatex} 
+\bibliography{refs}
+
+
+\title{Tweegion - mapping Tweet to Region }
+\author{Johannes Gontrum, Matthias Wegel, Steve Wendler}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This project originated from the seminar \textit{Computerlinguistische Analyse von Twitterdaten} by Tatjana Scheffler at Universität Potsdam in summer 2013. During this seminar we were confronted with many problems of computational analysis of social media data, esp. very short texts of media like Twitter.
+
+This project's aim was to find a way to map unseen Tweets to the region a Tweet or at least the Tweet-writer comes from. We were aware that it would only be possible to map a Tweet to a specific region if this Tweet contains at least little hints towards a region. Tweets written in pure standard language are impossible to map. Nonetheless we thought it being worthwhile to touch this region-specific marked Tweets.
+
+We tried out two different approaches whose starting points were different but which were very similar afterwards.The \emph{Geo-location-attempt} trained a model based on Tweets which were sent together with geo data information. The \emph{Regional-words-attempt} trained a model according to a list of words known of being regionally salient words. We found out that the regional words attempt was hardly usable whilst the geo location attempt could reach much better results.
+
+But not only finding and implementing a good algorithm for fulfilling this aim was important. For the three co-workers of this project it was the first project of this manner and it was exciting to learn to develop source code in a team. So we had to learn to work together, think together, try to find a way to communicate and of course to develop code.
+
+Even if the results of our project were not that satisfying as we wished they were, we nevertheless learnt much about collaborating in a project like this. Additionally we are convinced that bad results are improvable by finding more and better region-specific words and of course by accumulating more knowledge in computational linguistics during our studies. So the journey still goes on.
+\end{abstract}
+\newpage
+\tableofcontents
+\newpage
+\subfile{Introduction.tex}
+\newpage
+\subfile{Algorithms.tex}
+\newpage
+\subfile{Geo.tex}
+\newpage
+\subfile{Regional.tex}
+\newpage
+\subfile{Conclusion.tex}
+\printbibliography 
+\end{document}

@@ -2,6 +2,15 @@
 # -*- coding: utf8 -*-
 from include.tweegion import Tweegion
 
+
+# executes the tweegion-alogorithm for the geo-location-attempt and show results
+# for different cos_similarities
+# stopwords are fixed to 200
+# loops are fixed to 0
+
+# please execute in command-line: nohup python compare_cos_sim.py > xxx.results &
+
+
 blackwords = ["data/stoppwords200.txt"]
 tweets = ["data/geo-tweets/unbalanced_175k.json"]
 geo = ["data/geo-tweets/balanced-61k.json"]

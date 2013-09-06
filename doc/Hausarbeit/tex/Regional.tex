@@ -1,71 +1,146 @@
-\documentclass[../Main.tex]{subfiles} 
+\documentclass[./Main.tex]{subfiles} 
 \begin{document}
 
-\section{Regional word attempt (8p)}
+\section{Regional-word-attempt}
 \subsection{Idea}
-The main idea behind the regional word attempt is based on expressions of regional everyday language. This comprises expressions which are distributed somewhat complementary within the German-speaking area and are used by speakers in normal colloquial language, i. e. not necessarily just dialectal. Famous examples include \textit{Samstag} versus \textit{Sonnabend} and \textit{viertel vor} versus \textit{dreiviertel}. Since we restricted ourselves to unigrams for the sake of simplicity, the latter falls out of our examination's range.
+The main idea behind the \emph{Regional-word-attempt} is based on expressions of regional everyday language. This comprises expressions which are distributed somewhat complementary within the German-speaking area and are used by speakers in normal colloquial language, i. e. not necessarily just dialectal. Famous examples include \textit{Samstag} versus \textit{Sonnabend} and \textit{viertel vor} versus \textit{dreiviertel}. Since we restricted ourselves to unigrams for the sake of simplicity, the latter falls out of our examination's range.
 
 \subsection{Initial data}
-As a source for the regional expressions we used the \textit{Atlas der Alltagssprache.} The Atlas is a collaborative project of the Universität Salzburg and the Université de Liège and is based on surveys of speakers from anywhere within the German-speaking area. The results were published in the form of maps along with explanations.
+As a source for the regional expressions we used the \textit{Atlas der Alltagssprache.} This is a collaborative project of the Universität Salzburg and the Université de Liège and is based on surveys of speakers from anywhere within the German-speaking area. The results were published in the form of maps along with explanations.
 
-Collecting data from the Atlas der Alltagssprache we had to consider several factors. Of course only idiosyncrasies which are reflected in the written form came into consideration; data regarding for instance vowel qualities were out of the question. First of all we were looking for expressions which would divide the language area precisely as possible, i. e. show little to no overlapping. At the same time they should actually be regionally salient and not cover almost the whole language area like for instance \textit{Backofen.} Our limit here was to assign a word to four of our seven regions. Furthermore, homonyms and polysemes were inappropriate for our purposes, so for example most of the regional words for \textit{attic,} including \textit{Boden,} \textit{Speicher} and \textit{Bühne,} were ruled out. We also went without very short expressions like \textit{wa} (Berlin dialect for \textit{...right?}) because of the high chance of coincidence with abbreviations, cutted forms etc.
+Collecting data from the Atlas der Alltagssprache we had to consider several factors. Of course only idiosyncrasies which are reflected in the written form came into consideration; data regarding for instance vowel qualities were out of the question. First of all we were looking for expressions which would divide the language area precisely as possible, i. e. show little to no overlapping. At the same time they should actually be regionally salient and not cover almost the whole language area like for instance \textit{Backofen.} Our limit here was to assign a word to a maximum of four of our seven regions. Furthermore, homonyms and polysemes were inappropriate for our purposes, so for example most of the regional words for \textit{attic,} including \textit{Boden,} \textit{Speicher} and \textit{Bühne,} were ruled out. We also went without very short expressions like \textit{wa} (Berlin dialect for \textit{...right?}) because of the high chance of coincidence with abbreviations, cutted forms etc.
 
 From the data we created the initial word vectors for this attempt in the form of a csv file \textit{(comma separated values).} Doing this we assigned every word to $n$ of our seven regions. For this regions the word vector got the value $\frac 1 n$, for the remaining ones it got the value 0.
 
 \subsection{Data accumulation}
-On the basis of the source we created about 200 initial word vectors. Of course no classification of Tweets is possible using such a small amount of data---the chance of even finding a single one of these 200 words in a Tweet's text is simply to low.
-
-That's why we came up with the idea of an enrichment stage with the aid of training data from Twitter. The idea is to search for Tweets containing our initial words and to grade all further words occuring in their text as regional words, too.
+We used our threefold \emph{Regional word corpus} (Regioword-corpus, Scheffler-Regioword-corpus, Scheffler-oneday-corpus). On base of our regional-word-list and these corpora we created initial word vectors for each corpus. Obviously the chance of getting much smaller vectors is bigger for both the Scheffler-Regioword-corpus and Scheffler-oneday-corpus because many of our regional words are not within these corpora.
 
 To avoid gross errors doing this, we removed stopwords beside usertags, hashtags and URLs from the training corpus. What's more, these derivative word vectors are calculated based on all found Tweets containing the respective word. So non-regional words, which naturally also occur in those Tweets, eventually get an average-like, regionally indifferent vector.
 
-In order to actually gain enough data we thought of repeating this accumulation using the newly acquired word vectors. That's how our main algorithm came into being, which can be executed in a loop with any number of cycles, see chapter \textit{Algorithms.}
+In order to actually gain enough data we thought of repeating this accumulation using the newly acquired word vectors. That's how our main algorithm came into being. 
 
-\subsubsection{Guessing the amount of regional Tweets}
+We used the results of the \emph{Geo-location-attempt} and did not alter neither the number of stopwords (200) nor the percentage of guessed non-regional tweets (80\%)
+
+\subsubsection{Expectations}
+We expected the Regioword-corpus to lead to better results. We were convinced that the use of a initial list of regional words should have an enormous influence during the process of computing vectors. Only in this case we started with tweets which should contain regional words. And only in this case we could be somewhat sure about regional origins of the tweet-writer.
+
+The opposite is the case for the two other corpora. We expected that the two corpora with arbitrary content should lead to arbitrary results (less than 0,14 \% accuracy). Because we could not know which regional words are in these corpora (or if there are regional words at all) it also could be the case, that our algorithm is computing a arbitrary vector.
+
+This should lead to a huge advantage of the Regioword-corpus over the two others.
+\subsection{Experiments}
+We wanted to show the influence of the initial word vector for further calculation. So we tested our algorithm against our three corpora. Because the \emph{Geo-location-attempt} lead to the result that the use of 200 stopwords and guessing 80 \% of the tweets as non-regional the only parameter we changed was the number of loops and the methods of normalisation.
 \begin{figure}
 \begin{tikzpicture}
-       \pgfplotstableread{../data/geo_cos.csv}\data
+       \pgfplotstableread{../data/regio_loops.csv}\data
        \begin{axis}[
            legend pos=south east,
            ylabel near ticks,
-           axis y line*=left,
-           xmin = 5,
-           xmax = 100,
+           xmin = 0,
+           xmax = 20,
            ylabel= accuracy,
-           xlabel= guessed percentage of non-regional Tweets,
-           xtick = {5,10,20,30,40,50,60,70,80,90,100},
+           xlabel= loops,
+           xtick = {0,1,2,3,4,5,10,15,20},
            width=0.9\columnwidth,
-           height=0.5\textheight]
+           height=0.4\textheight]
            \addplot[blue, mark=x] 
-           table[x=Guess,y=Accuracy]{\data} ;
-           \addlegendentry[font=\tiny]{accuracy}
-       \end{axis}
-       \begin{axis}[
-           hide x axis,
-           xmin = 5,
-           xmax = 100,
-           axis y line*=right,
-           legend pos=south west,
-           ylabel near ticks,
-           ylabel= cosine similarity threshold,
-           width=0.9\columnwidth,
-           height=0.5\textheight]
-           \addplot[red, mark=x] 
-           table[x=Guess,y=Threshold]{\data};
-           \addlegendentry[font=\tiny]{threshold}
+             table[x=Loops,y=Normalized]{\data} ;
+             \addlegendentry{Normalized};   
+	   \addplot[red, mark=x] 
+             table[x=Loops,y=Root]{\data} ;   
+             \addlegendentry{Root};       
+	   \addplot[green, mark=x] 
+             table[x=Loops,y=Log]{\data} ;
+             \addlegendentry{Log};     
+	   \addplot[brown, mark=x] 
+             table[x=Loops,y=Linear]{\data} ;
+             \addlegendentry{Linear};  
        \end{axis}
 \end{tikzpicture}
-Calculation method: \textit{Normalized}; Geo-dataset: \textit{balanced-39k}, Main-dataset: \textit{geo-175k}; Stopwords: \textit{Top 200}; Loops: \textit{1}; 
 
-  \caption{Relation between the amount of regional Tweets and the accuracy.}
-  \label{geo_graph2}
+Stopwords: \textit{Top 200}; Guessed amount of regional Tweets: \textit{20\%}
+  \caption{Amount of loops in the algorithm and their effect on the accuracy for Regioword-corpus}
+  \label{regioword_corpus}
 \end{figure}
 
-\subsection{Experiments}
-\subsubsection{Parameters}
-\subsubsection{Expectations}
+\begin{figure}
+\begin{tikzpicture}
+       \pgfplotstableread{../data/regio_loops_scheffler.csv}\data
+       \begin{axis}[
+           legend pos=north east,
+           ylabel near ticks,
+           xmin = 0,
+           xmax = 20,
+           ylabel= accuracy,
+           xlabel= loops,
+           xtick = {0,1,2,3,4,5,10,15,20},
+           width=0.9\columnwidth,
+           height=0.4\textheight]
+           \addplot[blue, mark=x] 
+             table[x=Loops,y=Normalized]{\data} ;
+             \addlegendentry{Normalized};   
+	   \addplot[red, mark=x] 
+             table[x=Loops,y=Root]{\data} ;   
+             \addlegendentry{Root};       
+	   \addplot[green, mark=x] 
+             table[x=Loops,y=Log]{\data} ;
+             \addlegendentry{Log};     
+	   \addplot[brown, mark=x] 
+             table[x=Loops,y=Linear]{\data} ;
+             \addlegendentry{Linear};  
+       \end{axis}
+\end{tikzpicture}
+
+Stopwords: \textit{Top 200}; Guessed amount of regional Tweets: \textit{20\%}
+  \caption{Amount of loops in the algorithm and their effect on the accuracy for Scheffler-Regioword-corpus.}
+  \label{scheffler_regio_word_corpus}
+\end{figure}
+
+\begin{figure}
+\begin{tikzpicture}
+
+       \pgfplotstableread{../data/regio_loops_oneday.csv}\data
+
+       \begin{axis}[
+           legend pos=north east,
+           ylabel near ticks,
+           xmin = 0,
+           xmax = 20,
+           ylabel= accuracy,
+           xlabel= loops,
+           xtick = {0,1,2,3,4,5,10,15,20},
+           width=0.9\columnwidth,
+           height=0.4\textheight]
+           \addplot[blue, mark=x] 
+             table[x=Loops,y=Normalized]{\data} ;
+             \addlegendentry{Normalized};   
+	   \addplot[red, mark=x] 
+             table[x=Loops,y=Root]{\data} ;   
+             \addlegendentry{Root};       
+	   \addplot[green, mark=x] 
+             table[x=Loops,y=Log]{\data} ;
+             \addlegendentry{Log};     
+	   \addplot[brown, mark=x] 
+             table[x=Loops,y=Linear]{\data} ;
+             \addlegendentry{Linear};  
+       \end{axis}
+\end{tikzpicture}
+
+Stopwords: \textit{Top 200}; Guessed amount of regional Tweets: \textit{20\%}
+  \caption{Amount of loops in the algorithm and their effect on the accuracy for Scheffler-oneday-corpus.}
+  \label{scheffler_oneday}
+\end{figure}
+
+
+\subsubsection{Results}
+The results of our experiments were quite disappointing. Neither there could be found an advantage of the Regioword-corpus nor any systematic differences between our normalisation-methods.
+
+Whilst in the \emph{Geo-location-attempt} we found a steady decreasing value of accuracy with increasing number of loops this behavior could not be found during our experiments with the \emph{Regio-words-attempt}. There is an up and down of accuracy rates for all corpora and with all normalisation-methods.
+
+But the worst result of the \emph{Regio-words-attempt} was the accuracy itself: Our expectations about a huge advantage of the Regio-word-corpus were totally demolished! Experiments based on this corpus had the worst results - accuracy rates of approx. 0,15\% are only slightly (if at all) above the level of guessing! Even if some combination of loops and normalisation-methods with other corpora lead to slightly better results this results are fare from beeing useful.
+
 \subsubsection{Discussion}
-\subsubsection{-> new Experiment}
-\subsection{Conclusion}
+The results of the \emph{Regio-words-attempt} were very disappointing. The most outstanding result was the fact that calculating word-vectors had no real influence or advantage over guessing the right region.
+
+The fact that executing our algorithm based on our list of regional words lead to results which were even worse than based on arbitrary corpora was surprising. Probably this result did not mean that calculations based on a regional word list behave worse than calculations based on arbitrary material. The results only gave us a hint that \emph{our} regional word list wasn't assembled adequate. Our word list contains many words that are expressions for foods and kitchen equipment. We believe that this very restrict compilation doesn't reflect the use of language of mostly young Twitter users. With our word list we probably caught the use of language of an older generation.
 
 \end{document}

@@ -1,9 +1,17 @@
-\documentclass[../Main.tex]{subfiles} 
+\documentclass[./Main.tex]{subfiles} 
 \begin{document}
 
-\section{Conclusion (3p)}
-\subsection{Results of both attempts compared}
-\subsection{Reasons for good/bad results}
-\subsection{Outlook: What could be better if we had enought time}
+\section{Conclusion}
+The results of our experiments were very surprising. Our expectation concerning the differences between \emph{Geo-location-attempt} and \emph{Regio-words-attempt} were confirmed. Nevertheless we were suprised by the very weak results of the \emph{Regio-words-attempt}. Whilst the \emph{Geo-location-attempt} in some case could reach accuracy rates of allmost 0,50 \% the \emph{Regio-words-attempt} results were disastrous. There was no advantage of this \emph{Regio-words-attempt} over pure guessing.
+
+Nevertheless we are still convinced that some of the disappointing problems of the \emph{Regio-words-attempt} could be resolved by spending more time in carefully seeking for good candidates for the initial word list. We must accept that the language of social media differs from everdays language. This is the reason why simply adopting the results of other researchers did not fit our requirements.
+
+Probably a mix of both \emph{Geo-location-attempt} and \emph{Regio-words-attempt} could be promising. This approach still was based on real geo-location data. But additionally to calculating the known word-vectors we could try to find regional words by simple comparing if the ratio of a word in one region is bigger than the ratio of this word over the whole corpus. This way we could create yet another corpus out of this data - this time based on real social-media data.
+
+We know that the form of our regions are problematic. We divided the area with nativ german speakers to only seven regions. Maybe this is far too little for our purposes. In doing so we mixed together words and regions which better should be separated. On the other side we were confronted with the allready explained fact that Tweeting takes place only in some urban spots.
+
+In any case there is still one big thing to do: Our attempts both did not take into account the probability of a word. So a word that appears only twice in the training corpus will be treated the same way a word with 10,000 appearances. The fact that maybe 9,000 of these appearances were found in one region is necessary to take into account.  Because we did not find a way to weight this word due to lack of knowledge we are convinced that improvement of the algorithm is still possible.
+
+Nonetheless this project is far from beeing unsuccessfull. We still believe that three crucial points appeared -- all of them improvable: 1) The size of data was too small 2) The quality of our regional-word-list was not sufficient 3) Our knowledge depending specific problems has to be expanded. Often we had to handle problems which we were confronted with and we could take a standard-algorithm out of our deposit. The deposit still holds too little solutions. 
 
 \end{document}
